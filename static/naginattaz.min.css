@@ -361,7 +361,7 @@ padding:2px;}
 
 .button.is-secondary.is-alternate{color:#fff;background-color:transparent}.button.is-small{padding:.5rem 1.25rem;font-size:.75rem}.button.is-small.is-icon-only{padding-left:.5rem;padding-right:.5rem}.button.is-icon-only{padding-left:.75rem;padding-right:.75rem}.button.is-tertiary{color:#000;background-color:transparent;border-color:transparent}.button.is-link{color:#000;background-color:transparent;border-style:none;padding:.25rem 0;line-height:1;text-decoration:none}.button.is-link.is-alternate{color:#fff;background-color:transparent}.button.is-link.is-icon{grid-column-gap:.5rem;grid-row-gap:.5rem}.button.is-icon{grid-column-gap:.75rem;grid-row-gap:.75rem;justify-content:center;align-items:center;display:flex}
 
-.button.is-cta{background-color:var(--nagivioleta)}
+.button.is-cta{background-color:var(--nagiobispo)}
 
 .button.is-cta:hover{background-color:var(--nagimagenta)}
 
