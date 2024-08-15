@@ -12,7 +12,7 @@
   <meta property="og:type" content="website"/>
   <meta content="summary_large_image" name="twitter:card"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>-->
-  <link href="./static/steezy-studio.webflow.2a3d5fd81.min.css" rel="stylesheet" type="text/css"/>
+  <link href="./static/naginattaz.min.css" rel="stylesheet" type="text/css"/>
   <link href="./static/5e60461827af5ba96e00365e_STEEZY_S_FAVICON.png" rel="shortcut icon" type="image/x-icon"/>
   <link href="./static/5e60461d27af5b015200369e_STEEZY_S_WEBCLIP.png" rel="apple-touch-icon"/>
 
@@ -260,18 +260,15 @@ margin: 0rem !important;
 <div data-animation="default" class="navbar10_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbcf" role="banner" data-duration="400">
   <div class="navbar10_container">
     <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-      <img src="./src/logos/ISOLOGO_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-medium"/>
-    </a>
-    <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-      <h1 id="nagi-text">NAGINATTAZ</h1>
+      <img src="./src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
     </a>
     
     <nav role="navigation" class="navbar10_menu w-nav-menu">
       <div class="navbar10_menu-left">
-        <a href="#levels" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link">TEAMS</a>
-        <a href="#styles" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link">CLASES</a>
-        <a href="#reviews" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link">MEMBRESÍAS</a>
-        <a href="#pricing" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link">#NAGIDATTA</a>
+        <a href="#levels" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">TEAMS</a>
+        <a href="#styles" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">CLASES</a>
+        <a href="#reviews" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont  w-nav-link">MEMBRESÍAS</a>
+        <a href="#pricing" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">#NAGIDATTA</a>
         <div data-hover="true" data-delay="300" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbdd" class="navbar10_menu-dropdown w-dropdown">
         <div class="navbar10_dropdown-toggle text-size-tiny text-weight-semibold text-style-allcaps w-dropdown-toggle">
         </div>
@@ -371,8 +368,8 @@ margin: 0rem !important;
 </div>
 </div>
 <div class="navbar10_menu-right">
-  <a href="https://google.com.ar" class="button is-secondary is-small w-button">Inicia</a>
-  <a href="https://google.com.ar" class="button is-cta is-small w-button">Sumate</a>
+  <a href="https://google.com.ar" class="button is-secondary is-small titlefont w-button">Inicia</a>
+  <a href="https://google.com.ar" class="button is-cta is-small titlefont w-button">Sumate</a>
 </div>
 </nav>
 <div class="navbar10_menu-button w-nav-button">
@@ -399,6 +396,12 @@ margin: 0rem !important;
     }
     
     /* Slideshow container */
+    .slideshow-container {
+      max-width: 100%;
+      position: relative;
+      padding-top: 3vw;
+      margin-bottom: 2vw;
+    }
     .slideshow-container {
       max-width: 100%;
       position: relative;
@@ -437,6 +440,24 @@ margin: 0rem !important;
     @media only screen and (max-width: 300px) {
       .text {font-size: 11px}
     }
+
+    @media screen and (max-width: 991px){
+      .slideshow-container{
+    display: none;
+      }
+      .slideshow-container-mobile{
+    display: block;
+      }
+    }
+    @media screen and (min-width: 992px){
+      .slideshow-container{
+    display: block;
+      }
+      .slideshow-container-mobile{
+    display: none;
+      }
+    }
+    
     </style>
     </head>
     <body>
@@ -453,15 +474,35 @@ margin: 0rem !important;
     
     <div class="mySlides fade">
       <img src="./src/BANNERPRINCIPAL_1.png" style="width:100%">
+    </div>    
     </div>
-    
+    <div style="text-align:center; display: none;" >
+      <span class="dot"></span> 
+      <span class="dot"></span> 
+      <span class="dot"></span> 
     </div>
     <br>
+    <div class="slideshow-container-mobile">
     
-    <div style="text-align:center">
-      <span class="dot"></span> 
-      <span class="dot"></span> 
-      <span class="dot"></span> 
+      <div class="mobileS fade">
+        <img src="./src/BANNERPRINCIPAL_1_mob.png" style="width:100%">
+      </div>
+      
+      <div class="mobileS fade">
+        <img src="./src/BANNERPRINCIPAL_2mob.png" style="width:100%">
+      </div>
+      
+      <div class="mobileS fade">
+        <img src="./src/BANNERPRINCIPAL_1_mob.png" style="width:100%">
+      </div>
+      
+      </div>
+    <br>
+    
+    <div style="text-align:center; display: none;">
+      <span class="mobd"></span> 
+      <span class="mobd"></span> 
+      <span class="mobd"></span> 
     </div>
     
     <script>
@@ -485,7 +526,27 @@ margin: 0rem !important;
       setTimeout(showSlides, 3000); // Change image every 3 seconds
     }
     </script>
-    
+    <script>
+      let slideIndexM = 0;
+      showSlidesM();
+      
+      function showSlidesM() {
+        let i;
+        let slides = document.getElementsByClassName("mobileS");
+        let dots = document.getElementsByClassName("mobd");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+        }
+        slideIndexM++;
+        if (slideIndexM > slides.length) {slideIndexM = 1}    
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndexM-1].style.display = "block";  
+        dots[slideIndexM-1].className += " active";
+        setTimeout(showSlidesM, 3000); // Change image every 3 seconds
+      }
+      </script>
 </div>
 
 <div class="hero-v2 w-clearfix">
@@ -495,11 +556,10 @@ margin: 0rem !important;
     <div class="hero-image-transparent"></div>
   </div>
   <div data-w-id="73b23224-2d8c-0b57-2683-19eb9907f188" class="hero_text_container _2022_updated">
-    <h1 class="h1_v2 hero_text_block bigger" style="font-size: 40px; color: black;" >METAVERSO</h1>
-    <h1 class="h1_v2 hero_text_block bigger">STREET DANCE</h1>
-    <div class="subhead_v2 herooo">Clases nuevas cada mes!</div>
-    <div class="subhead_v2 herooo">Profes por descubrir SIEMPRE...</div>
-    <a id="hero-cta" href="https://google.com.ar" class="hero-get-started-cta w-button">VER MAS</a>
+    <h1 class="h1_v2 hero_text_block bigger titlefont" style="font-size: 40px; color: black;" >METAVERSO</h1>
+    <h1 class="h1_v2 hero_text_block bigger titlefont">STREET DANCE</h1>
+    <div class="subhead_v2 herooo customfont">Clases nuevas cada mes! Profes por descubrir SIEMPRE...</div>
+    <a id="hero-cta" href="https://google.com.ar" class="hero-get-started-cta w-button customfont">VER MAS</a>
     <link rel="prerender" href="https://google.com.ar"/>
   </div>
 
@@ -526,11 +586,13 @@ margin: 0rem !important;
 
 </div>
 <div id="levels" class="white-section stepbystep">
-
+  <br>
 
   <div class="section_header_container">
     <div class="words-wrapper"> 
-      <h3 id="h3">Te ofrecemos diversidad de clases y niveles, </h3>
+      <h3 id="h3" class="text-style-allcaps customfont">Te ofrecemos diversidad de clases y niveles </h3>
+      <br>
+      <h3 id="h3" class="text-style-allcaps customfont">para que tu aprendizaje sea progresivo y guiado</h3>
       <hr style="border-style: none;">   
       <span class="words">
         <span class="current" data-color="#4ac97d">Aprende</span>
@@ -539,23 +601,21 @@ margin: 0rem !important;
         <span data-color="#2e9dcc">Crece</span>
         <span data-color="#ff00ff">Mejora</span>
       </span>
-      <h3 id="h3">para que tu aprendizaje sea progresivo y guiado.</h3>
+      
   </div>
-  <script src="./static/rotatingText.js"></script>
+  <script src="../static/rotatingText.js"></script>
     
   </div>
   <div class="levels-container">
       <div class="columns-13 w-row">
         <div class="level_column w-col w-col-3 w-col-medium-6">
           <div class="level-block">
-            <div class="level_label">PRINCIPIANTE</div>
+            <div class="bigger level_label titlefont">PRINCIPIANTE</div>
             <div class="div-block-108">
               <div class="levels-color-block beginner">
-                <div class="level_text">Conocete y sacá lo mejor de vos!<br>
+                <div class="level_text customfont">Conocete y sacá lo mejor de vos!<br>
                   Sin miedos.
                   <br>
-                  <br>
-
                   Te tenemos fe!<br/>
                 </div>
               </div>
@@ -564,10 +624,10 @@ margin: 0rem !important;
         </div>
         <div class="level_column w-col w-col-3 w-col-medium-6">
           <div class="level-block">
-            <div class="level_label">PRACTICANTE</div>
+            <div class="bigger level_label titlefont">PRACTICANTE</div>
             <div class="div-block-108">
               <div class="levels-color-block intermediate">
-                <div class="level_text">Siempre se puede aprender y
+                <div class="level_text customfont">Siempre puedes aprender <br> y
                   experimentar más. <br> ¿Te animás?<br/>
                 </div>
               </div>
@@ -576,26 +636,11 @@ margin: 0rem !important;
         </div>
     </div>
   </div>
-  
+  <br><br>
+  <div class="div-block-110"><div class="div-block-111">
+    <div class="titlefont">CONOCE NUESTRAS CLASES DISPONIBLES <br><br>
+      RECORDA QUE MES A MES SUMAMOS NUEVAS</div></div></div>
 </div>
-<div id="pricing" class="white-section">
-	<div class="section_header_container pick-your-plan"><h2 class="section_header_v2">Elige Tu Plan</h2>
-		<div class="subhead_v2 dark deviices">Crea tu cuenta y subscribete.</div></div>
-	<div class="div-block-172">
-		<div class="w-row">
-			<div class="split-column w-col w-col-6 w-col-stack">
-				<div class="monthly-block monthly">
-					<div class="plan-header">PLAN&nbsp;PRINCIPIANTES</div><div class="text-block-51">$20000<span class="text-span-3">/mes</span></div>
-					<div class="section_header_container half"><div class="subhead_v2 dark">$20000 pesos argentinos por mes.</div>
-						<a href="https://google.com.ar" class="pricing_cta white w-button">COMIENZA&nbsp;TU&nbsp;AVENTURA&nbsp;YA</a>
-						<link rel="prerender" href="https://google.com.ar"></div></div></div>
-			<div class="split-column w-col w-col-6 w-col-stack">
-				<div class="monthly-block annual"><div class="plan-header">PLAN&nbsp;AVANZADO</div>
-					<div class="text-block-51">$35000<span class="text-span-3">/mes</span></div><div class="section_header_container half"><div class="subhead_v2 dark">$100 billed annually.<strong></strong></div></div>
-					<div class="div-block-170"></div><div class="div-block-171"><div class="pricing-value-text">BEST&nbsp;VALUE</div></div>
-					<a href="https://google.com.ar" class="pricing_cta w-button">MEJORA&nbsp;TUS&nbsp;HABILIDADES&nbsp;</a>
-					<link rel="prerender" href="https://google.com.ar"></div></div></div>
-		</div>
 
 <div id="styles" class="white-section">
   <div class="section_header_container styless">
@@ -603,21 +648,59 @@ margin: 0rem !important;
   </div>
   <div class="styles-container">
     <div class="w-layout-grid grid">
-      <a href="https://www.google.com.ar/search?q=hip-hop" class="style-single w-inline-block" target="_blank" title="Hip Hop Popular Choreography"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0aa12e6d6ad9074b6_STEEZY_HIPHOP-min.jpg" loading="lazy" alt="Hip Hop Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Hip Hop</div> </div></a>
-      <a href="https://www.google.com.ar/search?q=contemporary" class="style-single w-inline-block" target="_blank" title="Contemporary"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0aa12e68aa29074b7_STEEZY_CONTEMP-min.jpg" loading="lazy" alt="Contemporary Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Contemporary</div></div></a>
-      <a href="https://www.google.com.ar/search?q=steezy-sweat" class="style-single w-inline-block" target="_blank" title="Classes"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min.jpg" loading="lazy" sizes="(max-width: 479px) 90vw, (max-width: 767px) 88vw, (max-width: 991px) 89vw, (max-width: 2042px) 94vw, 1920px" srcset="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min-p-500.jpeg 500w, https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min.jpg 1920w" alt="Dance Workout Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Dance Workout</div></div></a>
-      <a href="https://www.google.com.ar/search?q=k-pop" class="style-single w-inline-block" target="_blank" title="K Pop"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0d8ce5038de0475ff_STEEZY_KPOP-min.jpg" loading="lazy" alt="K-Pop Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">K-Pop</div></div></a>
-      <a href="https://app.steezy.co/categories/ballet" class="style-single w-inline-block" target="_blank" title="Ballet"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab004cd38de543dd7a1_STEEZY_BALLET-min.jpg" loading="lazy" alt="Ballet Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Ballet</div></div></a>
-      <a href="https://www.google.com.ar/search?q=salsa" class="style-single w-inline-block" target="_blank" title="Salsa"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/615e128e6cd629d07d38baf1_SALSA_CATEGORY_THUMB-min.jpg" loading="lazy" alt="Salsa Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Salsa</div></div></a>
-      <a href="https://www.google.com.ar/search?q=popping" class="style-single w-inline-block" target="_blank" title="Popping"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0707f8ffece1e0ea3_STEEZY_POPPING-min.jpg" loading="lazy" alt="Popping Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Popping</div></div></a>
-      <a href="https://www.google.com.ar/search?q=jazz" class="style-single w-inline-block" target="_blank" title="Jazz"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0f8caa4145fe07fef_STEEZY_JAZZ-min.jpg" loading="lazy" alt="Jazz Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Jazz</div></div></a>
-      <a href="https://www.google.com.ar/search?q=lite-feet" class="style-single w-inline-block" target="_blank" title="Lite Feet"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab04214ca70831e3e4f_STEEZY_LITEFEET-min.jpg" loading="lazy" alt="Lite Feet Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Lite Feet</div></div></a>
-      <a href="https://www.google.com.ar/search?q=heels" class="style-single w-inline-block" target="_blank" title="Heels"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0f91c1677a7d6c4bb_STEEZY_HEELS-min.jpg" loading="lazy" alt="Heels Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Heels</div></div></a>
-      <a href="https://www.google.com.ar/search?q=house" class="style-single w-inline-block" target="_blank" title="House"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0707f8f87061e0ea2_STEEZY_HOUSE-min.jpg" loading="lazy" alt="House Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">House</div></div></a>
-      <a href="https://www.google.com.ar/search?q=locking" class="style-single w-inline-block" target="_blank" title="Locking"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab07a233c5367e6035e_STEEZY_LOCKING-min.jpg" loading="lazy" alt="Locking Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Locking</div></div></a></div>
+      <a href="https://www.google.com.ar/search?q=hip-hop" class="style-single w-inline-block" target="_blank" title="Hip Hop Popular Choreography"><div class="style_thumb_container"><img src="./src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Hip Hop</div> </div></a>
+      <a href="https://www.google.com.ar/search?q=contemporary" class="style-single w-inline-block" target="_blank" title="Contemporary"><div class="style_thumb_container"><img src="./src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" class="image-21 blur"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Contemporary</div></div></a>
+      <a href="https://www.google.com.ar/search?q=workout-dance" class="style-single w-inline-block" target="_blank" title="Classes"><div class="style_thumb_container"><img src="./src/workout.png" loading="lazy" sizes="(max-width: 479px) 90vw, (max-width: 767px) 88vw, (max-width: 991px) 89vw, (max-width: 2042px) 94vw, 1920px" srcset="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min-p-500.jpeg 500w, https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/61cb62b743a7564c79d61be4_PRODUCT_THUMBNAIL-min.jpg 1920w" alt="Dance Workout Style" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Workout</div></div></a>
+      <a href="https://www.google.com.ar/search?q=k-pop" class="style-single w-inline-block" target="_blank" title="K Pop"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0d8ce5038de0475ff_STEEZY_KPOP-min.jpg" loading="lazy" alt="K-Pop Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">K-Pop</div></div></a>
+      <a href="https://app.steezy.co/categories/ballet" class="style-single w-inline-block" target="_blank" title="Ballet"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab004cd38de543dd7a1_STEEZY_BALLET-min.jpg" loading="lazy" alt="Ballet Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Ballet</div></div></a>
+      <a href="https://www.google.com.ar/search?q=salsa" class="style-single w-inline-block" target="_blank" title="Salsa"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/615e128e6cd629d07d38baf1_SALSA_CATEGORY_THUMB-min.jpg" loading="lazy" alt="Salsa Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Salsa</div></div></a>
+      <a href="https://www.google.com.ar/search?q=popping" class="style-single w-inline-block" target="_blank" title="Popping"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0707f8ffece1e0ea3_STEEZY_POPPING-min.jpg" loading="lazy" alt="Popping Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Popping</div></div></a>
+      <a href="https://www.google.com.ar/search?q=jazz" class="style-single w-inline-block" target="_blank" title="Jazz"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0f8caa4145fe07fef_STEEZY_JAZZ-min.jpg" loading="lazy" alt="Jazz Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Jazz</div></div></a>
+      <a href="https://www.google.com.ar/search?q=lite-feet" class="style-single w-inline-block" target="_blank" title="Lite Feet"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab04214ca70831e3e4f_STEEZY_LITEFEET-min.jpg" loading="lazy" alt="Lite Feet Dance Style" style="filter: blur(4px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Lite Feet</div></div></a>
+      <a href="https://www.google.com.ar/search?q=heels" class="style-single w-inline-block" target="_blank" title="Heels"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0f91c1677a7d6c4bb_STEEZY_HEELS-min.jpg" loading="lazy" alt="Heels Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Heels</div></div></a>
+      <a href="https://www.google.com.ar/search?q=house" class="style-single w-inline-block" target="_blank" title="House"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab0707f8f87061e0ea2_STEEZY_HOUSE-min.jpg" loading="lazy" alt="House Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">House</div></div></a>
+      <a href="https://www.google.com.ar/search?q=locking" class="style-single w-inline-block" target="_blank" title="Locking"><div class="style_thumb_container"><img src="https://cdn.prod.website-files.com/5dbb40d6d8c97447e9450447/60baaab07a233c5367e6035e_STEEZY_LOCKING-min.jpg" loading="lazy" alt="Locking Dance Style" style="filter: blur(6px);" class="image-21"></div><div class="div-block-102 light"><div class="text-block-39 dark-centered">Locking</div></div></a></div>
     </div>
   </div>
-
+  <br><br><br>
+  
+<div id="pricing" class="white-section">
+	<div class="section_header_container titlefont text-style-allcaps"><h2 class="section_header_v2">Elige Tu Plan</h2>
+		<div class="subhead_v2 dark deviices titlefont text-style-allcaps">Crea tu cuenta y subscribete.</div></div>
+	<div class="div-block-172">
+		<div class="w-row">
+			<div class="split-column w-col w-col-6 w-col-stack">
+				<div class="monthly-block monthly">
+					<div class="plan-header titlefont">LIMITED</div>
+          <div class="text-block-51">
+            <ul class="titlefont text-size-small">
+              <li>ACCESSO A TODOS LOS CONTENIDOS</li>
+              <li>TARJETA DE MIEMBRO</li>
+              <li>ACCESSO A GRUPO PRIVADO DE TELEGRAM</li>
+              <li>DESCUENTOS EN CLASES PRESENCIALES Y ONLINE</li>
+            </ul>
+          </div>
+          <br>
+					<div class="section_header_container half">
+            <div class="text-block-51">US$9.90<span class="text-span-3">/mes</span></div>
+						<a href="https://google.com.ar" class="pricing_cta white w-button">COMIENZA&nbsp;TU&nbsp;AVENTURA&nbsp;YA</a>
+						<link rel="prerender" href="https://google.com.ar"></div></div></div>
+			<div class="split-column w-col w-col-6 w-col-stack">
+				<div class="monthly-block annual"><div class="plan-header">100% UNLOCKED</div>
+        <ul class="titlefont text-size-small">
+          <li>ACCESSO A TODOS LOS CONTENIDOS</li>
+          <li>TARJETA DE MIEMBRO</li>
+          <li>ACCESSO A GRUPO PRIVADO DE TELEGRAM</li>
+          <li>DESCUENTOS EN CLASES PRESENCIALES Y ONLINE</li>
+        </ul>
+        <br>
+					<div class="div-block-170"></div><div class="div-block-171"><div class="pricing-value-text">BEST&nbsp;VALUE</div></div>
+          <div class="section_header_container half">
+            <div class="text-block-51">US$14.90<span class="text-span-3">/mes</span></div>
+					<a href="https://google.com.ar" class="pricing_cta w-button">MEJORA&nbsp;TUS&nbsp;HABILIDADES&nbsp;</a>
+					<link rel="prerender" href="https://google.com.ar"></div></div></div>
+		</div>
+<br><br>
 			
 	
 </main>
