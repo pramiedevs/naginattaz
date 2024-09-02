@@ -98,6 +98,13 @@
                 transition: transform 0.3s ease;
             }
 
+                .carousel-item img {
+    width: 90vw;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
             .arrow-left, .arrow-right {
                 top: auto;
                 bottom: 0;
