@@ -25,9 +25,7 @@
         }
 
         .carousel-section {
-            height: 16vh;
-            overflow: hidden;                
-            padding: 30px;
+            overflow: hidden;
             background-color: #964bdf;
             position: relative;
             
@@ -45,8 +43,9 @@
 
         .carousel-item {
             flex: 0 0 auto; /* Prevent items from shrinking or growing */
-    padding: 10px; /* Space between items */
+    padding: 20px; /* Space between items */
     box-sizing: border-box;
+                height:25vh;
         }
 
         .carousel-item img {
