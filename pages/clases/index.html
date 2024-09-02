@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clases</title>
+    <title>Image Sections with Carousel</title>
     <style>
         body {
             margin: 0;
@@ -12,7 +12,7 @@
 
         .main-section {
             position: relative;
-            height: 80vh; /* Adjust the height as needed */
+            height: 60vh; /* Adjust the height as needed */
             overflow: hidden;
         }
 
@@ -20,6 +20,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: opacity 0.5s ease;
         }
 
         .carousel-section {
@@ -47,20 +48,8 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-logo">
-            <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-                <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
-            </a>
-        </div>
-        <div class="header-right">
-            <input type="text" placeholder="Search...">
-            <button>🔍</button>
-            <button>Subscribe</button>
-        </div>
-    </header>
     <div class="main-section">
-        <img src="https://i.pinimg.com/originals/7f/73/a5/7f73a5fe20e285ea4e51f1f20b9d4ed7.jpg" alt="Main Image">
+        <img id="mainImage" src="https://via.placeholder.com/1200x800" alt="Main Image">
     </div>
 
     <div class="carousel-section">
@@ -73,7 +62,7 @@
         </div>
     </div>
 
-   <script>
+    <script>
         const carouselImages = document.querySelectorAll('.carousel img');
         const mainImage = document.getElementById('mainImage');
 
