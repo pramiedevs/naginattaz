@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Layout with Main Content Grid</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="no-scrollbar">
+    <header>
+        <div class="header-logo">
+            <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
+                <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
+            </a>
+        </div>
+        <div class="header-right">
+            <input type="text" placeholder="Search...">
+            <button>🔍</button>
+            <button>Subscribe</button>
+        </div>
+    </header>
+    <div class="container">
+        <div class="left-panel">
+            <button onclick="showContent('section1')">INICIO</button>
+            <button onclick="showContent('section2')">CLASES</button>
+            <button onclick="showContent('section3')">ESTILOS</button>
+            <button onclick="showContent('section4')">PLAYLIST</button>
+            <button onclick="showContent('section5')">CALENDARIO</button>
+            <button onclick="showContent('section6')">COMUNIDAD</button>
+
+        </div>
+        <div class="main-content ">
+            <div class="welcome-section">
+                <h2>BIENVENIDO USUARIO NAGITEST123 !</h2>
+                <p>TU PLAN ACTUAL ES BAMBU</p>
+            </div>
+            <div id="section1" class="content-section active">
+                <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%">                
+            </div>
+            <div id="section2" class="content-section">
+                <div class="image-grid">
+                    <div>
+                        <img class="img-clases" src="https://images.stockcake.com/public/3/c/a/3ca4331b-5b6e-43cb-9a51-d6c6770ef5b4_large/aurora-wilderness-scene-stockcake.jpg" alt="">
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div id="section3" class="content-section">
+                <h2>ESTILOS</h2>
+                <p>Selecciona tu estilo preferido!</p>
+            </div>
+            <div id="section4" class="content-section">
+                <h2>PLAYLIST</h2>
+                <p>Selecciona rutinas previamente confeccionadas por nuestro equipo de instructores.</p>
+            </div>
+            <div id="section5" class="content-section">
+                <h2>CALENDARIO</h2>
+            </div>
+            <div id="section6" class="content-section">
+                <h2>COMUNIDAD NAGINATTAZ</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(sectionId) {
+            var sections = document.querySelectorAll('.content-section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
