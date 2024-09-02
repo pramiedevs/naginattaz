@@ -6,14 +6,18 @@
     <title>Clases</title>
     <link rel="stylesheet" href="./clases-styles.css">
 </head>
-<body class="no-scrollbar">
+<body class="no-scrollbar"
+    
+    <div class="main-section">
+    <!-- Default image -->
+    <img id="mainImage" src="https://png.pngtree.com/background/20230401/original/pngtree-dance-hip-hop-hip-hop-dancing-doodle-background-picture-image_2252724.jpg" alt="Main Image" style="display: block;">
 
-     <div class="main-section">
-        <img id="mainImage" src="https://png.pngtree.com/background/20230401/original/pngtree-dance-hip-hop-hip-hop-dancing-doodle-background-picture-image_2252724.jpg" alt="Main Image">
-    <video id="mainVideo" controls>
-        <source src="https://via.placeholder.com/1200x800.mp4" type="video/mp4">
+    <!-- Hidden video element for dynamic video content -->
+    <video id="mainVideo" controls style="display: none;">
+        <source src="" type="video/mp4">
+        Your browser does not support the video tag.
     </video>
-     </div>
+    </div>
         
     
 
@@ -25,12 +29,12 @@
                 
                 <div class="carousel-item">
                 <video src="https://via.placeholder.com/150x100.mp4" data-large="https://via.placeholder.com/1200x800.mp4" alt="Video 1"></video>
-                <div class="carousel-label">Clase 1</div>
-                </div>
+                <div class="carousel-label">Video 1</div>
+            </div>
                 
                 <div class="carousel-item">
-                <video src="https://via.placeholder.com/150x100.mp4" data-large="https://via.placeholder.com/1200x800.mp4" alt="Video 2"></video>
-                <div class="carousel-label">Clase 2</div>
+                    <img src="https://via.placeholder.com/150x100" alt="Image 3" data-large="https://via.placeholder.com/1200x800?text=Image+2">
+                    <div class="carousel-label">Clase 2</div>
                 </div>
                 <div class="carousel-item">
                     <img src="https://via.placeholder.com/150x100" alt="Image 3" data-large="https://via.placeholder.com/1200x800?text=Image+3">
@@ -76,13 +80,20 @@
         const carouselItems = document.querySelectorAll('.carousel-item');
         let scrollAmount = 0;
 
-     document.querySelectorAll('.carousel video').forEach(video => {
+
+//video scripts
+document.querySelectorAll('.carousel video').forEach(video => {
     video.addEventListener('click', () => {
+        const mainImage = document.getElementById('mainImage');
         const mainVideo = document.getElementById('mainVideo');
-        mainVideo.src = video.getAttribute('data-large');
+
+        // Hide the image and show the video
+        mainImage.style.display = 'none';
+        mainVideo.style.display = 'block';
         
-        // If you want to start playing the video automatically
-        //mainVideo.play();
+        // Set the video source and play
+        mainVideo.src = video.getAttribute('data-large');
+        mainVideo.play();
 
         // Smooth scroll to the main section if needed
         window.scrollTo({
@@ -91,6 +102,19 @@
         });
     });
 });
+
+// Optional: add functionality to reset to default image if needed
+function resetToImage() {
+    const mainImage = document.getElementById('mainImage');
+    const mainVideo = document.getElementById('mainVideo');
+
+    mainImage.style.display = 'block';
+    mainVideo.style.display = 'none';
+    mainVideo.pause(); // Stop video if any is playing
+    mainVideo.src = ''; // Clear the video source
+}
+
+        
 
         // Scroll the carousel
         function scrollCarousel(direction) {
