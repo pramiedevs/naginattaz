@@ -24,6 +24,12 @@
             transition: opacity 0.5s ease;
         }
 
+        .main-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .carousel-section {
             overflow: hidden;
             background-color: #964bdf;
