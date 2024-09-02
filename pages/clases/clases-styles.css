@@ -25,11 +25,12 @@
         }
 
         .carousel-section {
+            height: 16vh;
             overflow: hidden;                
             padding: 30px;
             background-color: #964bdf;
             position: relative;
-            height:18vh;
+            
         }
 
         .carousel-container {            
