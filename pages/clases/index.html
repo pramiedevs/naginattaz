@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .main-section {
+            position: relative;
+            height: 60vh; /* Adjust the height as needed */
+            overflow: hidden;
+        }
+
+        .main-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-section {
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 150px; /* Adjust size of carousel images */
+            margin-right: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-section">
+        <img src="https://via.placeholder.com/1200x800" alt="Main Image">
+    </div>
+
+    <div class="carousel-section">
+        <div class="carousel">
+            <img src="https://via.placeholder.com/150x100" alt="Image 1">
+            <img src="https://via.placeholder.com/150x100" alt="Image 2">
+            <img src="https://via.placeholder.com/150x100" alt="Image 3">
+            <img src="https://via.placeholder.com/150x100" alt="Image 4">
+            <img src="https://via.placeholder.com/150x100" alt="Image 5">
+        </div>
+    </div>
+
+    <script>
+        // Optional JavaScript for carousel interaction
+        const carousel = document.querySelector('.carousel');
+        let startX, scrollLeft;
+
+        carousel.addEventListener('mousedown', (e) => {
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+            carousel.style.cursor = 'grabbing';
+            carousel.style.transition = 'none';
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            carousel.style.cursor = 'grab';
+            carousel.style.transition = 'all 0.3s ease';
+        });
+
+        carousel.addEventListener('mouseup', () => {
+            carousel.style.cursor = 'grab';
+            carousel.style.transition = 'all 0.3s ease';
+        });
+
+        carousel.addEventListener('mousemove', (e) => {
+            if (startX !== undefined) {
+                const x = e.pageX - carousel.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll speed
+                carousel.scrollLeft = scrollLeft - walk;
+            }
+        });
+    </script>
+</body>
+</html>
