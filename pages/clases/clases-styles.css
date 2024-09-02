@@ -25,9 +25,7 @@
         }
 
         .carousel-section {
-width: 100%; /* Adjust as needed */
-    overflow: hidden; /* Hide overflow from the container */
-                
+            overflow: hidden;                
             padding: 20px;
             background-color: #964bdf;
             position: relative;
@@ -35,7 +33,7 @@ width: 100%; /* Adjust as needed */
 
         .carousel-container {            
             display: flex;
-    overflow: hidden; /* Hide overflow from the container */
+            overflow: hidden;
         }
 
         .carousel {
