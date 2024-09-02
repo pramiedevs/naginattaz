@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="./clases-styles.css">
 </head>
 <body class="no-scrollbar">
-    <div class="main-content">
-        <video id="mainVideo" controls>
+
+     <div class="main-section">
+        <img id="mainImage" src="https://png.pngtree.com/background/20230401/original/pngtree-dance-hip-hop-hip-hop-dancing-doodle-background-picture-image_2252724.jpg" alt="Main Image">
+    <video id="mainVideo" controls>
         <source src="https://via.placeholder.com/1200x800.mp4" type="video/mp4">
     </video>
-    </div>
+     </div>
+        
     
 
     <div class="carousel-section">
@@ -79,7 +82,7 @@
         mainVideo.src = video.getAttribute('data-large');
         
         // If you want to start playing the video automatically
-        mainVideo.play();
+        //mainVideo.play();
 
         // Smooth scroll to the main section if needed
         window.scrollTo({
