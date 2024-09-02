@@ -65,7 +65,16 @@
         </div>
     </div>
 
-    <script>
+   <script>
+        const carouselImages = document.querySelectorAll('.carousel img');
+        const mainImage = document.getElementById('mainImage');
+
+        carouselImages.forEach(img => {
+            img.addEventListener('click', () => {
+                mainImage.src = img.getAttribute('data-large');
+            });
+        });
+
         // Optional JavaScript for carousel interaction
         const carousel = document.querySelector('.carousel');
         let startX, scrollLeft;
