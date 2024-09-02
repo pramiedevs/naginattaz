@@ -26,12 +26,18 @@
         .carousel-section {
             padding: 20px;
             background-color: #f8f8f8;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
         }
 
         .carousel {
             display: flex;
-            overflow: hidden;
-            width: 100%;
+            transition: transform 0.3s ease;
         }
 
         .carousel img {
@@ -45,6 +51,34 @@
         .carousel img:hover {
             transform: scale(1.1);
         }
+
+        .carousel-label {
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+        }
+
+        .arrow-left {
+            left: 0;
+        }
+
+        .arrow-right {
+            right: 0;
+        }
     </style>
 </head>
 <body>
@@ -53,49 +87,94 @@
     </div>
 
     <div class="carousel-section">
-        <div class="carousel">
-            <img src="https://via.placeholder.com/150x100" alt="Image 1" data-large="https://via.placeholder.com/1200x800?text=Image+1">
-            <img src="https://via.placeholder.com/150x100" alt="Image 2" data-large="https://via.placeholder.com/1200x800?text=Image+2">
-            <img src="https://via.placeholder.com/150x100" alt="Image 3" data-large="https://via.placeholder.com/1200x800?text=Image+3">
-            <img src="https://via.placeholder.com/150x100" alt="Image 4" data-large="https://via.placeholder.com/1200x800?text=Image+4">
-            <img src="https://via.placeholder.com/150x100" alt="Image 5" data-large="https://via.placeholder.com/1200x800?text=Image+5">
+        <button class="arrow arrow-left" id="prevArrow">&#9664;</button>
+        <button class="arrow arrow-right" id="nextArrow">&#9654;</button>
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/150x100" alt="Image 1" data-large="https://via.placeholder.com/1200x800?text=Image+1">
+                    <div class="carousel-label">Image 1</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/150x100" alt="Image 2" data-large="https://via.placeholder.com/1200x800?text=Image+2">
+                    <div class="carousel-label">Image 2</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/150x100" alt="Image 3" data-large="https://via.placeholder.com/1200x800?text=Image+3">
+                    <div class="carousel-label">Image 3</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/150x100" alt="Image 4" data-large="https://via.placeholder.com/1200x800?text=Image+4">
+                    <div class="carousel-label">Image 4</div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://via.placeholder.com/150x100" alt="Image 5" data-large="https://via.placeholder.com/1200x800?text=Image+5">
+                    <div class="carousel-label">Image 5</div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        const carouselImages = document.querySelectorAll('.carousel img');
+        const carousel = document.getElementById('carousel');
         const mainImage = document.getElementById('mainImage');
+        const prevArrow = document.getElementById('prevArrow');
+        const nextArrow = document.getElementById('nextArrow');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let scrollAmount = 0;
 
-        carouselImages.forEach(img => {
+        // Click event for changing main image
+        carousel.querySelectorAll('img').forEach(img => {
             img.addEventListener('click', () => {
                 mainImage.src = img.getAttribute('data-large');
             });
         });
 
-        // Optional JavaScript for carousel interaction
-        const carousel = document.querySelector('.carousel');
+        // Scroll the carousel
+        function scrollCarousel(direction) {
+            const itemWidth = carouselItems[0].offsetWidth + parseInt(window.getComputedStyle(carouselItems[0]).marginRight);
+            const visibleItems = Math.floor(carouselContainer.offsetWidth / itemWidth);
+
+            if (direction === 'left') {
+                scrollAmount -= itemWidth;
+                if (scrollAmount < 0) scrollAmount = 0;
+            } else {
+                scrollAmount += itemWidth;
+                if (scrollAmount > (carouselItems.length - visibleItems) * itemWidth) {
+                    scrollAmount = (carouselItems.length - visibleItems) * itemWidth;
+                }
+            }
+
+            carousel.style.transform = `translateX(-${scrollAmount}px)`;
+        }
+
+        prevArrow.addEventListener('click', () => scrollCarousel('left'));
+        nextArrow.addEventListener('click', () => scrollCarousel('right'));
+
+        // Optional JavaScript for carousel drag-to-scroll interaction
+        const carouselContainer = document.querySelector('.carousel-container');
         let startX, scrollLeft;
 
-        carousel.addEventListener('mousedown', (e) => {
-            startX = e.pageX - carousel.offsetLeft;
+        carouselContainer.addEventListener('mousedown', (e) => {
+            startX = e.pageX - carouselContainer.offsetLeft;
             scrollLeft = carousel.scrollLeft;
-            carousel.style.cursor = 'grabbing';
-            carousel.style.transition = 'none';
+            carouselContainer.style.cursor = 'grabbing';
+            carouselContainer.style.transition = 'none';
         });
 
-        carousel.addEventListener('mouseleave', () => {
-            carousel.style.cursor = 'grab';
-            carousel.style.transition = 'all 0.3s ease';
+        carouselContainer.addEventListener('mouseleave', () => {
+            carouselContainer.style.cursor = 'grab';
+            carouselContainer.style.transition = 'all 0.3s ease';
         });
 
-        carousel.addEventListener('mouseup', () => {
-            carousel.style.cursor = 'grab';
-            carousel.style.transition = 'all 0.3s ease';
+        carouselContainer.addEventListener('mouseup', () => {
+            carouselContainer.style.cursor = 'grab';
+            carouselContainer.style.transition = 'all 0.3s ease';
         });
 
-        carousel.addEventListener('mousemove', (e) => {
+        carouselContainer.addEventListener('mousemove', (e) => {
             if (startX !== undefined) {
-                const x = e.pageX - carousel.offsetLeft;
+                const x = e.pageX - carouselContainer.offsetLeft;
                 const walk = (x - startX) * 2; // Scroll speed
                 carousel.scrollLeft = scrollLeft - walk;
             }
