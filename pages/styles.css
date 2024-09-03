@@ -159,11 +159,22 @@
                 border: solid 1.8px #4d4a509e;
                 border-radius: 20px;           
         }
-        .welcome-section h2 {
-                margin: 0;
-                font-size: 24px;
-                padding-top:15px;
-        }
+
+#welcome-message {
+    margin-right: 20px;
+}
+
+#user-info {
+    margin-left: 20px;
+}
+
+#g-signin-button {
+    margin-left: auto;
+}
+
+#logout-button {
+    margin-left: 20px;
+}
         .image-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
