@@ -14,9 +14,10 @@
             </a>
         </div>
         <div class="header-right">
-            <input type="text" placeholder="Search...">
-            <button>🔍</button>
-            <button>Subscribe</button>
+            <img id="image-preview" class="image-preview" src="" alt="Preview">
+            <input type="text" id="search-input" placeholder="Buscar...">
+            <button id="search">🔍</button>
+            <button class="titlefont">Subscribite</button>
         </div>
     </header>
     <div class="container">
@@ -39,28 +40,22 @@
             </div>
             <div id="section2" class="content-section">
                 <div class="image-grid">
-                    <div>
+                    <div id="hiphop">
                         <a href="./clases/index.html">
                         <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style"></a>
-                        <h3 style="position:absolute; bottom:-10px; margin-left:40%;">Hip-Hop</h3>
+                        <h3 style="position:absolute; bottom:-10px; margin-left:40%;"></h3>
                     </div>
-                    <div>
+                    <div id="contemporary">
                         <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Hip Hop Dance Style">
-                        <h3 style="position:absolute; bottom:-10px; margin-left:40%;">Contemporáneo</h3>
+                        <h3 style="position:absolute; bottom:-10px; margin-left:40%;"></h3>
                     </div>
-                    <div>
-                         <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Hip Hop Dance Style">
-                        <h3 style="position:absolute; bottom:-10px; margin-left:40%;">Workout</h3>
+                    <div id="workout">
+                        <a href="./clases/index.html">
+                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Hip Hop Dance Style">
+                        </a>
+                         
+                        <h3 style="position:absolute; bottom:-10px; margin-left:40%;"></h3>
                     </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                 </div>
             </div>
             <div id="section3" class="content-section">
@@ -81,13 +76,74 @@
     </div>
 
     <script>
+
+
+        // Toggle the search input and set up event listeners
+        document.getElementById('search').addEventListener('click', function() {
+            var searchInput = document.getElementById('search-input');
+            var imagePreview = document.getElementById('image-preview');
+
+            if (searchInput.classList.contains('visible')) {
+                searchInput.classList.remove('visible');
+                imagePreview.style.display = 'none';
+                resetSection2();
+            } else {
+                searchInput.classList.add('visible');
+                searchInput.focus();
+            }
+        });
+
         function showContent(sectionId) {
-            var sections = document.querySelectorAll('.content-section');
-            sections.forEach(function(section) {
-                section.classList.remove('active');
-            });
-            document.getElementById(sectionId).classList.add('active');
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
+// Handle the search input
+document.getElementById('search-input').addEventListener('input', function() {
+    var query = this.value.toLowerCase();
+    var imagePreview = document.getElementById('image-preview');
+    var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
+
+    if (query) {
+        var found = false;
+        imageGridItems.forEach(function(item) {
+            if (item.id.includes(query)) {
+                item.style.display = 'block';
+                var img = item.querySelector('img').src;
+                imagePreview.src = img;
+                imagePreview.style.display = 'block';
+                found = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        if (!found) {
+            imagePreview.style.display = 'none';
         }
+    } else {
+        imagePreview.style.display = 'none';
+        resetSection2(); // Reset if search input is cleared
+    }
+});
+
+// Handle the click on the preview image to navigate to section2
+document.getElementById('image-preview').addEventListener('click', function() {
+    // Simulate clicking the "CLASES" button to show section2
+    document.querySelector('button[onclick="showContent(\'section2\')"]').click();
+});
+
+// Reset section2 to show all items
+function resetSection2() {
+    var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
+    imageGridItems.forEach(function(item) {
+        item.style.display = 'block';
+    });
+    document.querySelector('button[onclick="showContent(\'section2\')"]').click();
+    
+}
     </script>
 </body>
 </html>
