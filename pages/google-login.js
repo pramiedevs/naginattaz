@@ -33,14 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLogout() {
-        google.accounts.id.revoke(window.gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token, () => {
-            // After revoke, clear user data
-            userName.textContent = '"USER"';
-            userPic.src = '';
-            userInfo.style.display = 'none';
-            signinButton.style.display = 'block';
-            logoutButton.style.display = 'none';
-        });
+        // Use the disableAutoSelect method to clear the sign-in state
+        google.accounts.id.disableAutoSelect();
+
+        // Clear user data
+        userName.textContent = '"USER"';
+        userPic.src = '';
+        userInfo.style.display = 'none';
+        signinButton.style.display = 'block';
+        logoutButton.style.display = 'none';
     }
 
     initGoogleSignIn();
