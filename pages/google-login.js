@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLogout() {
-        google.accounts.id.revoke(token => {
-            console.log('User logged out');
+        google.accounts.id.revoke(window.gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token, () => {
+            // After revoke, clear user data
             userName.textContent = '"USER"';
             userPic.src = '';
             userInfo.style.display = 'none';
