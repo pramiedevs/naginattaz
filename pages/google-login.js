@@ -8,16 +8,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
 
+    let isLoggedIn = false; // Track the login status
+
     function handleCredentialResponse(response) {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
 
-        // Update welcome message and user info
+        // Update UI with user info
         userName.textContent = userInfoData.name;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'block';
         signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
+
+        // Mark user as logged in
+        isLoggedIn = true;
     }
 
     function initGoogleSignIn() {
@@ -33,18 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleLogout() {
-        // Use the disableAutoSelect method to clear the sign-in state
-        google.accounts.id.disableAutoSelect();
+        if (!isLoggedIn) {
+            console.warn("User is not signed in.");
+            return;
+        }
 
-        // Clear user data
-        userName.textContent = '"USER"';
-        userPic.src = '';
-        userInfo.style.display = 'none';
-        signinButton.style.display = 'block';
-        logoutButton.style.display = 'none';
+        // Clear user data and update UI
+        google.accounts.id.revoke('', () => {
+            userName.textContent = '"USER"';
+            userPic.src = '';
+            userInfo.style.display = 'none';
+            signinButton.style.display = 'block';
+            logoutButton.style.display = 'none';
+
+            // Reset login status
+            isLoggedIn = false;
+        });
     }
 
     initGoogleSignIn();
 
     logoutButton.addEventListener('click', handleLogout);
 });
+
