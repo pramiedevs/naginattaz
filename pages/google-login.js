@@ -8,13 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleCredentialResponse(response) {
         const user = response.credential;
-        const userInfo = JSON.parse(atob(user.split('.')[1]));
-        
+        const userInfoData = JSON.parse(atob(user.split('.')[1]));
+
         // Update welcome message and user info
-        userName.textContent = userInfo.name;
-        userPic.src = userInfo.picture;
+        userName.textContent = userInfoData.name;
+        userPic.src = userInfoData.picture;
         userInfo.style.display = 'block';
-        planInfo.textContent = 'TU PLAN ACTUAL ES BAMBU'; // Optional: Update plan info if needed
+        signinButton.style.display = 'none';
+        logoutButton.style.display = 'inline-block';
     }
 
     function initGoogleSignIn() {
@@ -24,18 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         google.accounts.id.renderButton(
-            document.getElementById('g-signin-button'),
-            { theme: 'outline', size: 'large' }  // You can change these options as needed
+            signinButton,
+            { theme: 'outline', size: 'large' }
         );
     }
 
-    google.accounts.id.initialize({
-        client_id: clientId,
-        callback: handleCredentialResponse
-    });
+    function handleLogout() {
+        google.accounts.id.revoke(token => {
+            console.log('User logged out');
+            userName.textContent = '"USER"';
+            userPic.src = '';
+            userInfo.style.display = 'none';
+            signinButton.style.display = 'block';
+            logoutButton.style.display = 'none';
+        });
+    }
 
-    google.accounts.id.renderButton(
-        document.getElementById('g-signin-button'),
-        { theme: 'outline', size: 'large' }
-    );
+    initGoogleSignIn();
+
+    logoutButton.addEventListener('click', handleLogout);
 });
