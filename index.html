@@ -637,10 +637,14 @@ margin: 0rem !important;
     </div>
   </div>  
   </div>
+	
+
 <div class="div-block-110"><div class="div-block-111">
-	<div class="titlefont">CONOCE NUESTRAS CLASES DISPONIBLES
-		<br><br>
-      		RECORDA QUE MES A MES SUMAMOS NUEVAS</div>
+	<div class="scrolling-container">
+        <div class="scrolling-text">
+            CONOCE NUESTRAS CLASES DISPONIBLES / RECORDA QUE MES A MES SUMAMOS NUEVAS
+        </div>
+    </div>
 </div>
 	
 </div>
@@ -889,6 +893,22 @@ if (irclickid) {
         tabLoop();
         });
     });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollingText = document.querySelector('.scrolling-text');
+
+    // Set the default speed (in seconds)
+    const defaultSpeed = 10; // Lower values mean faster scrolling
+
+    function updateAnimationSpeed(speed) {
+        scrollingText.style.animationDuration = `${speed}s`;
+    }
+
+    // Initialize with default speed
+    updateAnimationSpeed(defaultSpeed);
+});
+
+	
 </script>
 </body>
 </html>
