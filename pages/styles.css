@@ -201,6 +201,57 @@
             display: block;
         }
 
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.menu {
+    display: flex;
+    background-color: #333;
+    padding: 10px;
+}
+
+.menu button {
+    color: white;
+    background-color: #555;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.menu button:hover {
+    background-color: #777;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+}
+
+.section {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.fixed-calendar {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.fixed-calendar th, .fixed-calendar td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.fixed-calendar th {
+    background-color: #f4f4f4;
+}
+
 
         @media (max-width: 768px) {
             .main-content{
@@ -233,6 +284,7 @@
             }
             
         }
+
 
 
 
