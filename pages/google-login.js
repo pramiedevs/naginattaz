@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
     const planInfo = document.getElementById('plan-info');
+    const signinButton = document.getElementById('g-signin-button');
+    const logoutButton = document.getElementById('logout-button');
 
     function handleCredentialResponse(response) {
         const user = response.credential;
