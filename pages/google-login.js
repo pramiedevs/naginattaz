@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your client ID
+    const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
     const welcomeMessage = document.getElementById('welcome-message');
     const userName = document.getElementById('user-name');
     const userPic = document.getElementById('user-pic');
