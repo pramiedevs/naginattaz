@@ -98,12 +98,33 @@
                 <p>Selecciona playlists previamente confeccionadas por nuestro equipo de instructores para llevar a cabo tus rutinas.</p>
                 <div class="spotify-container">
                 <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="600" height="700" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    <div class="overlay"></div>
                 </div>
                 <style>
                     .spotify-container {
-                    width: 600px; /* Adjust width as needed */
+                    margin-top:4vw;
                     height: 700px; /* Adjust height as needed */
         }
+                    .spotify-container {
+            position: relative;
+            width: 600px;
+        }
+        .spotify-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 0, 0.2); /* Example color overlay */
+            pointer-events: none; /* Ensure overlay does not block interaction */
+        }
+
+                    
     </style>
             </div>
             <div id="section5" class="content-section">
