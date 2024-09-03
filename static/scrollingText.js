@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const scrollingText = document.querySelector('.scrolling-text');
 
     // Set the default speed (in seconds)
-    const defaultSpeed = 10; // Lower values mean faster scrolling
+    const defaultSpeed = 15; // Lower values mean faster scrolling
 
     function updateAnimationSpeed(speed) {
         scrollingText.style.animationDuration = `${speed}s`;
