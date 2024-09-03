@@ -14,7 +14,7 @@
             </a>
         </div>
         <div class="header-right">
-            <img id="image-preview" class="image-preview" src="" alt="Preview">
+            <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input" placeholder=" Buscar clases...">
             <button id="search">🔍</button>
             <button class="titlefont">Subscribite</button>
@@ -36,31 +36,57 @@
                 <p>TU PLAN ACTUAL ES BAMBU</p>
             </div>
             <div id="section1" class="content-section active">
-                <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%">                
+                <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%; margin-bottom: 2vh;">
+                <img src="../src/BANNERPRINCIPAL_2.png" style="width:100%">                
             </div>
             <div id="section2" class="content-section">
                 <div class="image-grid">
-                    <div id="hiphop">
+                    <div id="hiphop principiante">
+                        <a href="./clases/index.html">
+                        <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: grayscale(1);" ></a>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop Principiante</h3>
+                    </div>
+                    <div id="hiphop intermedio">
+                        <a href="./clases/index.html">
+                        <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: sepia(1);"></a>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop Intermedio</h3>
+                    </div>
+                    <div id="hiphop avanzado">
                         <a href="./clases/index.html">
                         <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style"></a>
-                        <h3 style="width: 100%;position: absolute;bottom: -50px;z-index: 1000;">Hip Hop</h3>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop Avanzado</h3>
                     </div>
-                    <div id="contemporary">
+                    <div id="contemporary principiante">
+                        <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: grayscale(1);">
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary Principiante</h3>
+                    </div>
+                    <div id="contemporary intermedio">
+                        <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: sepia(1);">
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary Intermedio</h3>
+                    </div>
+                    <div id="contemporary avanzado">
                         <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style">
-                        <h3 style="width: 100%;position: absolute;bottom: -50px;z-index: 1000;"> Contemporary</h3>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary Avanzado</h3>
                     </div>
-                    <div id="workout">
+                    <div id="workout principiante">
+                        <a href="./clases/index.html">
+                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: grayscale(1);">
+                        </a>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Principiante</h3>
+                    </div>
+                    <div id="workout intermedio">
+                        <a href="./clases/index.html">
+                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: sepia(1);">
+                        </a>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Intermedio</h3>
+                    </div>
+                    <div id="workout avanzado">
                         <a href="./clases/index.html">
                             <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style">
                         </a>
-                        <h3 style="width: 100%;position: absolute;bottom: -50px;z-index: 1000;"> Workout</h3>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Avanzado</h3>
                     </div>
-                    <div id="hep wark">
-                        <a href="./clases/index.html">
-                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style">
-                        </a>
-                        <h3 style="width: 100%;position: absolute;bottom: -50px;z-index: 1000;">Test ABCDEF</h3>
-                    </div>
+                    
                 </div>
             </div>
             <div id="section3" class="content-section">
@@ -108,8 +134,11 @@
 // Handle the search input
 document.getElementById('search-input').addEventListener('input', function() {
     var query = this.value.toLowerCase();
-    var imagePreview = document.getElementById('image-preview');
+    var imagePreviewContainer = document.getElementById('image-preview-container');
     var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
+
+    // Clear the previous preview images
+    imagePreviewContainer.innerHTML = '';
 
     if (query) {
         var found = false;
@@ -117,8 +146,20 @@ document.getElementById('search-input').addEventListener('input', function() {
             if (item.id.includes(query)) {
                 item.style.display = 'block';
                 var img = item.querySelector('img').src;
-                imagePreview.src = img;
-                imagePreview.style.display = 'block';
+
+                // Create a new preview image for each match
+                var previewImg = document.createElement('img');
+                previewImg.src = img;
+                previewImg.classList.add('image-preview');
+                previewImg.style.display = 'inline-block';
+                previewImg.addEventListener('click', function() {
+                    // Simulate clicking the "CLASES" button to show section2
+                    document.querySelector('button[onclick="showContent(\'section2\')"]').click();
+                    
+                });
+
+                // Add the preview image to the container
+                imagePreviewContainer.appendChild(previewImg);
                 found = true;
             } else {
                 item.style.display = 'none';
@@ -126,18 +167,16 @@ document.getElementById('search-input').addEventListener('input', function() {
         });
 
         if (!found) {
-            imagePreview.style.display = 'none';
+            imagePreviewContainer.innerHTML = ''; // Clear if no matches
         }
     } else {
-        imagePreview.style.display = 'none';
-        resetSection2(); // Reset if search input is cleared
-    }
-});
+        imagePreviewContainer.innerHTML = ''; // Clear previews if search input is cleared
 
-// Handle the click on the preview image to navigate to section2
-document.getElementById('image-preview').addEventListener('click', function() {
-    // Simulate clicking the "CLASES" button to show section2
-    document.querySelector('button[onclick="showContent(\'section2\')"]').click();
+        // Check if section2 is currently active
+        if (document.getElementById('section2').classList.contains('active')) {
+            resetSection2(); // Reset only if in section2
+        }
+    }
 });
 
 // Reset section2 to show all items
@@ -146,8 +185,6 @@ function resetSection2() {
     imageGridItems.forEach(function(item) {
         item.style.display = 'block';
     });
-    document.querySelector('button[onclick="showContent(\'section2\')"]').click();
-    
 }
     </script>
 </body>
