@@ -129,7 +129,41 @@
             </div>
             <div id="section5" class="content-section">
                 <h2>CALENDARIO</h2>
+                <div class="calendar-container">
+        <nav class="menu">
+            <button id="calendar-btn">Calendar</button>
+            <button id="dance-btn">Dance Routine</button>
+            <button id="exercises-btn">Exercises</button>
+            <button id="diet-btn">Diet</button>
+        </nav>
+        <div class="content">
+            <div id="calendar-section" class="section">
+                <iframe src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=YOUR_TIMEZONE" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
             </div>
+            <div id="fixed-calendar-section" class="section" style="display: none;">
+                <table class="fixed-calendar">
+                    <thead>
+                        <tr>
+                            <th>Domingo</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                            <th>Sábado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Generating rows with JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+            </div>
+
+<script src="./calendar.js"></script>
+            
             <div id="section6" class="content-section">
                 <h2>COMUNIDAD NAGINATTAZ</h2>
             </div>
