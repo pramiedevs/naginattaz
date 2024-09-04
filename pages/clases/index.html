@@ -29,29 +29,11 @@
     </div>
 
     <div class="carousel-section">
-        <button class="arrow arrow-left" id="prevArrow">&#9664;</button>
-        <button class="arrow arrow-right" id="nextArrow">&#9654;</button>
         <div class="carousel-container">
             <div class="carousel" id="carousel">
                 <div class="carousel-item">                    
                     <img class="carousel-item-img" src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" data-url="https://www.youtube.com/embed/dQw4w9WgXcQ" alt="Clase 1">
                     <div class="carousel-label">Clase 1</div>
-                </div>
-                <div class="carousel-item">
-                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
-                    <div class="carousel-label">Clase 2</div>
-                </div>
-                <div class="carousel-item">
-                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
-                    <div class="carousel-label">Clase 2</div>
-                </div>
-                <div class="carousel-item">
-                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
-                    <div class="carousel-label">Clase 2</div>
-                </div>
-                <div class="carousel-item">
-                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
-                    <div class="carousel-label">Clase 2</div>
                 </div>
                 <div class="carousel-item">
                     <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
@@ -65,8 +47,6 @@
     <script>
         const carousel = document.getElementById('carousel');
         const mainImage = document.getElementById('mainImage');
-        const prevArrow = document.getElementById('prevArrow');
-        const nextArrow = document.getElementById('nextArrow');
         const carouselItems = document.querySelectorAll('.carousel-item');
         let scrollAmount = 0;
 
@@ -90,27 +70,6 @@
                 });
             });
         });
-
-        // Scroll the carousel
-        function scrollCarousel(direction) {
-            const itemHeight = carouselItems[0].offsetHeight + parseInt(window.getComputedStyle(carouselItems[0]).marginBottom);
-            const visibleItems = Math.floor(carouselContainer.offsetHeight / itemHeight);
-
-            if (direction === 'up') {
-                scrollAmount -= itemHeight;
-                if (scrollAmount < 0) scrollAmount = 0;
-            } else {
-                scrollAmount += itemHeight;
-                if (scrollAmount > (carouselItems.length - visibleItems) * itemHeight) {
-                    scrollAmount = (carouselItems.length - visibleItems) * itemHeight;
-                }
-            }
-
-            carousel.style.transform = `translateY(-${scrollAmount}px)`;
-        }
-
-        prevArrow.addEventListener('click', () => scrollCarousel('up'));
-        nextArrow.addEventListener('click', () => scrollCarousel('down'));
 
         // Optional JavaScript for carousel drag-to-scroll interaction
         const carouselContainer = document.querySelector('.carousel-container');
