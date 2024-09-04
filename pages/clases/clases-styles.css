@@ -4,10 +4,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #181818; /* Dark background for cinema mode */
     color: #fff;
-}
-
-.no-scrollbar {
-    overflow: hidden;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Header Styles */
@@ -18,6 +15,10 @@ body {
     background-color: #333;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .header .logo {
@@ -49,9 +50,11 @@ body {
 /* Main Section Styles */
 .main-section {
     position: relative;
-    width: 100%;
+    width: calc(100% - 300px); /* Full width minus carousel width */
     height: 70vh; /* Big screen height */
     background-color: #000;
+    margin-top: 60px; /* Adjust for fixed header */
+    margin-left: 0; /* Align with the left edge */
 }
 
 .main-img {
@@ -74,6 +77,8 @@ body {
     padding: 20px;
     background-color: #222;
     border-bottom: 1px solid #444;
+    margin-left: 0; /* Align with the left edge */
+    margin-top: 10px; /* Space below the video */
 }
 
 .video-title {
@@ -105,11 +110,11 @@ body {
 
 /* Carousel Section Styles */
 .carousel-section {
-    position: absolute;
-    top: 0;
+    position: fixed; /* Fix the carousel section to the right */
+    top: 70px; /* Align below the header */
     right: 0;
-    height: 100%;
     width: 300px; /* Width of the carousel */
+    height: calc(100vh - 70px); /* Full height minus header */
     background-color: #222;
     overflow: hidden;
     padding: 10px;
@@ -125,6 +130,8 @@ body {
     padding: 10px;
     border-radius: 5px;
     margin: 5px;
+    width: 100%;
+    text-align: center;
 }
 
 .arrow:hover {
@@ -132,21 +139,20 @@ body {
 }
 
 .carousel-container {
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
+    height: calc(100% - 50px); /* Full height minus arrow buttons */
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .carousel {
     display: flex;
-    transition: transform 0.3s ease;
+    flex-direction: column;
 }
 
 .carousel-item {
-    display: inline-block;
-    width: 100%;
+    margin-bottom: 10px;
     text-align: center;
-    margin-right: 10px;
 }
 
 .carousel-item-img {
