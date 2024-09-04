@@ -5,8 +5,13 @@ body {
     background-color: #181818; /* Dark background for cinema mode */
     color: #fff;
     overflow-x: hidden; /* Prevent horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical scrolling */
+    scrollbar-width: none; /* Hides scrollbar firefox*/
+    -ms-overflow-style: none; /* Hides scrollbar IE */
 }
+::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+}
+
 
 /* Header Styles */
 .header {
