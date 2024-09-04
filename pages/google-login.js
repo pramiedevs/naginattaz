@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
     const welcomeMessage = document.getElementById('welcome-message');
     const userName = document.getElementById('user-name');
+    const userEmail = document.getElementById('user-email');
     const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
     const planInfo = document.getElementById('plan-info');
@@ -16,11 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update UI with user info
         userName.textContent = userInfoData.name;
+        userEmail.textContent = userInfoData.mail;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'block';
         signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
-
+        console.log(userEmail);
         // Mark user as logged in
         isLoggedIn = true;
     }
@@ -45,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear user data and update UI
         google.accounts.id.revoke('', () => {
-            userName.textContent = '"USER"';
+            userName.textContent = '""';
             userPic.src = '';
             userInfo.style.display = 'none';
             signinButton.style.display = 'block';
