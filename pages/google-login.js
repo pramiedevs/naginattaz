@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
     const welcomeMessage = document.getElementById('welcome-message');
-    const userName = document.getElementById('user-name').innerText;
-    const userEmail = document.getElementById('user-email').innerText;
-    const userPic = document.getElementById('user-pic').src;
+    const userName = document.getElementById('user-name');
+    const userEmail = document.getElementById('user-email');
+    const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
     const planInfo = document.getElementById('plan-info');
     const signinButton = document.getElementById('g-signin-button');
@@ -63,10 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutButton.addEventListener('click', handleLogout);
 
+    const nombreUsuario = document.getElementById('user-name').innerText;
+    const emailUsuario = document.getElementById('user-email').innerText;
+    const fotoUsuario = document.getElementById('user-pic').src;
+
     const userData = {
-    name: userName,
-    email: userEmail,
-    picture: userPic
+    name: nombreUsuario,
+    email: emailUsuario,
+    picture: fotoUsuario
 };
     console.log(userData);
 });
