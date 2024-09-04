@@ -5,6 +5,7 @@ body {
     background-color: #181818; /* Dark background for cinema mode */
     color: #fff;
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrolling */
 }
 
 /* Header Styles */
