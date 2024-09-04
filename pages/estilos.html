@@ -187,11 +187,12 @@
         // Function to send data to the PHP file and display the result
         function displayData() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "display.php?nombre=" + encodeURIComponent(variableNombre) + "&mail=" + encodeURIComponent(variableMail) + "&foto=" + encodeURIComponent(variableFoto), true);
+    xhr.open("GET", "./display.php?nombre=" + encodeURIComponent(variableNombre) + "&mail=" + encodeURIComponent(variableMail) + "&foto=" + encodeURIComponent(variableFoto), true);
 
     xhr.onload = function() {
         if (this.status === 200) {
             document.getElementById("result").innerHTML = this.responseText;
+            document.getElementById("result").innerHTML = "hello";
         }
     };
 
