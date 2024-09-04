@@ -53,7 +53,7 @@ body {
     height: 70vh; /* Adjust height as needed */
     background-color: #000;
     margin-top: 60px; /* Adjust for fixed header */
-    position: relative; /* Ensure main video can be positioned absolutely */
+    position: relative;
 }
 
 .main-img {
@@ -73,11 +73,14 @@ body {
 
 /* Video Title and Comment Box */
 .video-info {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     background-color: #222;
     border-bottom: 1px solid #444;
-    margin-left: 0; /* Align with the left edge */
-    margin-top: 10px; /* Space below the video */
+    width: 65%;
+    margin: 0 auto; /* Center horizontally */
+    box-sizing: border-box;
 }
 
 .video-title {
@@ -109,14 +112,13 @@ body {
 
 /* Carousel Section Styles */
 .carousel-section {
-    position: fixed; /* Fix the carousel section to the right */
+    position: fixed;
     top: 70vh; /* Align below the main section */
     right: 0;
-    width: 300px; /* Width of the carousel */
-    height: calc(100vh - 70vh - 60px); /* Full height minus header and main section height */
+    width: 35%; /* Width of the carousel */
+    height: calc(100vh - 70vh); /* Full height minus header and main section height */
     background-color: #222;
     overflow-y: auto; /* Vertical scroll only */
-    padding: 10px;
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
 }
 
