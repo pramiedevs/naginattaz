@@ -58,7 +58,7 @@ body {
 /* Main Section Styles */
 .main-section {
     width: 100%;
-    height: auto; /* Adjust height based on content */
+    height: 80vh;
     background-color: #000;
     position: relative;
     margin-top: 60px; /* Adjust for fixed header */
@@ -84,7 +84,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
-    min-height: 100vh; /* Ensure the section takes full viewport height */
+    height: 80vh; /* Ensure the section takes full viewport height */
     margin-top: 20px; /* Space between main section and this section */
 }
 
