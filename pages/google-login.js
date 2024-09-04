@@ -62,5 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initGoogleSignIn();
 
     logoutButton.addEventListener('click', handleLogout);
+
+    const userData = {
+    name: userName,
+    email: userEmail,
+    picture: userPic
+};
+    console.log("hello world");
+    console.log(userData);
 });
 
