@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userInfo.style.display = 'block';
         signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
-        console.log(userEmail);
+
         // Mark user as logged in
         isLoggedIn = true;
     }
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
     email: userEmail,
     picture: userPic
 };
-    console.log("hello world");
     console.log(userData);
 });
 
