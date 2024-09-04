@@ -1,136 +1,170 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #181818; /* Dark background for cinema mode */
+    color: #fff;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            overflow: -moz-scrollbars-none; 
-        }
-        
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+.no-scrollbar {
+    overflow: hidden;
+}
 
-        .main-section {
-            position: relative;
-            height: 75vh;
-        }
+/* Header Styles */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-        .main-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.5s ease;
-        }
+.header .logo {
+    width: 100px;
+    height: 30px;
+    background-color: #555;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
 
-        .main-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.header .menu {
+    display: flex;
+    gap: 20px;
+}
 
-        .carousel-section {
-            overflow: hidden;
-            background-color: #964bdf;
-            position: relative;
-            
-        }
+.header .menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
 
-        .carousel-container {            
-            display: flex;
-            overflow: hidden;
-        }
+.header .menu a:hover {
+    text-decoration: underline;
+}
 
-        .carousel {
-            display: flex;
-            transition: transform 0.3s ease;
-        }
+/* Main Section Styles */
+.main-section {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* Big screen height */
+    background-color: #000;
+}
 
-        .carousel-item {
-            flex: 0 0 auto; /* Prevent items from shrinking or growing */
-            padding: 20px; /* Space between items */
-            box-sizing: border-box;
-            height:25vh;
-        }
+.main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .carousel-item-img {
-            width:150px;
-            height:100px;
-            display: block;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+#mainVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
 
-        .carousel-item-img:hover {
-            transform: scale(1.1);
-        }
+/* Video Title and Comment Box */
+.video-info {
+    padding: 20px;
+    background-color: #222;
+    border-bottom: 1px solid #444;
+}
 
-        .carousel-label {
-            text-align: center;
-            padding: 5px 0;
-        }
+.video-title {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            z-index: 10;
-        }
+.comment-box {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 5px;
+}
 
-        .arrow-left {
-            left: 0;
-        }
+.comment-box textarea {
+    width: 100%;
+    height: 80px;
+    border: none;
+    background-color: #222;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
 
-        .arrow-right {
-            right: 0;
-        }
+.comment-box textarea:focus {
+    outline: none;
+}
 
-        @media (max-width: 768px) {
-            .carousel-container {
-                flex-direction: column;
-                align-items: stretch;
-            }
+/* Carousel Section Styles */
+.carousel-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 300px; /* Width of the carousel */
+    background-color: #222;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
+}
 
-            .carousel {
-                flex-direction: column;
-                overflow-y: auto;
-                display: block;
-                transition: transform 0.3s ease;
-            }
+.arrow {
+    background-color: #333;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
 
-            .carousel-item {
-                height: 150%;
-                flex: 0 0 auto; /* Prevent items from shrinking or growing */
-                padding: 20px; /* Space between items */
-                box-sizing: border-box;
-            }
-            .carousel-item-img {
-                width: 100%; /* Make image fill the container */
-                height: 100%;
-                display: block;
-                cursor: pointer;
-                transition: transform 0.3s ease;
-            }
+.arrow:hover {
+    background-color: #555;
+}
 
-            .arrow-left, .arrow-right {
-                top: auto;
-                bottom: 0;
-                width: 100%;
-                font-size: 24px;
-            }
+.carousel-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
 
-            .arrow-left {
-                transform: none;
-            }
+.carousel {
+    display: flex;
+    transition: transform 0.3s ease;
+}
 
-            .arrow-right {
-                transform: rotate(180deg);
-            }
-        }
+.carousel-item {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.carousel-item-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.carousel-label {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Optional Drag-to-scroll Styles */
+.carousel-container {
+    cursor: grab;
+}
+
+.carousel-container.grabbing {
+    cursor: grabbing;
+}
