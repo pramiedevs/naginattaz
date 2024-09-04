@@ -20,6 +20,10 @@
             <button id="search">🔍</button>
             <div id="g-signin-button"></div>            
             <button id="logout-button" style="display: none;">Log Out</button>
+            <div id="user-info" style="display: none;">
+            <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
+           <h2><span id="user-email">" "</span>!</h2>
+        </div>
         </div>
     </header>
     <div class="container">
@@ -36,10 +40,6 @@
             <div class="welcome-section">
                 <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
         <p id="plan-info">TU PLAN ACTUAL ES BAMBU</p>
-        <div id="user-info" style="display: none;">
-            <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
-           <h2><span id="user-email">" "</span>!</h2>
-        </div>
             </div>
 
             <script src="./google-login.js"></script>
