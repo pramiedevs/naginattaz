@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ES">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,6 +70,31 @@
                 });
             });
         });
+
+        // Scroll the carousel
+        function scrollCarousel(direction) {
+            const itemHeight = carouselItems[0].offsetHeight + parseInt(window.getComputedStyle(carouselItems[0]).marginBottom);
+            const visibleItems = Math.floor(carouselContainer.offsetHeight / itemHeight);
+
+            if (direction === 'up') {
+                scrollAmount -= itemHeight;
+                if (scrollAmount < 0) scrollAmount = 0;
+            } else {
+                scrollAmount += itemHeight;
+                if (scrollAmount > (carouselItems.length - visibleItems) * itemHeight) {
+                    scrollAmount = (carouselItems.length - visibleItems) * itemHeight;
+                }
+            }
+
+            carousel.style.transform = `translateY(-${scrollAmount}px)`;
+        }
+
+        // Remove arrow buttons if not needed
+        // const prevArrow = document.getElementById('prevArrow');
+        // const nextArrow = document.getElementById('nextArrow');
+
+        // prevArrow.addEventListener('click', () => scrollCarousel('up'));
+        // nextArrow.addEventListener('click', () => scrollCarousel('down'));
 
         // Optional JavaScript for carousel drag-to-scroll interaction
         const carouselContainer = document.querySelector('.carousel-container');
