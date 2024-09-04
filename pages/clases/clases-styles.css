@@ -88,6 +88,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin-left: 0; /* No margin on the left */
 }
 
 .video-title {
@@ -122,19 +123,22 @@ body {
 .carousel-section {
     flex: 0 0 35%; /* Carousel takes the remaining 35% */
     background-color: #222;
-    overflow-y: auto; /* Vertical scroll only if needed */
+    overflow: hidden; /* Hide all scrollbars */
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
+    height: 100%; /* Match the height of the video info section */
 }
 
 .carousel-container {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* Hide scrollbars */
 }
 
 .carousel {
     display: flex;
     flex-direction: column;
+    overflow-y: auto; /* Vertical scroll only if needed */
 }
 
 .carousel-item {
