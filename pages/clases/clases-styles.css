@@ -49,12 +49,11 @@ body {
 
 /* Main Section Styles */
 .main-section {
-    position: relative;
-    width: calc(100% - 300px); /* Full width minus carousel width */
-    height: 70vh; /* Big screen height */
+    width: 100%;
+    height: 70vh; /* Adjust height as needed */
     background-color: #000;
     margin-top: 60px; /* Adjust for fixed header */
-    margin-left: 0; /* Align with the left edge */
+    position: relative; /* Ensure main video can be positioned absolutely */
 }
 
 .main-img {
@@ -111,35 +110,18 @@ body {
 /* Carousel Section Styles */
 .carousel-section {
     position: fixed; /* Fix the carousel section to the right */
-    top: 70px; /* Align below the header */
+    top: 70vh; /* Align below the main section */
     right: 0;
     width: 300px; /* Width of the carousel */
-    height: calc(100vh - 70px); /* Full height minus header */
+    height: calc(100vh - 70vh - 60px); /* Full height minus header and main section height */
     background-color: #222;
-    overflow: hidden;
+    overflow-y: auto; /* Vertical scroll only */
     padding: 10px;
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
 }
 
-.arrow {
-    background-color: #333;
-    border: none;
-    color: #fff;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-    width: 100%;
-    text-align: center;
-}
-
-.arrow:hover {
-    background-color: #555;
-}
-
 .carousel-container {
-    height: calc(100% - 50px); /* Full height minus arrow buttons */
+    height: 100%;
     overflow: auto;
     display: flex;
     flex-direction: column;
