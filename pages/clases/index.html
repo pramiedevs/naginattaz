@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./clases-styles.css">
 </head>
 <body class="no-scrollbar">
-
     <div class="header">
         <div class="logo">Logo</div>
         <nav class="menu">
@@ -16,7 +15,7 @@
             <a href="#">Contact</a>
         </nav>
     </div>
-    
+
     <div class="main-section">
         <img class="main-img" id="mainImage" src="https://png.pngtree.com/background/20230401/original/pngtree-dance-hip-hop-hip-hop-dancing-doodle-background-picture-image_2252724.jpg" alt="Main Image">
         <iframe id="mainVideo" style="display: none;" frameborder="0" allowfullscreen></iframe>
@@ -28,60 +27,40 @@
             <textarea placeholder="Add a comment..."></textarea>
         </div>
     </div>
-    </div>
 
     <div class="carousel-section">
         <button class="arrow arrow-left" id="prevArrow">&#9664;</button>
         <button class="arrow arrow-right" id="nextArrow">&#9654;</button>
         <div class="carousel-container">
             <div class="carousel" id="carousel">
-                <!-- Carousel items here -->
-                 <div class="carousel-item">                    
-                <img class="carousel-item-img" src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" data-url="https://www.youtube.com/embed/dQw4w9WgXcQ" alt="Clase 1">
-                <div class="carousel-label">Clase 1</div>
+                <div class="carousel-item">                    
+                    <img class="carousel-item-img" src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" data-url="https://www.youtube.com/embed/dQw4w9WgXcQ" alt="Clase 1">
+                    <div class="carousel-label">Clase 1</div>
                 </div>
-                
                 <div class="carousel-item">
                     <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
                     <div class="carousel-label">Clase 2</div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 3" data-large="https://via.placeholder.com/1200x800?text=Image+3">
-                    <div class="carousel-label">Clase 3</div>
+                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
+                    <div class="carousel-label">Clase 2</div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 4" data-large="https://via.placeholder.com/1200x800?text=Image+4">
-                    <div class="carousel-label">Clase 4</div>
+                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
+                    <div class="carousel-label">Clase 2</div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 5" data-large="https://via.placeholder.com/1200x800?text=Image+5">
-                    <div class="carousel-label">Clase 5</div>
+                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
+                    <div class="carousel-label">Clase 2</div>
                 </div>
                 <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 6" data-large="https://via.placeholder.com/1200x800?text=Image+6">
-                    <div class="carousel-label">Clase 6</div>
+                    <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
+                    <div class="carousel-label">Clase 2</div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 7" data-large="https://via.placeholder.com/1200x800?text=Image+7">
-                    <div class="carousel-label">Clase 7</div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 8" data-large="https://via.placeholder.com/1200x800?text=Image+8">
-                    <div class="carousel-label">Clase 8</div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 9" data-large="https://via.placeholder.com/1200x800?text=Image+9">
-                    <div class="carousel-label">Clase 9</div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://via.placeholder.com/150x100" alt="Image 10" data-large="https://via.placeholder.com/1200x800?text=Image+10">
-                    <div class="carousel-label">Clase 10</div>
-                </div>
+                <!-- More carousel items here -->
             </div>
         </div>
     </div>
-                
-               
 
     <script>
         const carousel = document.getElementById('carousel');
@@ -91,58 +70,55 @@
         const carouselItems = document.querySelectorAll('.carousel-item');
         let scrollAmount = 0;
 
+        // Video Scripts
+        document.querySelectorAll('.carousel img').forEach(img => {
+            img.addEventListener('click', () => {
+                const mainImage = document.getElementById('mainImage');
+                const mainVideo = document.getElementById('mainVideo');
 
-//video scripts
-document.querySelectorAll('.carousel img').forEach(img => {
-    img.addEventListener('click', () => {
-        const mainImage = document.getElementById('mainImage');
-        const mainVideo = document.getElementById('mainVideo');
+                // Hide the image and show the iframe
+                mainImage.style.display = 'none';
+                mainVideo.style.display = 'block';
 
-        // Hide the image and show the iframe
-        mainImage.style.display = 'none';
-        mainVideo.style.display = 'block';
+                // Set the iframe source to the clicked video's URL
+                mainVideo.src = img.getAttribute('data-url');
 
-        // Set the iframe source to the clicked video's URL
-        mainVideo.src = img.getAttribute('data-url');
-
-        // Smooth scroll to the main section if needed
-        window.scrollTo({
-            top: document.querySelector('.main-section').offsetTop,
-            behavior: 'smooth'
+                // Smooth scroll to the main section if needed
+                window.scrollTo({
+                    top: document.querySelector('.main-section').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
         });
-    });
-});
-
-        
 
         // Scroll the carousel
         function scrollCarousel(direction) {
-            const itemWidth = carouselItems[0].offsetWidth + parseInt(window.getComputedStyle(carouselItems[0]).marginRight);
-            const visibleItems = Math.floor(carouselContainer.offsetWidth / itemWidth);
+            const itemHeight = carouselItems[0].offsetHeight + parseInt(window.getComputedStyle(carouselItems[0]).marginBottom);
+            const visibleItems = Math.floor(carouselContainer.offsetHeight / itemHeight);
 
-            if (direction === 'left') {
-                scrollAmount -= itemWidth;
+            if (direction === 'up') {
+                scrollAmount -= itemHeight;
                 if (scrollAmount < 0) scrollAmount = 0;
             } else {
-                scrollAmount += itemWidth;
-                if (scrollAmount > (carouselItems.length - visibleItems) * itemWidth) {
-                    scrollAmount = (carouselItems.length - visibleItems) * itemWidth;
+                scrollAmount += itemHeight;
+                if (scrollAmount > (carouselItems.length - visibleItems) * itemHeight) {
+                    scrollAmount = (carouselItems.length - visibleItems) * itemHeight;
                 }
             }
 
-            carousel.style.transform = `translateX(-${scrollAmount}px)`;
+            carousel.style.transform = `translateY(-${scrollAmount}px)`;
         }
 
-        prevArrow.addEventListener('click', () => scrollCarousel('left'));
-        nextArrow.addEventListener('click', () => scrollCarousel('right'));
+        prevArrow.addEventListener('click', () => scrollCarousel('up'));
+        nextArrow.addEventListener('click', () => scrollCarousel('down'));
 
         // Optional JavaScript for carousel drag-to-scroll interaction
         const carouselContainer = document.querySelector('.carousel-container');
-        let startX, scrollLeft;
+        let startY, scrollTop;
 
         carouselContainer.addEventListener('mousedown', (e) => {
-            startX = e.pageX - carouselContainer.offsetLeft;
-            scrollLeft = carousel.scrollLeft;
+            startY = e.pageY - carouselContainer.offsetTop;
+            scrollTop = carousel.scrollTop;
             carouselContainer.style.cursor = 'grabbing';
             carouselContainer.style.transition = 'none';
         });
@@ -158,10 +134,10 @@ document.querySelectorAll('.carousel img').forEach(img => {
         });
 
         carouselContainer.addEventListener('mousemove', (e) => {
-            if (startX !== undefined) {
-                const x = e.pageX - carouselContainer.offsetLeft;
-                const walk = (x - startX) * 2; // Scroll speed
-                carousel.scrollLeft = scrollLeft - walk;
+            if (startY !== undefined) {
+                const y = e.pageY - carouselContainer.offsetTop;
+                const walk = (y - startY) * 2; // Scroll speed
+                carousel.scrollTop = scrollTop - walk;
             }
         });
     </script>
