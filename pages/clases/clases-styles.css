@@ -1,8 +1,26 @@
-/* General Styles */
+:root{
+    --black:#222;
+    --white-smoke:#ebefef;
+    --steel-blue:#0b79fb;
+    --steel-blue-2:#2683ab;
+    --deep-sky-blue:#2e9dcc;
+    --sweat-purple:#c191e7;
+    --green-yellow:#ccff7d;
+    --dark-cyan:#2e8e83;
+  
+    --nagivioleta: #4b59ed;
+    --nagiobispo: #b18cfe;
+    --nagimagenta: #af14af;
+    --nagirosa: #fac8f8;
+  
+  }
+
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #181818; /* Dark background for cinema mode */
+    background-color: var(--nagiobispo); /* Dark background for cinema mode */
     color: #fff;
     overflow-x: hidden; /* Prevent horizontal scrolling */
     overflow-y: auto; /* Allow vertical scrolling */
@@ -19,24 +37,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #333;
+    background-color: var(--nagivioleta);
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    border-bottom: solid;
 }
 
-.header .logo {
-    width: 100px;
-    height: 30px;
-    background-color: #555;
-    text-align: center;
-    line-height: 30px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
+.header .logo img {
+    width: 40vh;
 }
 
 .header .menu {
@@ -49,10 +61,13 @@ body {
     color: #fff;
     text-decoration: none;
     font-size: 14px;
+    background-color: var(--nagiobispo);
+    padding:7px;
+    border-radius:5px;
 }
 
 .header .menu a:hover {
-    text-decoration: underline;
+    background-color: var(--nagimagenta);
 }
 
 /* Main Section Styles */
@@ -90,12 +105,13 @@ body {
 
 .video-info {
     flex: 0 0 65%;
-    background-color: #222;
+    background-color: var(--nagivioleta);
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     margin-left: 1vw;
+    border:solid white;
 }
 
 .video-title {
@@ -129,7 +145,7 @@ body {
 /* Carousel Section Styles */
 .carousel-section {
     flex: 0 0 35%; /* Carousel takes the remaining 35% */
-    background-color: #222;
+    background-color: var(--black);
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
     height: auto; /* Height adjusts based on content */
     overflow: hidden; /* Hide all scrollbars */
