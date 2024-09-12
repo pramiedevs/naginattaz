@@ -93,6 +93,9 @@
             display: none; /* Hidden by default */
             cursor: pointer;
         }
+        #g-signin-button{
+            margin-right: 25px;
+        }
         
         .header-right button {
             margin-right: 2vw;

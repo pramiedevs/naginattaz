@@ -70,6 +70,7 @@ body {
 }
 
 .header-right {
+    margin-right: 25px;
     display: flex;
     align-items: center;
     position: relative;
@@ -85,14 +86,8 @@ body {
 .header-right input[type="text"].visible {
     display: block;
 }
-.image-preview {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    margin-right: 10px;
-    border-radius: 3px;
-    display: none; /* Hidden by default */
-    cursor: pointer;
+#user-info{
+    margin-right: 20px;
 }
 
 .header-right button {
