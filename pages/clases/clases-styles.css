@@ -227,6 +227,7 @@ body {
         height: auto; /* Height adjusts based on content */
         overflow: hidden; /* Hide all scrollbars */
         cursor: default; /* Ensure default cursor behavior */
+        margin:20px;
     }
     .video-info {
         background-color: var(--nagivioleta);
