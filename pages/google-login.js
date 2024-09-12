@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
     const welcomeMessage = document.getElementById('welcome-message');
     const userName = document.getElementById('user-name');
-    const userEmail = document.getElementById('user-email');
+    //const userEmail = document.getElementById('user-email');
     const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
     const signinButton = document.getElementById('g-signin-button');
@@ -10,13 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isLoggedIn = false; // Track the login status
 
+    welcomeMessage = "Estás a punto de entrar al Metaverso Naginattaz";
+
     function handleCredentialResponse(response) {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
 
         // Update UI with user info
         userName.textContent = userInfoData.name;
-        userEmail.textContent = userInfoData.email;
+        //userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'block';
         signinButton.style.display = 'none';
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idToken) {
             google.accounts.id.revoke(idToken, () => {
                 userName.textContent = '';
-                userEmail.textContent = '';
+                //userEmail.textContent = '';
                 userPic.src = '';
                 userInfo.style.display = 'none';
                 signinButton.style.display = 'block';
