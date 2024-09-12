@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmail = document.getElementById('user-email');
     const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
-    const planInfo = document.getElementById('plan-info');
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
 
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update UI with user info
         userName.textContent = userInfoData.name;
-        //userEmail.textContent = userInfoData.email;
+        userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'block';
         signinButton.style.display = 'none';
@@ -26,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mark user as logged in
         isLoggedIn = true;
 
+        // Save user picture URL to localStorage
+        localStorage.setItem('userPic', userInfoData.picture);
     }
 
     function initGoogleSignIn() {
@@ -38,6 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
             signinButton,
             { theme: 'outline', size: 'large' }
         );
+
+        // Check if user is already logged in
+        const savedPic = localStorage.getItem('userPic');
+        if (savedPic) {
+            userPic.src = savedPic;
+            userInfo.style.display = 'block';
+            signinButton.style.display = 'none';
+            logoutButton.style.display = 'inline-block';
+            isLoggedIn = true;
+        }
     }
 
     function handleLogout() {
@@ -47,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Clear user data and update UI
-        google.accounts.id.revoke('', () => {
-            userName.textContent = '""';
+        google.accounts.id.revoke(localStorage.getItem('idToken'), () => {
+            userName.textContent = '';
             userEmail.textContent = '';
             userPic.src = '';
             userInfo.style.display = 'none';
@@ -57,12 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Reset login status
             isLoggedIn = false;
-            // Clear the user picture URL from localStorage
-    localStorage.removeItem('userPic');
-    
-    // Redirect back to clases.html
-    window.location.href = '../clases.html';
 
+            // Clear local storage
+            localStorage.removeItem('userPic');
+            localStorage.removeItem('idToken');
         });
     }
 
@@ -70,18 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     logoutButton.addEventListener('click', handleLogout);
 
-    const nombreUsuario = document.getElementById('user-name').innerText;
-    //const emailUsuario = document.getElementById('user-email').innerText;
-    const fotoUsuario = document.getElementById('user-pic').src;
-    localStorage.setItem('userPic', fotoUsuario);
-
-
-/*
-    const userData = {
-    name: nombreUsuario,
-    email: emailUsuario,
-    picture: fotoUsuario
-};
-    console.log(userData);*/
+    // Handle the Google Sign-In button initialization
+    const idToken = localStorage.getItem('idToken');
+    if (idToken) {
+        google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.prompt(); // Show the sign-in prompt
+    }
 });
-
