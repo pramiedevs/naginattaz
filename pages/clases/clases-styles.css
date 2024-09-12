@@ -37,9 +37,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--nagivioleta);
+    background-image: linear-gradient(to right, rgba(77, 39, 92, 0.301), rgb(119, 0, 255));
     padding: 10px 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: fixed;
     width: 100%;
     top: 0;
@@ -76,7 +75,7 @@ body {
     height: 80vh;
     background-color: #000;
     position: relative;
-    margin-top: 60px; /* Adjust for fixed header */
+    margin-top:14vh;
 }
 
 .main-img {
