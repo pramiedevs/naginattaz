@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userName.textContent = userInfoData.name;
         //userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
-        userInfo.style.display = 'block';
+        userInfo.style.display = 'flex';
         signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
 
