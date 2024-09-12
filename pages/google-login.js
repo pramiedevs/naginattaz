@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mark user as logged in
         isLoggedIn = true;
 
-        localStorage.setItem('userPic', userPic);
     }
 
     function initGoogleSignIn() {
@@ -69,6 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const nombreUsuario = document.getElementById('user-name').innerText;
     //const emailUsuario = document.getElementById('user-email').innerText;
     const fotoUsuario = document.getElementById('user-pic').src;
+    localStorage.setItem('userPic', fotoUsuario);
+
+
 
     const userData = {
     name: nombreUsuario,
