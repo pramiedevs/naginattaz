@@ -84,6 +84,10 @@
         .header-right input[type="text"].visible {
             display: block;
         }
+        #user-info{
+            display: flex;
+            align-items: center;
+        }
         .image-preview {
             width: 40px;
             height: 40px;
