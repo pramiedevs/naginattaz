@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update UI with user info
         userName.textContent = userInfoData.name;
-        userEmail.textContent = userInfoData.email;
+        //userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'block';
         signinButton.style.display = 'none';
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutButton.addEventListener('click', handleLogout);
 
     const nombreUsuario = document.getElementById('user-name').innerText;
-    const emailUsuario = document.getElementById('user-email').innerText;
+    //const emailUsuario = document.getElementById('user-email').innerText;
     const fotoUsuario = document.getElementById('user-pic').src;
 
     const userData = {
