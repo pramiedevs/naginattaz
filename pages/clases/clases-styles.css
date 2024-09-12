@@ -45,7 +45,9 @@ body {
     z-index: 1000;
     border-bottom: solid;
 }
-
+#logout-button{
+    margin-left: 20px;
+}
 .header .logo img {
     width: 50vh;
 }
