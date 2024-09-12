@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isLoggedIn = false; // Track the login status
 
-    welcomeMessage = "Estás a punto de entrar al Metaverso Naginattaz";
-
     function handleCredentialResponse(response) {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
