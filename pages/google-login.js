@@ -25,11 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Mark user as logged in
         isLoggedIn = true;
 
-        // Save user picture URL to localStorage
+        // Save user picture URL and ID token to localStorage
         localStorage.setItem('userPic', userInfoData.picture);
+        localStorage.setItem('idToken', response.credential);
     }
 
     function initGoogleSignIn() {
+        if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
+            console.error('Google Sign-In library is not loaded.');
+            return;
+        }
+
         google.accounts.id.initialize({
             client_id: clientId,
             callback: handleCredentialResponse
@@ -42,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if user is already logged in
         const savedPic = localStorage.getItem('userPic');
-        if (savedPic) {
+        const idToken = localStorage.getItem('idToken');
+        if (savedPic && idToken) {
             userPic.src = savedPic;
             userInfo.style.display = 'block';
             signinButton.style.display = 'none';
@@ -58,34 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Clear user data and update UI
-        google.accounts.id.revoke(localStorage.getItem('idToken'), () => {
-            userName.textContent = '';
-            userEmail.textContent = '';
-            userPic.src = '';
-            userInfo.style.display = 'none';
-            signinButton.style.display = 'block';
-            logoutButton.style.display = 'none';
+        const idToken = localStorage.getItem('idToken');
+        if (idToken) {
+            google.accounts.id.revoke(idToken, () => {
+                userName.textContent = '';
+                userEmail.textContent = '';
+                userPic.src = '';
+                userInfo.style.display = 'none';
+                signinButton.style.display = 'block';
+                logoutButton.style.display = 'none';
 
-            // Reset login status
-            isLoggedIn = false;
+                // Reset login status
+                isLoggedIn = false;
 
-            // Clear local storage
-            localStorage.removeItem('userPic');
-            localStorage.removeItem('idToken');
-        });
+                // Clear local storage
+                localStorage.removeItem('userPic');
+                localStorage.removeItem('idToken');
+            });
+        } else {
+            console.warn("No ID token found for revocation.");
+        }
     }
 
+    // Initialize Google Sign-In
     initGoogleSignIn();
 
     logoutButton.addEventListener('click', handleLogout);
-
-    // Handle the Google Sign-In button initialization
-    const idToken = localStorage.getItem('idToken');
-    if (idToken) {
-        google.accounts.id.initialize({
-            client_id: clientId,
-            callback: handleCredentialResponse
-        });
-        google.accounts.id.prompt(); // Show the sign-in prompt
-    }
 });
