@@ -76,12 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('userPic', fotoUsuario);
 
 
-
+/*
     const userData = {
     name: nombreUsuario,
     email: emailUsuario,
     picture: fotoUsuario
 };
-    console.log(userData);
+    console.log(userData);*/
 });
 
