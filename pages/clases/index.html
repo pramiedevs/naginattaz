@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <link rel="stylesheet" href="./clases-styles.css">
+    <script src="userPic.js" defer></script>
 </head>
 <body class="no-scrollbar">
     <div class="header">
@@ -21,7 +22,14 @@
             <a href="https://joaconavarro.github.io/naginattaz/pages/clases.html">CLASES</a>
             <a href="#">NAGIDATTAZ</a>
         </nav>
+        <div class="header-right">
+            <div id="user-info">
+                <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
+            </div>  
+            <button id="logout-button">Log Out</button>
+        </div>
     </div>
+    
 
     <div class="main-section">
         <img class="main-img" id="mainImage" src="https://png.pngtree.com/background/20230401/original/pngtree-dance-hip-hop-hip-hop-dancing-doodle-background-picture-image_2252724.jpg" alt="Main Image">
@@ -101,20 +109,20 @@
         const mainImage = document.getElementById('mainImage');
         const carouselItems = document.querySelectorAll('.carousel-item');
         let scrollAmount = 0;
-
+    
         // Video Scripts
         document.querySelectorAll('.carousel img').forEach(img => {
             img.addEventListener('click', () => {
                 const mainImage = document.getElementById('mainImage');
                 const mainVideo = document.getElementById('mainVideo');
-
+    
                 // Hide the image and show the iframe
                 mainImage.style.display = 'none';
                 mainVideo.style.display = 'block';
-
+    
                 // Set the iframe source to the clicked video's URL
                 mainVideo.src = img.getAttribute('data-url');
-
+    
                 // Smooth scroll to the main section if needed
                 window.scrollTo({
                     top: document.querySelector('.main-section').offsetTop,
@@ -122,12 +130,12 @@
                 });
             });
         });
-
+    
         // Scroll the carousel
         function scrollCarousel(direction) {
             const itemHeight = carouselItems[0].offsetHeight + parseInt(window.getComputedStyle(carouselItems[0]).marginBottom);
             const visibleItems = Math.floor(carouselContainer.offsetHeight / itemHeight);
-
+    
             if (direction === 'up') {
                 scrollAmount -= itemHeight;
                 if (scrollAmount < 0) scrollAmount = 0;
@@ -137,38 +145,47 @@
                     scrollAmount = (carouselItems.length - visibleItems) * itemHeight;
                 }
             }
-
+    
             carousel.style.transform = `translateY(-${scrollAmount}px)`;
         }
-
+    
         // Optional JavaScript for carousel drag-to-scroll interaction
         const carouselContainer = document.querySelector('.carousel-container');
         let startY, scrollTop;
-
+        let isDragging = false; // Flag to track dragging state
+    
         carouselContainer.addEventListener('mousedown', (e) => {
             startY = e.pageY - carouselContainer.offsetTop;
             scrollTop = carousel.scrollTop;
+            isDragging = true; // Set dragging flag to true
             carouselContainer.style.cursor = 'grabbing';
             carouselContainer.style.transition = 'none';
         });
-
+    
         carouselContainer.addEventListener('mouseleave', () => {
-            carouselContainer.style.cursor = 'grab';
-            carouselContainer.style.transition = 'all 0.3s ease';
+            if (isDragging) {
+                isDragging = false; // Reset dragging flag
+                carouselContainer.style.cursor = 'grab';
+                carouselContainer.style.transition = 'all 0.3s ease';
+            }
         });
-
+    
         carouselContainer.addEventListener('mouseup', () => {
-            carouselContainer.style.cursor = 'grab';
-            carouselContainer.style.transition = 'all 0.3s ease';
+            if (isDragging) {
+                isDragging = false; // Reset dragging flag
+                carouselContainer.style.cursor = 'grab';
+                carouselContainer.style.transition = 'all 0.3s ease';
+            }
         });
-
+    
         carouselContainer.addEventListener('mousemove', (e) => {
-            if (startY !== undefined) {
+            if (isDragging) {
                 const y = e.pageY - carouselContainer.offsetTop;
                 const walk = (y - startY) * 2; // Scroll speed
                 carousel.scrollTop = scrollTop - walk;
             }
         });
     </script>
+    
 </body>
 </html>

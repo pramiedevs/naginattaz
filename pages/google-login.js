@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Mark user as logged in
         isLoggedIn = true;
+
+        localStorage.setItem('userPic', userPic);
     }
 
     function initGoogleSignIn() {
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleLogout() {
         if (!isLoggedIn) {
             console.warn("User is not signed in.");
+            localStorage.removeItem('userPic');
             return;
         }
 

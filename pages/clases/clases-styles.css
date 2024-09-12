@@ -69,6 +69,46 @@ body {
     background-color: var(--nagivioleta);
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.header-right input[type="text"] {
+    padding: 10px;
+    outline: none;
+    margin-right: 25px;
+    border-radius: 20px;
+    border: none;
+    display: none; /* Initially hidden */
+}
+.header-right input[type="text"].visible {
+    display: block;
+}
+.image-preview {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 3px;
+    display: none; /* Hidden by default */
+    cursor: pointer;
+}
+
+.header-right button {
+    margin-right: 2vw;
+    padding: .8rem 1.25rem;
+    background-color: var(--nagiobispo);
+    color: var(--white-smoke);
+    border: 1px #000;
+    border-radius: .25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.header-right button:hover {
+    background-color: #ddd;
+}
+
 /* Main Section Styles */
 .main-section {
     width: 100%;
@@ -135,6 +175,7 @@ body {
     box-shadow: -4px 0 8px rgba(0, 0, 0, 0.5);
     height: auto; /* Height adjusts based on content */
     overflow: hidden; /* Hide all scrollbars */
+    cursor: default; /* Ensure default cursor behavior */
 }
 
 .carousel-container {    
@@ -149,6 +190,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto; /* Vertical scroll only if needed */
+    cursor: pointer; /* Ensure pointer cursor */
 }
 
 .carousel-item {
