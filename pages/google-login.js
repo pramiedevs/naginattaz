@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const idToken = localStorage.getItem('idToken');
         if (savedPic && idToken) {
             userPic.src = savedPic;
-            userInfo.style.display = 'block';
+            userInfo.style.display = 'flex';
             signinButton.style.display = 'none';
             logoutButton.style.display = 'inline-block';
             isLoggedIn = true;
