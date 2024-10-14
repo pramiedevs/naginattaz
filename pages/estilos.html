@@ -9,11 +9,25 @@
     <script src="./calendar.js" defer></script>
 </head>
 <body class="no-scrollbar">
+    <div class="loading">
+        <img src="./nagi.jpeg" alt="">
+        <img src="./nagi.jpeg" alt="">
+        <img src="./nagi-logo.jpeg" alt="">
+    </div>
+
     <header>
         <div class="header-logo">
             <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
                 <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
             </a>
+        </div>
+            <div class="left-panel">
+                <button onclick="showContent('section1')">INICIO</button>
+                <button onclick="showContent('section2')">CLASES</button>
+                <button onclick="showContent('section3')">ESTILOS</button>
+                <button onclick="showContent('section4')">PLAYLIST</button>
+                <button onclick="showContent('section5')">CALENDARIO</button>
+                <button onclick="showContent('section6')">COMUNIDAD</button>
         </div>
         <div class="header-right">
             <div id="image-preview-container" class="image-preview-container"></div>
@@ -27,16 +41,7 @@
             <button id="logout-button" style="display: none;">Log Out</button>
         </div>
     </header>
-    <div class="container">
-        <div class="left-panel">
-            <button onclick="showContent('section1')">INICIO</button>
-            <button onclick="showContent('section2')">CLASES</button>
-            <button onclick="showContent('section3')">ESTILOS</button>
-            <button onclick="showContent('section4')">PLAYLIST</button>
-            <button onclick="showContent('section5')">CALENDARIO</button>
-            <button onclick="showContent('section6')">COMUNIDAD</button>
 
-        </div>
         <div class="main-content ">
             <div class="welcome-section">
                 <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
@@ -276,7 +281,7 @@
 
             if (searchInput.classList.contains('visible')) {
                 searchInput.classList.remove('visible');
-                imagePreview.style.display = 'none';
+                //imagePreview.style.display = 'none';
                 resetSection2();
             } else {
                 searchInput.classList.add('visible');
