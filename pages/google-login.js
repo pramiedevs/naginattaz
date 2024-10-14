@@ -88,7 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize Google Sign-In
+    window.onload = function() {
     initGoogleSignIn();
+};
+
 
     logoutButton.addEventListener('click', handleLogout);
 });
