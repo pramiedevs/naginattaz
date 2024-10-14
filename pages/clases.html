@@ -6,45 +6,49 @@
     <title>Naginattaz Metaverso</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="./google-login.js" defer></script>
-
     <script src="./calendar.js" defer></script>
 </head>
 <body class="no-scrollbar">
+    <div class="loading">
+        <img src="./nagi.jpeg" alt="">
+        <img src="./nagi.jpeg" alt="">
+        <img src="./nagi-logo.jpeg" alt="">
+    </div>
+
     <header>
         <div class="header-logo">
             <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
                 <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
             </a>
         </div>
+            <div class="left-panel">
+                <button onclick="showContent('section1')">INICIO</button>
+                <button onclick="showContent('section2')">CLASES</button>
+                <button onclick="showContent('section3')">ESTILOS</button>
+                <button onclick="showContent('section4')">PLAYLIST</button>
+                <button onclick="showContent('section5')">CALENDARIO</button>
+                <button onclick="showContent('section6')">COMUNIDAD</button>
+        </div>
         <div class="header-right">
             <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input" placeholder=" Buscar clases...">
             <button id="search">🔍</button>
             <div id="user-info" style="display: none;">
-                
-                <img id="user-pic" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
-                <button id="logout-button" style="display: none;">Salir</button>
+                <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
+                <h2><span id="user-email">" "</span>!</h2>
             </div>
-            <div id="g-signin-button"></div>
+            <div id="g-signin-button" style="margin-right:2vh;"></div>            
+            <button id="logout-button" style="display: none;">Log Out</button>
         </div>
     </header>
-    <div class="container">
-        <div class="left-panel">
-            <button onclick="showContent('section1')">INICIO</button>
-            <button onclick="showContent('section2')">CLASES</button>
-            <button onclick="showContent('section3')">ESTILOS</button>
-            <button onclick="showContent('section4')">PLAYLIST</button>
-            <button onclick="showContent('section5')">CALENDARIO</button>
-            <button onclick="showContent('section6')">COMUNIDAD</button>
 
-        </div>
         <div class="main-content ">
             <div class="welcome-section">
-                <p id="welcome-message">Welcome  <span id="user-name"></span></p>
+                <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
         <p id="plan-info">TU PLAN ACTUAL ES BAMBU</p>
             </div>
 
+            <script src="./google-login.js"></script>
             
             <div id="section1" class="content-section active">
                 <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%; margin-bottom: 2vh;">
@@ -258,7 +262,11 @@
 </div>
             
             <div id="section6" class="content-section">
-                <h2>COMUNIDAD NAGINATTAZ</h2>                
+                <h2>COMUNIDAD NAGINATTAZ</h2>
+
+                <div id="result"></div>
+                <script src="displayPHP.js"></script>
+                
             </div>
         </div>
     </div>
@@ -273,7 +281,7 @@
 
             if (searchInput.classList.contains('visible')) {
                 searchInput.classList.remove('visible');
-                imagePreview.style.display = 'none';
+                //imagePreview.style.display = 'none';
                 resetSection2();
             } else {
                 searchInput.classList.add('visible');
