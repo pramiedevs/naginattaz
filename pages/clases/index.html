@@ -6,6 +6,7 @@
     <title>Clases</title>
     <link rel="stylesheet" href="./clases-styles.css">
     <script src="userPic.js" defer></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
 </head>
 <body class="no-scrollbar">
     <div class="header">
@@ -30,11 +31,12 @@
         </div>
     </div>
     
-
     <div class="main-section">
-        <img class="main-img" id="mainImage" src="https://png.pngtree.com/background/20230401/original/pngtree-dance-hip-hop-hip-hop-dancing-doodle-background-picture-image_2252724.jpg" alt="Main Image">
-        <iframe id="mainVideo" style="display: none;" frameborder="0" allowfullscreen></iframe>
+        <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
+        <iframe id="mainVideo" style="display: block;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" src="" title="Main Vimeo Video"></iframe>
+        
     </div>
+    
 
     <div class="info-carousel-section">
         <div class="video-info">
@@ -71,10 +73,11 @@
         <div class="carousel-section">
             <div class="carousel-container">
                 <div class="carousel" id="carousel">
-                    <div class="carousel-item">                    
-                        <img class="carousel-item-img" src="https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg" data-url="https://www.youtube.com/embed/dQw4w9WgXcQ" alt="Clase 1">
-                        <div class="carousel-label">Clase 1 - Introducción al Hip-Hop</div>
-                        <div class="carousel-label">Duración: Calentamiento 10 minutos + Coreo 33 minutos</div>
+                    <div class="carousel-item">
+                        <div class="carousel-item">
+                            <img class="carousel-item-img" id="clase1" src="https://i.vimeocdn.com/video/1019631883.jpg" data-url="https://player.vimeo.com/video/1019631883" alt="Clase 1">
+                            <div class="carousel-label">Introducción al Hip Hop - Duración: 1 minuto</div>
+                        </div>
                     </div>
                     <div class="carousel-item">
                         <img class="carousel-item-img" src="https://img.youtube.com/vi/_CL6n0FJZpk/maxresdefault.jpg" data-url="https://www.youtube.com/embed/_CL6n0FJZpk?si=C0vkHPF2aBjsWzOt" alt="Clase 2">
@@ -105,31 +108,46 @@
     </div>
 
     <script>
-        const carousel = document.getElementById('carousel');
-        const mainImage = document.getElementById('mainImage');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        let scrollAmount = 0;
-    
-        // Video Scripts
-        document.querySelectorAll('.carousel img').forEach(img => {
-            img.addEventListener('click', () => {
-                const mainImage = document.getElementById('mainImage');
-                const mainVideo = document.getElementById('mainVideo');
-    
-                // Hide the image and show the iframe
-                mainImage.style.display = 'none';
-                mainVideo.style.display = 'block';
-    
-                // Set the iframe source to the clicked video's URL
-                mainVideo.src = img.getAttribute('data-url');
-    
-                // Smooth scroll to the main section if needed
-                window.scrollTo({
-                    top: document.querySelector('.main-section').offsetTop,
-                    behavior: 'smooth'
-                });
-            });
+    const mainImage = document.getElementById('mainImage');
+    const mainVideo = document.getElementById('mainVideo');
+    const carouselItems = document.querySelectorAll('.carousel-item-img');
+    const headerHeight = 120; // Fixed header height
+
+    // Disable scroll restoration
+    window.history.scrollRestoration = 'manual';
+
+    // Function to load the video and thumbnail for a specific carousel item
+    function loadVideo(item) {
+        const videoUrl = item.getAttribute('data-url');
+        const videoId = videoUrl.split('/').pop(); // Extract the video ID
+
+        // Set the thumbnail image source using the video ID
+        mainImage.src = `https://i.vimeocdn.com/video/${videoId}.jpg`; // Set thumbnail URL
+        mainImage.style.display = 'block'; // Show the thumbnail
+
+        // Set the iframe source to the video and show it
+        mainVideo.style.display = 'block';
+        mainVideo.src = videoUrl + "?autoplay=1&muted=1"; // Ensure autoplay and mute are included
+
+        // Smooth scroll to the main section, accounting for the header height
+        window.scrollTo({
+            top: document.querySelector('.main-section').offsetTop - headerHeight,
+            behavior: 'smooth'
         });
+    }
+
+    // Video Scripts for carousel items
+    document.querySelectorAll('.carousel-item-img').forEach(img => {
+        img.addEventListener('click', () => {
+            loadVideo(img); // Load video when carousel item is clicked
+        });
+    });
+
+    // Load the first video when the page loads and reset scroll position
+    window.onload = () => {
+        loadVideo(carouselItems[0]); // Load the first video
+        window.scrollTo(0, 0); // Reset scroll position to the top
+    };
     
         // Scroll the carousel
         function scrollCarousel(direction) {

@@ -34,6 +34,7 @@ body {
 
 /* Header Styles */
 .header {
+    height:91px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,7 +50,8 @@ body {
     margin-left: 20px;
 }
 .header .logo img {
-    width: 50vh;
+    width: 20vw;
+    max-width:200px;
 }
 
 .header .menu {
