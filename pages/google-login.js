@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const idToken = localStorage.getItem('idToken');
         if (idToken) {
             google.accounts.id.revoke(idToken, () => {
-                userName.textContent = '';
+                //userName.textContent = '';
                 //userEmail.textContent = '';
                 userPic.src = '';
                 userInfo.style.display = 'none';
