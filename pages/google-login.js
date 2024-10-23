@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     // Custom button click to trigger Google Sign-In
-    document.getElementById('custom-login-button').addEventListener('click', () => {
+    document.getElementById('g-signin-button').addEventListener('click', () => {
         // Programmatically trigger click on the hidden Google Sign-In button
         google.accounts.id.prompt(); // This will show the Google sign-in dialog
     });
