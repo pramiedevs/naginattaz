@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 //userEmail.textContent = '';
                 userPic.src = '';
                 userInfo.style.display = 'none';
-                signinButton.style.display = 'block';
+                //signinButton.style.display = 'block';
                 logoutButton.style.display = 'none';
 
                 // Reset login status
