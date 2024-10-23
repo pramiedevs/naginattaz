@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedPic && idToken) {
             userPic.src = savedPic;
             userInfo.style.display = 'flex';
-            signinButton.style.display = 'none';
+            //signinButton.style.display = 'none';
             logoutButton.style.display = 'inline-block';
             isLoggedIn = true;
         }
