@@ -21,14 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Trigger your animation here
         slashImage();
-        
+
         if (window.opener) {
-            console.log("its working")
-            window.opener.location.href = './clases.html'; // Redirect parent window
+            console.log("Redirecting parent window");
+            window.opener.location.href = './pages/clases.html'; // Redirect parent window
+        } else {
+            console.log("No opener found, redirecting this window");
+            window.location.href = './pages/clases.html'; // Fallback for testing
         }
-    
-        // Close the popup
-        window.close(); // Closes the popup window
     }
 
     function initGoogleSignIn() {
@@ -76,6 +76,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem('userPic');
                 localStorage.removeItem('idToken');
             });
+            // Reset login status
+            isLoggedIn = false;
+
+            // Clear local storage
+            localStorage.removeItem('userPic');
+            localStorage.removeItem('idToken');
+            window.location.href = '../index.html';
         }
+
     });
 });
