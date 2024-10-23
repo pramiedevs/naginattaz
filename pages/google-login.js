@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('idToken', response.credential);
 
         if (window.opener) {
+            console.log("its working")
             window.opener.location.href = './clases.html'; // Redirect parent window
         }
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,7 +90,16 @@
         <div style="margin-top: 20px;" id="g-signin-button" style="margin-right:2vh;"></div>
 
     </div>
-    <button style="display: none;" id="logout-button"></button>
+    <div style="display: none;" class="header-right">
+        <div id="image-preview-container" class="image-preview-container"></div>
+        <input type="text" id="search-input" placeholder=" Buscar clases...">
+        <button id="search">🔍</button>
+        <div id="user-info" style="display: none;">
+            <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
+            <h2><span id="user-email">" "</span>!</h2>
+        </div>
+        <button id="logout-button" style="display: none;">Log Out</button>
+    </div>
 
     <script>
         function slashImage() {
