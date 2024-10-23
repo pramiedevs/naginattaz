@@ -1,11 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
+    const welcomeMessage = document.getElementById('welcome-message');
+    const userName = document.getElementById('user-name');
+    //const userEmail = document.getElementById('user-email');
     const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
-    const signinButton = document.getElementById('g-signin-button'); // Hidden button
+    const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
 
-    let isLoggedIn = false;
+    
+
+    let isLoggedIn = false; // Track the login status
 
     function handleCredentialResponse(response) {
         const user = response.credential;
@@ -26,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
 
+        slashImage();
+
         if (window.opener) {
             console.log("Redirecting parent window");
             window.opener.location.href = './pages/clases.html'; // Redirect parent window
@@ -36,6 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initGoogleSignIn() {
+        if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) {
+            console.error('Google Sign-In library is not loaded.');
+            return;
+        }
+
         google.accounts.id.initialize({
             client_id: clientId,
             callback: handleCredentialResponse
@@ -52,42 +64,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedPic && idToken) {
             userPic.src = savedPic;
             userInfo.style.display = 'flex';
+            //signinButton.style.display = 'none';
             logoutButton.style.display = 'inline-block';
             isLoggedIn = true;
         }
     }
 
-    // Custom button click to trigger Google Sign-In
-    document.getElementById('custom-login-button').addEventListener('click', () => {
-        // Programmatically trigger click on the hidden Google Sign-In button
-        google.accounts.id.prompt(); // This will show the Google sign-in dialog
-    });
+    function handleLogout() {
+        if (!isLoggedIn) {
+            console.warn("User is not signed in.");
+            return;
+        }
 
-    // Initialize Google Sign-In
-    window.onload = function() {
-        initGoogleSignIn();
-    };
-
-    logoutButton.addEventListener('click', () => {
-        if (!isLoggedIn) return;
+        // Clear user data and update UI
         const idToken = localStorage.getItem('idToken');
         if (idToken) {
             google.accounts.id.revoke(idToken, () => {
+                //userName.textContent = '';
+                //userEmail.textContent = '';
                 userPic.src = '';
                 userInfo.style.display = 'none';
-                logoutButton.style.display = 'none';
+                //signinButton.style.display = 'block';
+                //logoutButton.style.display = 'none';
+
+                // Reset login status
                 isLoggedIn = false;
+
+                // Clear local storage
                 localStorage.removeItem('userPic');
                 localStorage.removeItem('idToken');
+                window.location.href = '../index.html';
             });
-            // Reset login status
-            isLoggedIn = false;
-
-            // Clear local storage
-            localStorage.removeItem('userPic');
-            localStorage.removeItem('idToken');
-            window.location.href = '../index.html';
+        } else {
+            console.warn("No ID token found for revocation.");
         }
+    }
 
-    });
+    // Initialize Google Sign-In
+    window.onload = function() {
+    initGoogleSignIn();
+};
+
+
+    logoutButton.addEventListener('click', handleLogout);
 });
