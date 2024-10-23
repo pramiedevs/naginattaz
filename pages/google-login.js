@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('idToken', response.credential);
 
         // Redirect to clases.html
-        window.location.href = './clases.html';
+        window.location.href = 'https://www.google.com/';
     }
 
     function initGoogleSignIn() {
