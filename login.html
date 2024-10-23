@@ -41,7 +41,7 @@
         }
         .container {
             margin:0 30px;
-            background-color: var(--nagivioleta) ;
+            background-color: var(--nagiobispo) ;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -53,6 +53,19 @@
             padding: 20px; /* Optional padding */
             z-index: 1000;
         }
+        #custom-login-button {
+    padding: 10px 20px;
+    background-color: var(--nagivioleta); /* Google blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#custom-login-button:hover {
+    background-color: var(--nagimagenta); /* Darker blue on hover */
+}
         
         .gif-background {
             position: absolute;
@@ -85,9 +98,12 @@
 <body>
     <div class="gif-background" id="gifBackground"></div>
     <div class="container">
+        
         <img src="./src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
+        <div id="g-signin-button" style="display: none; position:absolute; top:50%;left:50%;"></div> <!-- Hidden initially -->           
+
         <div style="margin-top: 20px;" id="slash-button">
-            <div class="g_id_signin" id="g-signin-button" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="sign_in_with" data-size="large" data-logo_alignment="left"></div>
+            <button id="custom-login-button">INGRESAR!</button>
         </div>    
     </div>
     
@@ -101,6 +117,14 @@
         </div>
         <button id="logout-button">Log Out</button>
     </div>
-
+    <script>
+        document.getElementById('custom-login-button').addEventListener('click', () => {
+    // Show the Google Sign-In button
+    document.getElementById('g-signin-button').style.display = 'block';
+    
+    // Optionally trigger the Google sign-in process
+    google.accounts.id.prompt();
+});
+    </script>
 </body>
 </html>
