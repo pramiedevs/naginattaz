@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
     // Redirect to clases.html in the parent window
     if (window.opener) {
-        window.opener.location.href = './clases.html'; // Redirect parent window
+        window.opener.location.href = '../clases.html'; // Redirect parent window
     }
 
     // Optionally: Show a message or do other actions here
