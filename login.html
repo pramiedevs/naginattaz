@@ -87,7 +87,10 @@
     <div class="gif-background" id="gifBackground"></div>
     <div class="container">
         <img src="./src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
-        <div style="margin-top: 20px;" id="g-signin-button" style="margin-right:2vh;"></div>
+        <div style="margin-top: 20px;" id="slash-button">
+            <div  id="g-signin-button"></div>
+        </div>
+        
 
     </div>
     <div style="display: none;" class="header-right">
@@ -143,7 +146,7 @@
             }, 500); // Match duration of shake animation
         }
 
-        document.getElementById('g-signin-button').addEventListener('click', slashImage);
+        document.getElementById('slash-button').addEventListener('click', slashImage);
     </script>
 </body>
 </html>
