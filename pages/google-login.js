@@ -11,15 +11,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
 
+        // Update UI with user info
+        //userName.textContent = userInfoData.name;
+        //userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'flex';
+        //signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
+
+        // Mark user as logged in
         isLoggedIn = true;
 
+        // Save user picture URL and ID token to localStorage
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
 
-        // Trigger your animation here
         slashImage();
 
         if (window.opener) {
