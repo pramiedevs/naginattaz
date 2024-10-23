@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
         image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
 
         // Play sound effect
-        const sound = new Audio('path-to-your-sound-effect.mp3'); // Replace with your sound file path
-        sound.play();
+        //const sound = new Audio('path-to-your-sound-effect.mp3'); // Replace with your sound file path
+        //sound.play();
 
         // Flash background color
         body.style.background = 'white';
