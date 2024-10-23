@@ -29,8 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
 
-        // Redirect to clases.html
-        window.location.href = 'https://www.google.com/';
+        if (window.opener) {
+            window.opener.location.href = './clases.html'; // Redirect parent window
+        }
+    
+        // Close the popup
+        window.close(); // Closes the popup window
     }
 
     function initGoogleSignIn() {
