@@ -38,10 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Reset clip-path after a slight delay to allow for visibility
             setTimeout(() => {
                 image.style.clipPath = 'none'; // Reset clip-path to original
-            }, 50); // Small delay before resetting clip-path
+            }, 500); // Small delay before resetting clip-path
         }, 500); // Match duration of shake animation
     }
 
     document.getElementById('slash-button').addEventListener('click', slashImage);
+    document.getElementById('g-signin-button').addEventListener('click', slashImage);
 });
 

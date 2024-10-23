@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
 
+    
+
     let isLoggedIn = false; // Track the login status
 
     function handleCredentialResponse(response) {
