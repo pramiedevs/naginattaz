@@ -1,4 +1,5 @@
-
+document.addEventListener('DOMContentLoaded', () => {
+    
 function slashImage() {
     const image = document.querySelector('.image');
     const container = document.querySelector('.container');
@@ -40,6 +41,6 @@ function slashImage() {
     }, 500); // Match duration of shake animation
 }
 
-document.addEventListener("DOMContentLoaded", function() {
 document.getElementById('slash-button').addEventListener('click', slashImage);
+    
 });
