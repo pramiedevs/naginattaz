@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
 
         // Update UI with user info
-        userName.textContent = userInfoData.name;
+        //userName.textContent = userInfoData.name;
         //userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'flex';
