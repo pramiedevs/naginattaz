@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="./calendar.js" defer></script>
+    <script src="./wating.js"></script>
 </head>
 <body class="no-scrollbar">
     <div class="loading">
@@ -15,7 +16,9 @@
         <img src="./nagi-logo.jpeg" alt="">
     </div>
 
-    <header>
+    <div id="loader">Loading...</div>
+
+    <header class="wating">
         <div class="header-logo">
             <a href="../index.html" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
                 <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
@@ -42,7 +45,7 @@
         </div>
     </header>
 
-        <div class="main-content ">
+        <div class="main-content wating ">
             <div class="welcome-section">
                 <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
         <p id="plan-info">TU PLAN ACTUAL ES BAMBU</p>
@@ -264,8 +267,10 @@
             <div id="section6" class="content-section">
                 <h2>COMUNIDAD NAGINATTAZ</h2>
 
+                <!--
                 <div id="result"></div>
                 <script src="displayPHP.js"></script>
+                -->
                 
             </div>
         </div>

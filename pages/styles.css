@@ -136,7 +136,9 @@
         transform: scale(1.5); /* Continue to zoom */
     }
 }
-
+    .wating {
+         display: none;
+    }
 
         .no-scrollbar {
             -ms-overflow-style: none;
