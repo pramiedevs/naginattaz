@@ -5,13 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
         const gifBackground = document.getElementById('gifBackground');
 
-        // Reset clip-path
-        image.style.clipPath = 'none'; // Reset to original state
-
         // Change the clip-path for a diagonal reveal
-        setTimeout(() => {
-            image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
-        }, 0); // Ensure the clip-path is applied after reset
+        image.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
 
         // Play sound effect
         const sound = new Audio('path-to-your-sound-effect.mp3'); // Replace with your sound file path
@@ -39,7 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remove animation class after it finishes to allow re-triggering
         setTimeout(() => {
-            container.style.animation = 'none';
+            container.style.animation = 'none'; // Reset the animation
+            // Reset clip-path after a slight delay to allow for visibility
+            setTimeout(() => {
+                image.style.clipPath = 'none'; // Reset clip-path to original
+            }, 50); // Small delay before resetting clip-path
         }, 500); // Match duration of shake animation
     }
 
