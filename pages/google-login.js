@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //userEmail.textContent = userInfoData.email;
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'flex';
-        signinButton.style.display = 'none';
+        //signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
 
         // Mark user as logged in
