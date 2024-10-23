@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.style.animation = 'none'; // Reset the animation
             // Reset clip-path after a slight delay to allow for visibility
             setTimeout(() => {
+                container.style.background = 'var(--nagiobispo)';
                 googleButton.style.display = 'none';
                 body.style.background = 'linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f)';
                 image.style.clipPath = 'none'; // Reset clip-path to original
