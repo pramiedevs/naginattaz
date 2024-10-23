@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingreso a Naginattaz</title>
-    <script src="./slash.js"></script>
+    <script src="./slash.js" defer></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="./pages/google-login.js" defer></script>
 
@@ -87,8 +87,10 @@
     <div class="container">
         <img src="./src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
         
-        <div style="margin-top: 20px;" id="slash-button">
-            <div id="g-signin-button"></div>
+        <div style="margin-top: 20px;" id="slash-button" >
+            <button onclick="slashImage()">
+                <div id="g-signin-button"></div>
+            </button>
         </div>
         
 

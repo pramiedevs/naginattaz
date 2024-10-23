@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isLoggedIn = false; // Track the login status
 
     function handleCredentialResponse(response) {
+        slashImage()
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
 
@@ -30,8 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save user picture URL and ID token to localStorage
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
-
-        slashImage();
 
         if (window.opener) {
             console.log("Redirecting parent window");
