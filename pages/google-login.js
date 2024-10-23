@@ -30,12 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('idToken', response.credential);
 
         if (window.opener) {
-            console.log("its working")
+            console.log("Redirecting parent window");
             window.opener.location.href = './clases.html'; // Redirect parent window
+        } else {
+            console.log("No opener found, redirecting this window");
+            window.location.href = './clases.html'; // Fallback for testing
         }
-    
-        // Close the popup
-        window.close(); // Closes the popup window
     }
 
     function initGoogleSignIn() {

@@ -146,7 +146,9 @@
             }, 500); // Match duration of shake animation
         }
 
-        document.getElementById('slash-button').addEventListener('click', slashImage);
+        document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('slash-button').addEventListener('click', slashImage);
+    });
     </script>
 </body>
 </html>
