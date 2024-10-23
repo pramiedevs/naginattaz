@@ -21,6 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Trigger your animation here
         slashImage();
+        
+        if (window.opener) {
+            console.log("its working")
+            window.opener.location.href = './clases.html'; // Redirect parent window
+        }
+    
+        // Close the popup
+        window.close(); // Closes the popup window
     }
 
     function initGoogleSignIn() {
