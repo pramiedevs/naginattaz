@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Clear local storage
                 localStorage.removeItem('userPic');
                 localStorage.removeItem('idToken');
-                window.location.href = '../login.html'; // Fallback for testing
+                window.location.href = '../index.html';
             });
         } else {
             console.warn("No ID token found for revocation.");
