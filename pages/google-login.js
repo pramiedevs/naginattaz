@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
 
-        slashImage();
 
         if (window.opener) {
             console.log("Redirecting parent window");
