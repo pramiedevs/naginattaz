@@ -29,13 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
 
-        if (window.opener) {
-            console.log("Redirecting parent window");
-            window.opener.location.href = './clases.html'; // Redirect parent window
-        } else {
-            console.log("No opener found, redirecting this window");
-            window.location.href = './clases.html'; // Fallback for testing
-        }
+        
+    // Redirect to clases.html in the parent window
+    if (window.opener) {
+        window.opener.location.href = './clases.html'; // Redirect parent window
+    }
+
+    // Optionally: Show a message or do other actions here
+    console.log("Redirecting parent window");
     }
 
     function initGoogleSignIn() {
