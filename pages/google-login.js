@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save user picture URL and ID token to localStorage
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
+
+        // Redirect to clases.html
+        window.location.href = './clases.html';
     }
 
     function initGoogleSignIn() {
