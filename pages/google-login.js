@@ -99,6 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.warn("No ID token found for revocation.");
         }
     }
+    // Custom button click to trigger Google Sign-In
+    document.getElementById('custom-login-button').addEventListener('click', () => {
+        // Programmatically trigger click on the hidden Google Sign-In button
+        google.accounts.id.prompt(); // This will show the Google sign-in dialog
+    });
 
     // Initialize Google Sign-In
     window.onload = function() {
