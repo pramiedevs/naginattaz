@@ -374,11 +374,14 @@ background-color: var(--nagivioleta);
 .fixed-calendar th {
     background-color: #f4f4f4;
 }
+.mobile{
+    display:none;
+}
 
 
         @media (max-width: 768px) {
             .main-content{
-                margin-top: 1vh;
+                margin-top: 85px;
                 margin-left: 1vh;
                 margin-right: 1vh;
                 flex-grow: 1;
@@ -388,14 +391,39 @@ background-color: var(--nagivioleta);
                 align-items: center;
                 background: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
             }
-
-            .image-grid {
+            .desktop{
+                display:none;
+            }
+            .mobile{
+                display:flex;    
+            }
+            .image-grid{
                 display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 8vh;
-            width: 23vh;
-            max-width: 800px;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+                gap: 8vh;
+                max-width: 500px;
+            }
+
+            .image-preview{
+            border: white solid 1px;
+            position: absolute;
+            top: 78px;
+            right: -400px;
+            display: none;
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+            #search-input2{
+                border: solid 2px violet;
+                position: absolute;
+                left: 50%;
+                top: 100px;
+                transform: translate(-50%, -50%);
             }
             .left-panel button {
                 font-size: 1.4vh;

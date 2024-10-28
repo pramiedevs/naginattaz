@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso a Naginattaz</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+
+:root{
+            --black:#222;
+            --white-smoke:#ebefef;
+            --steel-blue:#0b79fb;
+            --steel-blue-2:#2683ab;
+            --deep-sky-blue:#2e9dcc;
+            --sweat-purple:#c191e7;
+            --green-yellow:#ccff7d;
+            --dark-cyan:#2e8e83;
+          
+            --nagivioleta: #4b59ed;
+            --nagiobispo: #b18cfe;
+            --nagimagenta: #af14af;
+            --nagirosa: #fac8f8;
+          
+          }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        body{            
+            background: linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f); /* Initial background color */
+            transition: background-color 0.5s ease; /* Smooth transition for background color */
+        }
+
+        @font-face {
+    font-family: "Monument Extended Regular";
+    src: url("../src/fonts/MonumentExtended\ Regular/MonumentExtended-Regular.otf") format("truetype");
+  }
+  @font-face {
+    font-family: "Gotham Medium Regular";
+    src: url("../src/fonts/Gotham\ Medium.otf") format("truetype");
+  }
+  .customfont { 
+    font-family: "Gotham Medium Regular";
+  }
+  .titlefont{
+    font-family: "Monument Extended Regular";
+  }
+        .container {
+            height: 400px;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin:0 30px;
+            background-color: var(--nagiobispo) ;
+            align-items: center;
+            justify-content: space-between;
+            border: 2px solid #ccc; /* Optional styling */
+            border-radius: 8px; /* Optional rounding */
+            padding: 20px; /* Optional padding */
+        }
+
+        .image {
+            cursor: pointer;
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.2s; /* Optional for a smooth effect */
+        }
+
+        .image:hover {        
+        animation: shake 0.5s; /* Adjust duration as needed */
+        }
+    h2{
+        text-align: center;
+        justify-content: center;
+    }
+    h4{
+        text-align: center;
+        justify-content: center;
+    }
+    .container div:hover h4 {
+    transform: scale(1.2); /* Scale up the text */
+}
+.container div:hover h2 {
+    transform: scale(1.2); /* Scale up the text */
+}
+    h4 {
+    transition: transform 0.3s; /* Smooth transition for scaling effect */
+    }
+
+        @keyframes shake {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">        
+        <div>
+            <h4 class="titlefont">Plan Bambú</h4>
+            <img src="./src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
+            <h2 class="titlefont">$50</h2> 
+
+        </div>        
+        <div>
+            <h4 class="titlefont">Plan Acero</h4>
+            <img src="./src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
+            <h2 class="titlefont">$80</h2> 
+
+        </div>
+        <div>
+            <h4 class="titlefont">Plan Obsidian</h4>
+            <img src="./src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
+            <h2 class="titlefont">$100</h2> 
+        </div>
+    </div>
+    <script>
+        const images = document.querySelectorAll('.container .image');
+    
+        images.forEach(image => {
+            image.addEventListener('mouseover', () => {
+                images.forEach(img => {
+                    if (img !== image) {
+                        img.style.filter = 'grayscale(100%)'; // Apply grayscale to other images
+                        img.style.filter = 'brightness(40%)'; // Apply grayscale to other images
+                    }
+                });
+            });
+    
+            image.addEventListener('mouseout', () => {
+                images.forEach(img => {
+                    img.style.filter = 'none'; // Remove grayscale from all images
+                });
+            });
+        });
+    </script>
+</body>
+</html>

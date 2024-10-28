@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,18 +24,17 @@
                 <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
             </a>
         </div>
-            <div class="left-panel">
+            <div class="left-panel desktop">
                 <button onclick="showContent('section1')">INICIO</button>
                 <button onclick="showContent('section2')">CLASES</button>
-                <button onclick="showContent('section3')">ESTILOS</button>
+                <button onclick="showContent('section3')">COMUNIDAD</button>
                 <button onclick="showContent('section4')">PLAYLIST</button>
                 <button onclick="showContent('section5')">CALENDARIO</button>
-                <button onclick="showContent('section6')">COMUNIDAD</button>
-        </div>
+            </div>
         <div class="header-right">
             <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input" placeholder=" Buscar clases...">
-            <button id="search">🔍</button>
+            <button id="search" class="desktop">🔍</button>
             <div id="user-info" style="display: none;">
                 <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
                 
@@ -43,6 +42,22 @@
             </div>
             <div id="g-signin-button" style="display: none; position:absolute; top:50%;left:50%;"></div> <!-- Hidden initially -->           
             <button id="logout-button" style="display: none;">Log Out</button>
+        </div>
+
+        <div class="left-panel mobile">
+            <button onclick="showContent('section1')">INICIO</button>
+            <button onclick="showContent('section2')">CLASES</button>
+            <button onclick="showContent('section3')">COMUNIDAD</button>
+            <button onclick="showContent('section4')">PLAYLIST</button>
+            <button onclick="showContent('section5')">CALENDARIO</button>
+            <div id="image-preview-container" class="image-preview-container"></div>
+            <input type="text" id="search-input2" class="desktop" placeholder=" Buscar clases...">
+            <button id="search2">🔍</button>
+            <div id="user-info" style="display: none;">
+                <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
+                
+                <!--<h2><span id="user-email">" "</span>!</h2>-->
+            </div>
         </div>
     </header>
 
@@ -95,13 +110,16 @@
                     </div>
                     <div id="workout intermedio">
                         <a href="./clases/index.html">
-                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: sepia(1);">
+                            <img class="img-clases" src="../src/workout.png" srcset="image-small.jpg 600w, image-medium.jpg 1200w, image-large.jpg 1800w" 
+                            sizes="(max-width: 600px) 100vw, 
+                                   (max-width: 1200px) 50vw, 
+                                   33vw" loading="lazy" alt="Workout Dance Style" style="filter: sepia(1);">
                         </a>
                         <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Intermedio</h3>
                     </div>
                     <div id="workout avanzado">
                         <a href="./clases/index.html">
-                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style">
+                            <img class="img-clases" src="../src/workout.png"  loading="lazy" alt="Workout Dance Style">
                         </a>
                         <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Avanzado</h3>
                     </div>
@@ -295,6 +313,23 @@
             }
         });
 
+        // Toggle the search input and set up event listeners
+        document.getElementById('search2').addEventListener('click', function() {
+            var searchInput = document.getElementById('search-input2');
+            var imagePreview = document.getElementById('image-preview');
+
+            if (searchInput.classList.contains('visible')) {
+                searchInput.classList.remove('visible');
+                searchInput.classList.remove('desktop');
+                //imagePreview.style.display = 'none';
+                resetSection2();
+            } else {
+                searchInput.classList.add('visible');
+                searchInput.classList.add('desktop');
+                searchInput.focus();
+            }
+        });
+
         function showContent(sectionId) {
         var sections = document.querySelectorAll('.content-section');
         sections.forEach(function(section) {
@@ -304,6 +339,54 @@
     }
 // Handle the search input
 document.getElementById('search-input').addEventListener('input', function() {
+    var query = this.value.toLowerCase();
+    var imagePreviewContainer = document.getElementById('image-preview-container');
+    var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
+
+    // Clear the previous preview images
+    imagePreviewContainer.innerHTML = '';
+
+    if (query) {
+        var found = false;
+        imageGridItems.forEach(function(item) {
+            if (item.id.includes(query)) {
+                item.style.display = 'block';
+                var img = item.querySelector('img').src;
+
+                // Create a new preview image for each match
+                var previewImg = document.createElement('img');
+                previewImg.src = img;
+                previewImg.classList.add('image-preview');
+                previewImg.style.display = 'inline-block';
+                previewImg.addEventListener('click', function() {
+                    // Simulate clicking the "CLASES" button to show section2
+                    document.querySelector('button[onclick="showContent(\'section2\')"]').click();
+                    
+                });
+
+                // Add the preview image to the container
+                imagePreviewContainer.appendChild(previewImg);
+                found = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        if (!found) {
+            imagePreviewContainer.innerHTML = ''; // Clear if no matches
+        }
+    } else {
+        imagePreviewContainer.innerHTML = ''; // Clear previews if search input is cleared
+
+        // Check if section2 is currently active
+        if (document.getElementById('section2').classList.contains('active')) {
+            resetSection2(); // Reset only if in section2
+        }
+    }
+});
+
+// Handle the search input
+document.getElementById('search-input2').addEventListener('input', function() {
     var query = this.value.toLowerCase();
     var imagePreviewContainer = document.getElementById('image-preview-container');
     var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
