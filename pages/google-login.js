@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (window.opener) {
             console.log("Redirecting parent window");
-            window.opener.location.href = './pages/clases.html'; // Redirect parent window
+            window.opener.location.href = './clases.html'; // Redirect parent window
         } else {
             console.log("No opener found, redirecting this window");
-            window.location.href = './pages/clases.html'; // Fallback for testing
+            window.location.href = './clases.html'; // Fallback for testing
         }
     }
 
