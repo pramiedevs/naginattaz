@@ -64,7 +64,7 @@
         <div id="main-content" class="main-content wating">
             <div id="welcome" class="welcome-section wating">
                 <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
-        <p id="plan-info">TU PLAN ACTUAL ES BAMBU</p>
+                <p id="plan-info">TU PLAN ACTUAL ES BAMBU</p>
             </div>
 
             <script src="./google-login.js"></script>
@@ -78,52 +78,18 @@
                     <div id="hiphop principiante">
                         <a href="./clases/index.html">
                         <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: grayscale(1);" ></a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop Principiante</h3>
-                    </div>
-                    <div id="hiphop intermedio">
-                        <a href="./clases/index.html">
-                        <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: sepia(1);"></a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop Intermedio</h3>
-                    </div>
-                    <div id="hiphop avanzado">
-                        <a href="./clases/index.html">
-                        <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style"></a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop Avanzado</h3>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop</h3>
                     </div>
                     <div id="contemporary principiante">
                         <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: grayscale(1);">
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary Principiante</h3>
-                    </div>
-                    <div id="contemporary intermedio">
-                        <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: sepia(1);">
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary Intermedio</h3>
-                    </div>
-                    <div id="contemporary avanzado">
-                        <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style">
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary Avanzado</h3>
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary</h3>
                     </div>
                     <div id="workout principiante">
                         <a href="./clases/index.html">
                             <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: grayscale(1);">
                         </a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Principiante</h3>
-                    </div>
-                    <div id="workout intermedio">
-                        <a href="./clases/index.html">
-                            <img class="img-clases" src="../src/workout.png" srcset="image-small.jpg 600w, image-medium.jpg 1200w, image-large.jpg 1800w" 
-                            sizes="(max-width: 600px) 100vw, 
-                                   (max-width: 1200px) 50vw, 
-                                   33vw" loading="lazy" alt="Workout Dance Style" style="filter: sepia(1);">
-                        </a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Intermedio</h3>
-                    </div>
-                    <div id="workout avanzado">
-                        <a href="./clases/index.html">
-                            <img class="img-clases" src="../src/workout.png"  loading="lazy" alt="Workout Dance Style">
-                        </a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout Avanzado</h3>
-                    </div>
-                    
+                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout</h3>
+                    </div>                    
                 </div>
             </div>
             <div id="section3" class="content-section">
@@ -440,6 +406,41 @@ function resetSection2() {
         item.style.display = 'block';
     });
 }
+
+const plans = {
+    "joaconavarro.untref@gmail.com": "BAMBÚ",
+    "nagitest@gmail.com": "ACERO",
+    "pramietest@gmail.com": "OBSIDIAN"
+};
+
+function updatePlan(userEmail) {
+    const planInfoElement = document.getElementById("plan-info");
+    const userNameElement = document.getElementById("user-name");
+    
+    userNameElement.textContent = userEmail.split('@')[0]; // Extract the username
+
+    if (plans[userEmail]) {
+        planInfoElement.textContent = `TU PLAN ACTUAL ES ${plans[userEmail]}`;
+    } else {
+        planInfoElement.textContent = "TU PLAN ACTUAL NO ESTÁ DEFINIDO";
+    }
+}
+
+// Plan display script
+function updatePlanFromStorage() {
+    const userEmail = localStorage.getItem('userEmail');
+    if (userEmail) {
+        updatePlan(userEmail);
+    }
+}
+updatePlanFromStorage();
+// Call the function with the logged-in user's email
+updatePlan(userInfoData.email);
+
+
+
+
+
     </script>
     <script src="https://accounts.google.com/gsi/client" async></script>
 </body>

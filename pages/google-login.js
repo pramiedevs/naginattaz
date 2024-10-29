@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleCredentialResponse(response) {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
-
+        localStorage.setItem('userEmail', userInfoData.email); // Save the email
         // Update UI with user info
         //userName.textContent = userInfoData.name;
         //userEmail.textContent = userInfoData.email;
