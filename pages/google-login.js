@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const welcomeMessage = document.getElementById('welcome-message');
     const userName = document.getElementById('user-name');
     const userPic = document.getElementById('user-pic');
+    const userPic2 = document.getElementById('user-pic2');
     const userInfo = document.getElementById('user-info');
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
+    const logoutButton2 = document.getElementById('logout-button2');
+
 
     let isLoggedIn = false; // Track the login status
     let clientId; // Declare clientId variable
@@ -29,14 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('userEmail', userEmail);
         
         userPic.src = userInfoData.picture;
+        userPic2.src = userInfoData.picture;
+
         userInfo.style.display = 'flex';
         logoutButton.style.display = 'inline-block';
+        logoutButton2.style.display = 'inline-block';
 
         // Mark user as logged in
         isLoggedIn = true;
 
         // Save user picture URL and ID token to sessionStorage
         sessionStorage.setItem('userPic', userInfoData.picture);
+        sessionStorage.setItem('userPic2', userInfoData.picture);
         sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
 
@@ -67,11 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check if user is already logged in
         const savedPic = sessionStorage.getItem('userPic');
+        const savedPic2 = sessionStorage.getItem('userPic2');
         const idToken = sessionStorage.getItem('idToken');
         if (savedPic && idToken) {
             userPic.src = savedPic;
+            userPic2.src = savedPic2;
             userInfo.style.display = 'flex';
             logoutButton.style.display = 'inline-block';
+            logoutButton2.style.display = 'inline-block';
             isLoggedIn = true;
         }
     }
@@ -87,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (idToken) {
             google.accounts.id.revoke(idToken, () => {
                 userPic.src = '';
+                userPic2.src = '';
                 userInfo.style.display = 'none';
 
                 // Reset login status
@@ -95,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Clear session storage
                 sessionStorage.removeItem('userEmail');
                 sessionStorage.removeItem('userPic');
+                sessionStorage.removeItem('userPic2');
                 sessionStorage.removeItem('idToken');
                 sessionStorage.removeItem('loggedIn');
                 window.location.href = '../index.html';
@@ -114,6 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
+    logoutButton2.addEventListener('click', handleLogout);
+
 
     
 });
