@@ -476,7 +476,13 @@ updatePlanFromStorage();
 // Call the function with the logged-in user's email
 updatePlan(userInfoData.email);
 
-
+// Clear session storage on page unload
+window.addEventListener('beforeunload', function () {
+        sessionStorage.removeItem('userEmail');
+        sessionStorage.removeItem('userPic');
+        sessionStorage.removeItem('idToken');
+        sessionStorage.removeItem('loggedIn');
+    });
 
 
 

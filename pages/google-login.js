@@ -111,11 +111,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
 
-    // Clear session storage on page unload
-    window.addEventListener('beforeunload', function () {
-        sessionStorage.removeItem('userEmail');
-        sessionStorage.removeItem('userPic');
-        sessionStorage.removeItem('idToken');
-        sessionStorage.removeItem('loggedIn');
-    });
+    
 });
