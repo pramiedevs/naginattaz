@@ -382,7 +382,7 @@ background-color: var(--nagivioleta);
 
         @media (max-width: 768px) {
             .main-content{
-                margin-top: 85px;
+                margin-top:5px;
                 margin-left: 1vh;
                 margin-right: 1vh;
                 flex-grow: 1;
@@ -434,6 +434,9 @@ background-color: var(--nagivioleta);
         @media (max-width: 1100px){
             #g-signin-button {
                 width:45px;
+            }
+            .header{
+                flex-direction: column!important;
             }
         }
 
