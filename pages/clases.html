@@ -18,6 +18,11 @@
 
     <div id="loader">Loading...</div>
 
+    <div id="notification" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 20px; background-color: red; color: white; text-align: center; line-height: 20px;">
+        <span id="notification-text"></span>
+        <a id="unite-button" href="./pages/subscription.html" style="color: white; text-decoration: underline; margin-left: 10px;">Unite</a>
+    </div>
+
     <header class="wating" id="header">
         <div class="header-logo">
             <a href="../index.html" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
@@ -419,14 +424,16 @@ const plans = {
 function updatePlan(userEmail) {
     const planInfoElement = document.getElementById("plan-info");
     const userNameElement = document.getElementById("user-name");
-    const bodyElement = document.body; // Get the body element
-    
+    const bodyElement = document.body;
+    const notificationElement = document.getElementById("notification");
+    const notificationText = document.getElementById("notification-text");
+
     userNameElement.textContent = userEmail.split('@')[0]; // Extract the username
 
     if (plans[userEmail]) {
         const plan = plans[userEmail];
         planInfoElement.textContent = `TU PLAN ACTUAL ES ${plan}`;
-        
+
         // Change the background color based on the plan
         switch (plan) {
             case "BAMBÚ":
@@ -437,15 +444,23 @@ function updatePlan(userEmail) {
                 break;
             case "OBSIDIAN":
                 bodyElement.style.backgroundColor = "violet";
-                break;
+                notificationElement.style.display = "none"; // Hide notification if Obsidian
+                return; // Exit the function for Obsidian
             default:
                 bodyElement.style.backgroundColor = ""; // Reset background if plan is unknown
         }
+
+        // Show notification for non-Obsidian plans
+        notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
+        notificationElement.style.display = "flex"; // Show notification
+
     } else {
         planInfoElement.textContent = "TU PLAN ACTUAL NO ESTÁ DEFINIDO";
         bodyElement.style.backgroundColor = ""; // Reset background if no plan is defined
+        notificationElement.style.display = "none"; // Hide notification
     }
 }
+
 
 
 // Plan display script

@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isLoggedIn = false;
 
                 // Clear local storage
+                localStorage.removeItem('userEmail');
                 localStorage.removeItem('userPic');
                 localStorage.removeItem('idToken');
                 window.location.href = '../index.html';
