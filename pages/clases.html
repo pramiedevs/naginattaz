@@ -433,48 +433,41 @@ function updatePlan(userEmail) {
 
     userNameElement.textContent = userEmail.split('@')[0]; // Extract the username
 
-    // Check if the user email exists in the plans object
     let plan = plans[userEmail] || "BAMBÚ"; // Assign BAMBÚ as default if no plan is found
     planInfoElement.textContent = `TU PLAN ACTUAL ES ${plan}`;
 
-    // Change the background color based on the plan
     switch (plan) {
         case "BAMBÚ":
             bodyElement.style.backgroundColor = "yellowgreen";
-            notificationElement.style.display = "flex"; // Show notification for BAMBÚ
+            notificationElement.style.display = "flex";
             notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
             break;
         case "ACERO":
             bodyElement.style.backgroundColor = "grey";
-            notificationElement.style.display = "flex"; // Show notification for ACERO
+            notificationElement.style.display = "flex";
             notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
             break;
         case "OBSIDIAN":
             bodyElement.style.backgroundColor = "violet";
-            notificationElement.style.display = "none"; // Hide notification if Obsidian
-            return; // Exit the function for Obsidian
+            notificationElement.style.display = "none";
+            return;
         default:
-            // Mimic BAMBÚ behavior for default case
-            bodyElement.style.backgroundColor = "red"; // Set to BAMBÚ background
-            notificationElement.style.display = "flex"; // Show notification
+            bodyElement.style.backgroundColor = "red";
+            notificationElement.style.display = "flex";
             notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
             break;
     }
 }
 
-
-
-
-// Plan display script
 function updatePlanFromStorage() {
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = sessionStorage.getItem('userEmail'); // Retrieve the email
     if (userEmail) {
         updatePlan(userEmail);
     }
 }
+
+// Call the function to update the plan when the page loads
 updatePlanFromStorage();
-// Call the function with the logged-in user's email
-updatePlan(userInfoData.email);
 
 // Clear session storage on page unload
 window.addEventListener('beforeunload', function () {

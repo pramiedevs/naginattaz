@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleCredentialResponse(response) {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
-        sessionStorage.setItem('userEmail', userInfoData.email); // Save the email
+        const userEmail = userInfoData.email; // Extract email
+
+        // Save email in session storage
+        sessionStorage.setItem('userEmail', userEmail);
+        
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'flex';
         logoutButton.style.display = 'inline-block';
