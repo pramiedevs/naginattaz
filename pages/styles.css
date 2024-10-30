@@ -153,8 +153,7 @@ body {
             width: 100vw;
             background-color: var(--nagivioleta);
             color: white;
-            position: fixed;
-            top: 0;
+            position: inherit;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
@@ -242,7 +241,7 @@ body {
             color: white;
         }
         .main-content {
-            margin-top: 90px;
+            margin-top: 10px;
             margin-left: 2vh;
             margin-right: 2vh;
             flex-grow: 1;
