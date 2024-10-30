@@ -20,7 +20,11 @@
 
     <div id="notification" style="display: none; z-index: 100000; position: inherit; border-bottom: white 2px solid; width: 100%; height: 35px;background-color: rgb(163, 9, 104); color: white;align-items: center; justify-content: center; line-height: 20px;">
         <span id="notification-text" style="text-align: center;"></span>
+
         <a id="unite-button" href="./pages/subscription.html" style="padding:5px; border-radius: 5px; color: white; background-color: rgb(190, 115, 190); text-decoration: none; margin-left: 10px;">Unite</a>
+        <style>#unite-button:hover{
+            background-color: var(--nagimagenta);
+        }</style>
     </div>
 
     <header class="wating" id="header">
@@ -35,8 +39,6 @@
                 <button id="search" class="desktop">🔍</button>
                 <div id="user-info" style="display: none;">
                     <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
-                    
-                    <!--<h2><span id="user-email">" "</span>!</h2>-->
                 </div>
                 <div id="g-signin-button" style="display: none; position:absolute; top:50%;left:50%;"></div> <!-- Hidden initially -->           
                 <button id="logout-button" style="display: none;">Log Out</button>
@@ -53,7 +55,7 @@
             <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input" placeholder=" Buscar clases...">
             <button id="search" class="desktop">🔍</button>
-            <div id="user-info" style="display: none;">
+            <div id="user-info">
                 <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
                 
                 <!--<h2><span id="user-email">" "</span>!</h2>-->
