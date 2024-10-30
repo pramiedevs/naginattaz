@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutButton.style.display = 'inline-block';
         logoutButton2.style.display = 'inline-block';
 
+        console.log(userPic);  // Check if it's null
+        console.log(userPic2); // Check if it's null
+
         // Mark user as logged in
         isLoggedIn = true;
 
