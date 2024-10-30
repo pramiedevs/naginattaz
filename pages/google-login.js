@@ -2,36 +2,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
     const welcomeMessage = document.getElementById('welcome-message');
     const userName = document.getElementById('user-name');
-    //const userEmail = document.getElementById('user-email');
     const userPic = document.getElementById('user-pic');
     const userInfo = document.getElementById('user-info');
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
-
-    
 
     let isLoggedIn = false; // Track the login status
 
     function handleCredentialResponse(response) {
         const user = response.credential;
         const userInfoData = JSON.parse(atob(user.split('.')[1]));
-        localStorage.setItem('userEmail', userInfoData.email); // Save the email
-        // Update UI with user info
-        //userName.textContent = userInfoData.name;
-        //userEmail.textContent = userInfoData.email;
+        sessionStorage.setItem('userEmail', userInfoData.email); // Save the email
         userPic.src = userInfoData.picture;
         userInfo.style.display = 'flex';
-        //signinButton.style.display = 'none';
         logoutButton.style.display = 'inline-block';
 
         // Mark user as logged in
         isLoggedIn = true;
 
-        // Save user picture URL and ID token to localStorage
-        localStorage.setItem('userPic', userInfoData.picture);
-        localStorage.setItem('idToken', response.credential);
+        // Save user picture URL and ID token to sessionStorage
+        sessionStorage.setItem('userPic', userInfoData.picture);
+        sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
-
 
         if (window.opener) {
             console.log("Redirecting parent window");
@@ -59,12 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         // Check if user is already logged in
-        const savedPic = localStorage.getItem('userPic');
-        const idToken = localStorage.getItem('idToken');
+        const savedPic = sessionStorage.getItem('userPic');
+        const idToken = sessionStorage.getItem('idToken');
         if (savedPic && idToken) {
             userPic.src = savedPic;
             userInfo.style.display = 'flex';
-            //signinButton.style.display = 'none';
             logoutButton.style.display = 'inline-block';
             isLoggedIn = true;
         }
@@ -77,23 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Clear user data and update UI
-        const idToken = localStorage.getItem('idToken');
+        const idToken = sessionStorage.getItem('idToken');
         if (idToken) {
             google.accounts.id.revoke(idToken, () => {
-                //userName.textContent = '';
-                //userEmail.textContent = '';
                 userPic.src = '';
                 userInfo.style.display = 'none';
-                //signinButton.style.display = 'block';
-                //logoutButton.style.display = 'none';
 
                 // Reset login status
                 isLoggedIn = false;
 
-                // Clear local storage
-                localStorage.removeItem('userEmail');
-                localStorage.removeItem('userPic');
-                localStorage.removeItem('idToken');
+                // Clear session storage
+                sessionStorage.removeItem('userEmail');
+                sessionStorage.removeItem('userPic');
+                sessionStorage.removeItem('idToken');
                 sessionStorage.removeItem('loggedIn');
                 window.location.href = '../index.html';
             });
@@ -101,17 +88,26 @@ document.addEventListener('DOMContentLoaded', () => {
             console.warn("No ID token found for revocation.");
         }
     }
+
     // Custom button click to trigger Google Sign-In
-    document.getElementById('g-signin-button').addEventListener('click', () => {
+    signinButton.addEventListener('click', () => {
         // Programmatically trigger click on the hidden Google Sign-In button
         google.accounts.id.prompt(); // This will show the Google sign-in dialog
     });
 
     // Initialize Google Sign-In
     window.onload = function() {
-    initGoogleSignIn();
-};
+        initGoogleSignIn();
+    };
 
-
+    // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
+
+    // Clear session storage on page unload
+    window.addEventListener('beforeunload', function () {
+        sessionStorage.removeItem('userEmail');
+        sessionStorage.removeItem('userPic');
+        sessionStorage.removeItem('idToken');
+        sessionStorage.removeItem('loggedIn');
+    });
 });
