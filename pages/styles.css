@@ -436,6 +436,8 @@ background-color: var(--nagivioleta);
                 width:45px;
             }
             .header{
+                align-items: center;
+                justify-content: center;
                 flex-direction: column!important;
             }
         }
