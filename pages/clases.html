@@ -467,7 +467,7 @@ function updatePlan(userEmail) {
 
 // Plan display script
 function updatePlanFromStorage() {
-    const userEmail = localStorage.getItem('userEmail');
+    const userEmail = sessionStorage.getItem('userEmail');
     if (userEmail) {
         updatePlan(userEmail);
     }
