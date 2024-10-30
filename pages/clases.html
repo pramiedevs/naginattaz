@@ -409,22 +409,44 @@ function resetSection2() {
 
 const plans = {
     "joaconavarro.untref@gmail.com": "BAMBÚ",
+    "paurocker993@gmail.com": "BAMBÚ",
     "nagitest@gmail.com": "ACERO",
-    "pramietest@gmail.com": "OBSIDIAN"
+    "pramietest@gmail.com": "OBSIDIAN",
+    "durquiza311@gmail.com": "OBSIDIAN"
+
 };
 
 function updatePlan(userEmail) {
     const planInfoElement = document.getElementById("plan-info");
     const userNameElement = document.getElementById("user-name");
+    const bodyElement = document.body; // Get the body element
     
     userNameElement.textContent = userEmail.split('@')[0]; // Extract the username
 
     if (plans[userEmail]) {
-        planInfoElement.textContent = `TU PLAN ACTUAL ES ${plans[userEmail]}`;
+        const plan = plans[userEmail];
+        planInfoElement.textContent = `TU PLAN ACTUAL ES ${plan}`;
+        
+        // Change the background color based on the plan
+        switch (plan) {
+            case "BAMBÚ":
+                bodyElement.style.backgroundColor = "red";
+                break;
+            case "ACERO":
+                bodyElement.style.backgroundColor = "grey";
+                break;
+            case "OBSIDIAN":
+                bodyElement.style.backgroundColor = "violet";
+                break;
+            default:
+                bodyElement.style.backgroundColor = ""; // Reset background if plan is unknown
+        }
     } else {
         planInfoElement.textContent = "TU PLAN ACTUAL NO ESTÁ DEFINIDO";
+        bodyElement.style.backgroundColor = ""; // Reset background if no plan is defined
     }
 }
+
 
 // Plan display script
 function updatePlanFromStorage() {
