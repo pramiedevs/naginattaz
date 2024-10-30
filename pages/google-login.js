@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             userPic2.src = savedPic2;
             userInfo.style.display = 'flex';
             logoutButton.style.display = 'inline-block';
-            logoutButton2.style.display = 'inline-block';
+            logoutButton2.style.display = 'flex';
             isLoggedIn = true;
         }
     }
