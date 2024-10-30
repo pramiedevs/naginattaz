@@ -155,7 +155,11 @@ body {
             color: white;
             position: inherit;
             z-index: 1000;
+            
+        }
+        .header-desktop{
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
         }
@@ -392,10 +396,15 @@ background-color: var(--nagivioleta);
                 align-items: center;
                 background: linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
             }
-            .desktop{
+            .header-desktop{
                 display:none;
             }
+
             .mobile{
+                display: flex!important;
+            }
+            
+            .header-mobile{
                 display:flex;    
             }
             .image-grid{
@@ -435,7 +444,9 @@ background-color: var(--nagivioleta);
             #g-signin-button {
                 width:45px;
             }
-            .header{
+            .mobile{display: flex;}
+            
+            .header-mobile{
                 flex-direction: column!important;
             }
         }
