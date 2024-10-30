@@ -268,6 +268,11 @@
 
     <script>
 
+    // Check if the user is logged in
+    if (sessionStorage.getItem('loggedIn') !== 'true') {
+        window.location.href = './login.html'; 
+    }
+
 
         // Toggle the search input and set up event listeners
         document.getElementById('search').addEventListener('click', function() {

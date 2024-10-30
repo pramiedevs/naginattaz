@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Save user picture URL and ID token to localStorage
         localStorage.setItem('userPic', userInfoData.picture);
         localStorage.setItem('idToken', response.credential);
+        sessionStorage.setItem('loggedIn', 'true');
 
 
         if (window.opener) {
@@ -93,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.removeItem('userEmail');
                 localStorage.removeItem('userPic');
                 localStorage.removeItem('idToken');
+                sessionStorage.removeItem('loggedIn');
                 window.location.href = '../index.html';
             });
         } else {
