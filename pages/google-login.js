@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userPic = document.getElementById('user-pic');
     const userPic2 = document.getElementById('user-pic2');
     const userInfo = document.getElementById('user-info');
+    const userInfo2 = document.getElementById('user-info2');
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
     const logoutButton2 = document.getElementById('logout-button2');
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userPic2.src = userInfoData.picture;
 
         userInfo.style.display = 'flex';
+        userInfo2.style.display = 'flex';
         logoutButton.style.display = 'inline-block';
         logoutButton2.style.display = 'inline-block';
 
@@ -80,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
             userPic.src = savedPic;
             userPic2.src = savedPic2;
             userInfo.style.display = 'flex';
+            userInfo2.style.display = 'flex';
             logoutButton.style.display = 'inline-block';
             logoutButton2.style.display = 'flex';
             isLoggedIn = true;
@@ -99,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 userPic.src = '';
                 userPic2.src = '';
                 userInfo.style.display = 'none';
+                userInfo2.style.display = 'none';
 
                 // Reset login status
                 isLoggedIn = false;
