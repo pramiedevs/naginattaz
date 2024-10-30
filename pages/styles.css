@@ -435,7 +435,7 @@ background-color: var(--nagivioleta);
             #g-signin-button {
                 width:45px;
             }
-            .header{
+            #header{
                 align-items: center;
                 justify-content: center;
                 flex-direction: column!important;
