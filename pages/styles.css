@@ -266,7 +266,9 @@ body {
                 border: solid 1.8px #4d4a509e;
                 border-radius: 20px;           
         }
-
+        #unite-button:hover{
+            background-color: var(--nagimagenta);
+        }
 #welcome-message {
     margin-right: 20px;
 }

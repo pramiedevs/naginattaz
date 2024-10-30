@@ -18,9 +18,9 @@
 
     <div id="loader">Loading...</div>
 
-    <div id="notification" style="display: none; z-index: 100000; position: inherit; border-bottom: white 2px solid; width: 100%; height: 20px; background-color: rgb(163, 9, 104); color: white; text-align: center; line-height: 20px;">
+    <div id="notification" style="display: none; z-index: 100000; position: inherit; border-bottom: white 2px solid; width: 100%; height: 35px;background-color: rgb(163, 9, 104); color: white; justify-content: center; line-height: 20px;">
         <span id="notification-text" style="text-align: center;"></span>
-        <a id="unite-button" href="./pages/subscription.html" style="color: white; background-color: rgb(190, 115, 190); text-decoration: none; margin-left: 10px;">Unite</a>
+        <a id="unite-button" href="./pages/subscription.html" style="padding:5px; border-radius: 5px; color: white; background-color: rgb(190, 115, 190); text-decoration: none; margin-left: 10px;">Unite</a>
     </div>
 
     <header class="wating" id="header">
@@ -440,7 +440,7 @@ function updatePlan(userEmail) {
     // Change the background color based on the plan
     switch (plan) {
         case "BAMBÚ":
-            bodyElement.style.backgroundColor = "red";
+            bodyElement.style.backgroundColor = "yellowgreen";
             notificationElement.style.display = "flex"; // Show notification for BAMBÚ
             notificationText.textContent = "Todavía no sos Obsidian? Unite al plan y desbloqueá todo el contenido!";
             break;
