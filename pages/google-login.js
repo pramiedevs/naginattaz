@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
     const welcomeMessage = document.getElementById('welcome-message');
     const userName = document.getElementById('user-name');
     const userPic = document.getElementById('user-pic');
@@ -8,6 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logout-button');
 
     let isLoggedIn = false; // Track the login status
+    let clientId; // Declare clientId variable
+
+    async function loadConfig() {
+        try {
+            const response = await fetch('./config.json');
+            const config = await response.json();
+            clientId = config.clientId; // Set clientId from config
+            initGoogleSignIn(); // Call init after setting clientId
+        } catch (error) {
+            console.error('Error loading configuration:', error);
+        }
+    }
 
     function handleCredentialResponse(response) {
         const user = response.credential;
@@ -91,14 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Custom button click to trigger Google Sign-In
     signinButton.addEventListener('click', () => {
-        // Programmatically trigger click on the hidden Google Sign-In button
-        google.accounts.id.prompt(); // This will show the Google sign-in dialog
+        google.accounts.id.prompt(); // Show the Google sign-in dialog
     });
 
-    // Initialize Google Sign-In
-    window.onload = function() {
-        initGoogleSignIn();
-    };
+    // Load configuration
+    loadConfig();
 
     // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
