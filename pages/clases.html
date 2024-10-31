@@ -73,7 +73,7 @@
                 }
     
                 // If logged in, display user picture and logout button
-                const userPicContainer = document.getElementById('user-container');
+                const userContainer = document.querySelector('.user-container');
                 const userPic = document.createElement('img');
                 const logoutButton = document.createElement('button');
     
@@ -89,11 +89,11 @@
                     window.location.reload(); // Reload the page
                 };
     
-                // Append user picture and logout button to the container
-                userPicContainer.appendChild(userPic);
-                userPicContainer.appendChild(logoutButton);
-                userPicContainer.style.display = 'flex'; // Adjust display style
-                userPicContainer.style.alignItems = 'center'; // Center items vertically
+                // Append user picture and logout button to the user container
+                userContainer.appendChild(userPic);
+                userContainer.appendChild(logoutButton);
+                userContainer.style.display = 'flex'; // Adjust display style
+                userContainer.style.alignItems = 'center'; // Center items vertically
             });
         </script>
     </header>
