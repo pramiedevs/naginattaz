@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naginattaz Metaverso</title>
     <link rel="stylesheet" href="./styles.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="./calendar.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js" defer></script>
     <script src="./wating.js"></script>
@@ -38,11 +37,7 @@
                 <div id="image-preview-container" class="image-preview-container"></div>
                 <input type="text" id="search-input" placeholder=" Buscar clases...">
                 <button id="search" class="desktop">🔍</button>
-                <div id="user-info" style="display: none;">
-                    <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
-                </div>
-                <div id="g-signin-button" style="display: none; position:absolute; top:50%;left:50%;"></div> <!-- Hidden initially -->           
-                <button id="logout-button" style="display: none;">Log Out</button>
+                
             </div>
         </div>
             <div class="left-panel desktop">
@@ -56,13 +51,7 @@
             <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input" placeholder=" Buscar clases...">
             <button id="search" class="desktop">🔍</button>
-            <div id="user-info">
-                <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
-                
-                <!--<h2><span id="user-email">" "</span>!</h2>-->
-            </div>
-            <div id="g-signin-button" style="display: none; position:absolute; top:50%;left:50%;"></div> <!-- Hidden initially -->           
-            <button id="logout-button" style="display: none;">Log Out</button>
+            
         </div>
 
         <div class="left-panel mobile">
@@ -87,8 +76,6 @@
                 <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
                 <p id="plan-info">TU PLAN ACTUAL ES BAMBU</p>
             </div>
-
-            <script src="./google-login.js"></script>
             
             <div id="section1" class="content-section active">
                 <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%; margin-bottom: 2vh;">
@@ -284,9 +271,36 @@
     <script>
 
     // Check if the user is logged in
-    if (sessionStorage.getItem('loggedIn') !== 'true') {
-        window.location.href = './login.html'; 
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+            // Check if the user is logged in
+            if (sessionStorage.getItem('loggedIn') !== 'true') {
+                window.location.href = './login.html'; 
+                return; // Exit if redirecting
+            }
+
+            // If logged in, display user picture and logout button
+            const userPicContainer = document.getElementById('image-preview-container');
+            const userPic = document.createElement('img');
+            const logoutButton = document.createElement('button');
+
+            userPic.src = sessionStorage.getItem('userPic');
+            userPic.alt = 'User Picture';
+            userPic.style.width = '40px'; // Adjust size as needed
+            userPic.style.borderRadius = '50%'; // Optional: Make it circular
+
+            // Create logout button
+            logoutButton.textContent = 'Logout';
+            logoutButton.onclick = () => {
+                sessionStorage.clear(); // Clear session storage
+                window.location.reload(); // Reload the page
+            };
+
+            // Append user picture and logout button to the container
+            userPicContainer.appendChild(userPic);
+            userPicContainer.appendChild(logoutButton);
+            userPicContainer.style.display = 'flex'; // Adjust display style
+            userPicContainer.style.alignItems = 'center'; // Center items vertically
+        });
 
 
         // Toggle the search input and set up event listeners
@@ -481,17 +495,6 @@ function updatePlanFromStorage() {
     }
 }
 
-// Call the function to update the plan when the page loads
-updatePlanFromStorage();
-/*
-// Clear session storage on page unload
-window.addEventListener('beforeunload', function () {
-        sessionStorage.removeItem('userEmail');
-        sessionStorage.removeItem('userPic');
-        sessionStorage.removeItem('idToken');
-        sessionStorage.removeItem('loggedIn');
-    });
-*/
 
 
     </script>
