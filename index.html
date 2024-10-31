@@ -15,7 +15,6 @@
   <link href="./static/naginattaz.min.css" rel="stylesheet" type="text/css"/>
   <link href="./static/5e60461827af5ba96e00365e_STEEZY_S_FAVICON.png" rel="shortcut icon" type="image/x-icon"/>
   <link href="./static/5e60461d27af5b015200369e_STEEZY_S_WEBCLIP.png" rel="apple-touch-icon"/>
-  <script src="./google-login.js"></script>
 
   <script type="text/javascript">
     
@@ -372,12 +371,46 @@ margin: 0rem !important;
 <div class="navbar10_menu-right">
   <a href="./pages/login.html" class="button is-secondary is-small titlefont w-button">Inicia</a>
   <a href="./pages/subscription.html" class="button is-cta is-small titlefont w-button">Sumate</a>
-  <div id="user-info" style="display: none;">
-    <img id="user-pic" src="" alt="User Picture" style="border-radius: 50%; width: 50px; height: 50px;">
-  </div>
-  <div id="g-signin-button" style="display: none; position:absolute; top:50%;left:50%;"></div> <!-- Hidden initially -->           
-  <button id="logout-button" style="display: none;">Log Out</button>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
+      const loginButton = document.querySelector('.navbar10_menu-right .button.is-secondary');
+      const subscriptionButton = document.querySelector('.navbar10_menu-right .button.is-cta');
+      const userPicContainer = document.createElement('div');
+      const logoutButton = document.createElement('button');
+
+      if (isLoggedIn) {
+          // Hide buttons
+          loginButton.style.display = 'none';
+          subscriptionButton.style.display = 'none';
+
+          // Show user picture
+          const userPic = document.createElement('img');
+          userPic.src = sessionStorage.getItem('userPic');
+          userPic.alt = 'User Picture';
+          userPic.style.width = '40px'; // Adjust size as needed
+          userPic.style.borderRadius = '50%'; // Optional: Make it circular
+
+          // Create logout button
+          logoutButton.textContent = 'Logout';
+          logoutButton.onclick = () => {
+              sessionStorage.clear(); // Clear session storage
+              window.location.reload(); // Reload the page
+          };
+
+          // Append user picture and logout button to the container
+          userPicContainer.appendChild(userPic);
+          userPicContainer.appendChild(logoutButton);
+          userPicContainer.style.display = 'flex'; // Adjust display style
+          userPicContainer.style.alignItems = 'center'; // Center items vertically
+
+          // Append to navbar
+          const navbar = document.querySelector('.navbar10_menu-right');
+          navbar.appendChild(userPicContainer);
+      }
+  });
+</script>
 </nav>
 <div class="navbar10_menu-button w-nav-button">
   <div class="menu-icon">
