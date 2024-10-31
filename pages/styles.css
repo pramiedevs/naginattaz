@@ -150,6 +150,7 @@ body {
             display: none;
         }
         header {
+            flex-direction: row;
             width: 100vw;
             background-color: var(--nagivioleta);
             color: white;
