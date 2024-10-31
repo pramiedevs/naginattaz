@@ -63,6 +63,22 @@
             <button id="search2">🔍</button>
         </div>
         <div class="user-container"></div>
+        <style>
+            .logout-button {
+                margin: 0 20px; 
+                padding: .8rem 1.25rem;
+                background-color: var(--nagiobispo);
+                color: var(--white-smoke);
+                border: 1px solid #000;
+                border-radius: .25rem;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+    
+            .logout-button:hover {
+                background-color: var(--nagimagenta);
+            }
+        </style>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
@@ -84,6 +100,7 @@
     
                 // Create logout button
                 logoutButton.textContent = 'Logout';
+                logoutButton.classList.add('logout-button'); // Add class for styling
                 logoutButton.onclick = () => {
                     sessionStorage.clear(); // Clear session storage
                     window.location.reload(); // Reload the page
