@@ -15,7 +15,20 @@
   
   }
 
-
+  @font-face {
+    font-family: "Monument Extended Regular";
+    src: url("../src/fonts/MonumentExtended\ Regular/MonumentExtended-Regular.otf") format("truetype");
+  }
+  @font-face {
+    font-family: "Gotham Medium Regular";
+    src: url("../src/fonts/Gotham\ Medium.otf") format("truetype");
+  }
+  .customfont { 
+    font-family: "Gotham Medium Regular";
+  }
+  .titlefont{
+    font-family: "Monument Extended Regular";
+  }
 
 body {
     margin: 0;
