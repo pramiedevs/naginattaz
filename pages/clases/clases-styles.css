@@ -61,6 +61,13 @@ body {
 }
 #logout-button{
     margin-left: 20px;
+    padding: .8rem 1.25rem;
+    background-color: var(--nagiobispo);
+    color: var(--white-smoke);
+    border: 1px #000;
+    border-radius: .25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 .header .logo img {
     width: 20vw;
