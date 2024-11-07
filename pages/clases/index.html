@@ -11,10 +11,12 @@
 <body class="no-scrollbar">
     <div class="header">
         <div class="logo">
-            <img src="LOGOS_1.png">
+            <a href="../index.html">
+                <img src="LOGOS_1.png">
+            </a>
         </div>
         <div>
-            <H1>
+            <H1 class="titlefont">
                 HIP-HOP 101
             </H1>
         </div>
@@ -23,18 +25,40 @@
             <a href="../clases.html">CLASES</a>
             <a href="#">NAGIDATTAZ</a>
         </nav>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Check if the user is logged in
+                if (sessionStorage.getItem('loggedIn') !== 'true') {
+                    window.location.href = './login.html'; 
+                    return; // Exit if redirecting
+                }
+    
+                // If logged in, display user picture and logout button
+                const userContainer = document.querySelector('user-info');
+    
+                userPic.src = sessionStorage.getItem('userPic');
+                userPic.alt = 'User Picture';
+                userPic.style.width = '40px'; // Adjust size as needed
+                userPic.style.borderRadius = '50%'; // Optional: Make it circular
+    
+                // Append user picture and logout button to the user container
+                userContainer.appendChild(userPic);
+                userContainer.style.display = 'flex'; // Adjust display style
+                userContainer.style.alignItems = 'center'; // Center items vertically
+            });
+        </script>
+
         <div class="header-right titlefont>
             <div id="user-info">
-                <img id="user-pic" alt="User Picture" style="border-radius: 50%; width: 70px; height: 70px;">
             </div>  
             <button id="logout-button">Atrás</button>
         </div>
     </div>
     
-    <div class="main-section custom font">
+    <div class="main-section customfont">
         <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
         <iframe id="mainVideo" style="display: block;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" src="" title="Main Vimeo Video"></iframe>
-        
     </div>
     
 
