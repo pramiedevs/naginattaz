@@ -518,7 +518,9 @@ function updatePlanFromStorage() {
     }
     console.log(userEmail, plans[userEmail])
 }
-
+document.addEventListener('DOMContentLoaded', () => {
+    updatePlanFromStorage();
+});
 
 
     </script>
