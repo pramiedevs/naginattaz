@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.getElementById('logout-button').addEventListener('click', () => {
     // Clear the user picture URL from localStorage
-    localStorage.removeItem('userPic');
     
     // Redirect back to clases.html
     window.location.href = '../clases.html';
