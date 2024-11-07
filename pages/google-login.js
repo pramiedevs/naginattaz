@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Save user picture URL and ID token to sessionStorage
         sessionStorage.setItem('userPic', userInfoData.picture);
-        sessionStorage.setItem('userPicClass', userInfoData.picture);
         sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
 

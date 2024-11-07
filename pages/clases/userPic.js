@@ -1,15 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userPic = document.getElementById('user-pic');
     
-    const profilePictureURL = sessionStorage.getItem('userPicClass');
+    // Retrieve the URL from localStorage
+    const profilePictureURL = localStorage.getItem('userPic');
     
     if (profilePictureURL) {
         userPic.src = profilePictureURL;
-    } else {
-        console.log("No profile picture found in localStorage");
     }
 });
 
 
 
-
+document.getElementById('logout-button').addEventListener('click', () => {
+    // Clear the user picture URL from localStorage
+    localStorage.removeItem('userPic');
+    
+    // Redirect back to clases.html
+    window.location.href = '../clases.html';
+});

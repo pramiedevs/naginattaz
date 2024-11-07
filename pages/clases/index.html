@@ -5,57 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <link rel="stylesheet" href="./clases-styles.css">
+    <script src="userPic.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const userPic = document.getElementById('user-pic');
-          const profilePictureURL = sessionStorage.getItem('userPicClass');
-          if (profilePictureURL) {
-            userPic.src = profilePictureURL;
-          }
-        });
-        document.getElementById('logout-button').addEventListener('click', () => {
-    // Redirect back to clases.html
-    window.location.href = '../clases.html';
-});
-      </script>
-
 </head>
 <body class="no-scrollbar">
     <div class="header">
         <div class="logo">
-            <a href="../index.html">
-                <img src="LOGOS_1.png">
-            </a>
+            <img src="LOGOS_1.png">
         </div>
         <div>
-            <H1 class="titlefont">
-                H I P - H O P
+            <H1>
+                HIP-HOP 101
             </H1>
         </div>
-        <nav class="menu titlefont">
+        <nav class="menu">
             <a href="./index.html">INICIO</a>
             <a href="../clases.html">CLASES</a>
             <a href="#">NAGIDATTAZ</a>
         </nav>
-
-        
-
-        <div class="header-right titlefont>
-            <img id="user-pic" src="default-pic.jpg" alt="User Picture">
+        <div class="header-right">
+            <div id="user-info">
+                <img id="user-pic" alt="User Picture" style="border-radius: 50%; width: 70px; height: 70px;">
+            </div>  
             <button id="logout-button">Atrás</button>
         </div>
     </div>
     
-    <div class="main-section customfont">
+    <div class="main-section">
         <img class="main-img" id="mainImage" src="" alt="Main Image" style="display: none;">
         <iframe id="mainVideo" style="display: block;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" src="" title="Main Vimeo Video"></iframe>
+        
     </div>
     
 
-    <div class="info-carousel-section customfont">
+    <div class="info-carousel-section">
         <div class="video-info">
-            <div class="video-title titlefont">Clase Hip-Hop 101 - Nivel Principiante</div>
+            <div class="video-title">Clase Hip-Hop 101 - Nivel Principiante</div>
             <br>
             <div class="descripcion">
                     <h3>Programa:</h3>
@@ -235,6 +220,10 @@
                 carousel.scrollTop = scrollTop - walk;
             }
         });
-    </script>    
+    </script>
+    <footer>
+        Nagifooter
+    </footer>
+    
 </body>
 </html>
