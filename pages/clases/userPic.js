@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userPic = document.getElementById('user-pic');
     
-    // Retrieve the URL from localStorage
-    const profilePictureURL = localStorage.getItem('userPic');
+    const profilePictureURL = sessionStorage.getItem('userPicClass');
     
     if (profilePictureURL) {
         userPic.src = profilePictureURL;
+    } else {
+        console.log("No profile picture found in localStorage");
     }
 });
 

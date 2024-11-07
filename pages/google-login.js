@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Save user picture URL and ID token to sessionStorage
         sessionStorage.setItem('userPic', userInfoData.picture);
-        localStorage.setItem('userPic', userInfoData.picture);
+        sessionStorage.setItem('userPicClass', userInfoData.picture);
         sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
 
@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 isLoggedIn = false;
 
                 // Clear session storage
-                localStorage.removeItem('userPic');
                 sessionStorage.removeItem('userEmail');
                 sessionStorage.removeItem('userPic');
                 sessionStorage.removeItem('idToken');
