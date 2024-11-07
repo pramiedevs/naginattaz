@@ -9,7 +9,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
           const userPic = document.getElementById('user-pic');
-          const profilePictureURL = localStorage.getItem('userPic');
+          const profilePictureURL = sessionStorage.getItem('userPicClass');
           if (profilePictureURL) {
             userPic.src = profilePictureURL;
           }
