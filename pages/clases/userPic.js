@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userPic = document.getElementById('user-pic');
     
     // Retrieve the URL from localStorage
-    const profilePictureURL = sessionStorageStorage.getItem('userPic');
+    const profilePictureURL = sessionStorage.getItem('userPic');
     
     if (profilePictureURL) {
         userPic.src = profilePictureURL;
