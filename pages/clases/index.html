@@ -5,8 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clases</title>
     <link rel="stylesheet" href="./clases-styles.css">
-    <script src="userPic.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const userPic = document.getElementById('user-pic');
+          const profilePictureURL = localStorage.getItem('userPic');
+          if (profilePictureURL) {
+            userPic.src = profilePictureURL;
+          }
+        });
+        document.getElementById('logout-button').addEventListener('click', () => {
+    // Redirect back to clases.html
+    window.location.href = '../clases.html';
+});
+      </script>
+
 </head>
 <body class="no-scrollbar">
     <div class="header">

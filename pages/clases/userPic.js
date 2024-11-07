@@ -12,7 +12,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-document.getElementById('logout-button').addEventListener('click', () => {
-    // Redirect back to clases.html
-    window.location.href = '../clases.html';
-});
+
