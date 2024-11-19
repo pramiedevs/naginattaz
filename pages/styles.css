@@ -12,7 +12,7 @@
             --nagivioleta: #4b59ed;
             --nagiobispo: #b18cfe;
             --nagimagenta: #af14af;
-            --nagirosa: #fac8f8;
+            --nagirosa: #e1ace0;
           
           }
 
@@ -68,7 +68,7 @@ body {
         header {
             flex-direction: row;
             width: 100vw;
-            background-color: var(--nagivioleta);
+            background-color: var(--nagirosa);
             color: white;
             position: inherit;
             z-index: 1000;
@@ -157,15 +157,116 @@ body {
             background-color: var(--nagimagenta);
             color: white;
         }
-        .main-content {
+
+
+        /* General Layout */
+.main-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.panel {
+    width: 20%;
+    background-color: black;
+    padding: 15px;
+    border-right: 4px solid #ccc;
+}
+
+.panel-button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: var(--nagivioleta);
+    color: white;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.panel-button:hover {
+    background-color: var(--nagimagenta);
+}
+
+.arrow {
+    float: right;
+}
+
+.dropdown-content {
+    display: none;
+    padding-left: 15px;
+    margin-top: 5px;
+    color: white;
+    background-color: var(--nagiobispo);
+}
+
+.dropdown-content p {
+    margin: 5px 0;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #ddd;
+}
+
+/* Add space between dropdown items */
+.dropdown-item + .dropdown-item {
+    margin-top: 5px; /* Adds 5px gap between items */
+}
+
+/* Make the image responsive */
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* Welcome Section */
+.welcome-section {
+    margin-bottom: 20px;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.content-section {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .contenido {
             margin-top: 10px;
-            margin-left: 2vh;
-            margin-right: 2vh;
             flex-grow: 1;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 80%;
             
         }
 
@@ -215,8 +316,6 @@ background-color: var(--nagivioleta);
         }
         .image-grid div {
             margin-top: 10px;
-                border-radius: 54px;
-    background-color: #ff54ae78;
     width: 100%;
     padding-bottom: 100%;
     position: relative;

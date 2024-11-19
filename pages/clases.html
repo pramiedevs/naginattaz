@@ -43,12 +43,13 @@
             <a href="../index.html" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
                 <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
             </a>
+            <!--
             <div class="header-right mobile">
                 <div id="image-preview-container" class="image-preview-container"></div>
                 <input type="text" id="search-input" placeholder=" Buscar clases...">
                 <button id="search" class="desktop">🔍</button>
                 
-            </div>
+            </div>-->
         </div>
             <div class="left-panel desktop">
                 <button onclick="showContent('section1')">INICIO</button>
@@ -57,11 +58,13 @@
                 <button onclick="showContent('section4')">PLAYLIST</button>
                 <button onclick="showContent('section5')">CALENDARIO</button>
             </div>
+
+            <!--
         <div class="header-right desktop">
             <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input" placeholder=" Buscar clases...">
             <button id="search" class="desktop">🔍</button>            
-        </div>
+        </div>-->
 
         <div class="left-panel mobile">
             <button onclick="showContent('section1')">INICIO</button>
@@ -94,10 +97,12 @@
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 // Check if the user is logged in
+
+                /*
                 if (sessionStorage.getItem('loggedIn') !== 'true') {
                     window.location.href = './login.html'; 
                     return; // Exit if redirecting
-                }
+                }*/
     
                 // If logged in, display user picture and logout button
                 const userContainer = document.querySelector('.user-container');
@@ -127,204 +132,339 @@
     </header>
 
         <div id="main-content" class="main-content wating">
-            <div id="welcome" class="welcome-section wating">
-                <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
-                <p id="plan-info"></p>
-            </div>
+            <script>
+                // Toggle the dropdown content
+function toggleDropdown(id) {
+    var dropdown = document.getElementById(id);
+    // If the dropdown is visible, hide it
+    if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+    } else {
+        // Hide all dropdowns
+        var allDropdowns = document.querySelectorAll('.dropdown-content');
+        allDropdowns.forEach(function(content) {
+            content.style.display = "none";
+        });
+        // Show the clicked dropdown
+        dropdown.style.display = "block";
+    }
+}
+
+            </script>
+
+
+
+            <div id="main-container" class="main-container">
+                <!-- Left Panel (30%) -->
+                <div id="panel" class="panel">
+                    <!-- Clases Section -->
+                    <button class="panel-button" onclick="showContent('section2'); showAllItems()">
+                        Todas las Clases <span class="arrow">&#x2192;</span>
+                    </button>
+                    
+                    <!-- Clases Individuales Section -->
+                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('clases'); filterItems('class')">
+                        Clases Individuales <span class="arrow">&#x2193;</span>
+                    </button>
+                    <div id="clases" class="dropdown-content">
+                        <button class="dropdown-item">Clases Individuales</button>
+                        <button class="dropdown-item">Próximas Clases</button>
+                    </div>
+                    
+                    <!-- Programas Section -->
+                    <button class="panel-button" onclick="showContent('section2'); filterItems('program')">
+                        Programas <span class="arrow">&#x2192;</span>
+                    </button>
+                    
+                    <!-- Estilos Section -->
+                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('categories')">
+                        Estilos <span class="arrow">&#x2193;</span>
+                    </button>
+                    <div id="categories" class="dropdown-content">
+                        <button class="dropdown-item" onclick="filterByCategory('hiphop')">Hip-Hop</button>
+                        <button class="dropdown-item" onclick="filterByCategory('contemporary')">Contemporary</button>
+                        <button class="dropdown-item" onclick="filterByCategory('workout')">Workout</button>
+                    </div>
+                    
+                    <!-- Instructores Section -->
+                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('instructors')">
+                        Instructores <span class="arrow">&#x2193;</span>
+                    </button>
+                    <div id="instructors" class="dropdown-content">
+                        <button class="dropdown-item">Instructor 1</button>
+                        <button class="dropdown-item">Instructor 2</button>
+                        <button class="dropdown-item">Instructor 3</button>
+                    </div>
+                
+                    <!-- Playlists Section -->
+                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('playlists')">
+                        Playlists <span class="arrow">&#x2193;</span>
+                    </button>
+                    <div id="playlists" class="dropdown-content">
+                        <button class="dropdown-item">Playlist 1</button>
+                        <button class="dropdown-item">Playlist 2</button>
+                        <button class="dropdown-item">Playlist 3</button>
+                    </div>
+                
+                    <!-- Calendario Section -->
+                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('calendar')">
+                        Calendario <span class="arrow">&#x2193;</span>
+                    </button>
+                    <div id="calendar" class="dropdown-content">
+                        <button class="dropdown-item">Evento 1</button>
+                        <button class="dropdown-item">Evento 2</button>
+                        <button class="dropdown-item">Evento 3</button>
+                    </div>
+                
+                    <!-- Comunidad Section -->
+                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('community')">
+                        Comunidad <span class="arrow">&#x2193;</span>
+                    </button>
+                    <div id="community" class="dropdown-content">
+                        <button class="dropdown-item">Comunidad 1</button>
+                    </div>
+                </div>
+                
+
+                <script>
+
+
+function showAllItems() {
+    var items = document.querySelectorAll('.image-grid > div');
+    items.forEach(function(item) {
+        item.style.display = "block"; // Show all items
+    });
+}
+                    // Function to filter items by type (program or class)
+function filterItems(type) {
+    var items = document.querySelectorAll('.image-grid > div');
+    items.forEach(function(item) {
+        // Check if the ID contains the type (program or class)
+        if (item.id.toLowerCase().includes(type)) {
+            item.style.display = "block"; // Show matching item
+        } else {
+            item.style.display = "none"; // Hide non-matching item
+        }
+    });
+}
+
+// Function to filter items by category (hiphop, contemporary, workout)
+function filterByCategory(category) {
+    var items = document.querySelectorAll('.image-grid > div');
+    items.forEach(function(item) {
+        // Check if the ID starts with the category name
+        if (item.id.toLowerCase().startsWith(category)) {
+            item.style.display = "block"; // Show matching item
+        } else {
+            item.style.display = "none"; // Hide non-matching item
+        }
+    });
+}
+
+                </script>
             
-            <div id="section1" class="content-section active">
-                <div class="image-container">
-                    <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%; margin-bottom: 2vh;">
-                </div>                
-                <!-- <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=0&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position: inherit; width:1200px;height:100%;" title="nagi video"></iframe> -->            
-                </div>
-            <div id="section2" class="content-section">
-                <div class="image-grid">
-                    <div id="hiphop principiante free">
-                        <a href="./clases/index.html">
-                        <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: grayscale(1);" ></a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop</h3>
+                <!-- Main Content (70%) -->
+                <div id="contenido" class="contenido">
+                    <div id="welcome" class="welcome-section">
+                        <h2 id="welcome-message">BIENVENIDO <span id="user-name"></span>!</h2>
+                        <p id="plan-info"></p>
                     </div>
-                    <div id="contemporary principiante">
-                        <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: grayscale(1);">
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary</h3>
+            
+                    <div id="section1" class="content-section active">
+                        <div class="image-container">
+                            <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%; margin-bottom: 2vh;">
+                        </div>                
+                        <!-- <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=0&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position: inherit; width:1200px;height:100%;" title="nagi video"></iframe> -->            
+                        </div>
+                    <div id="section2" class="content-section">
+                        <div class="image-grid">
+                            <div id="hiphop program">
+                                <a href="./clases/index.html">
+                                <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: grayscale(1);" ></a>
+                                <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop</h3>
+                            </div>
+                            <div id="contemporary class">
+                                <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: grayscale(1);">
+                                <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary</h3>
+                            </div>
+                            <div id="workout class">
+                                <a href="./clases/index.html">
+                                    <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: grayscale(1);">
+                                </a>
+                                <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout</h3>
+                            </div>                    
+                        </div>
                     </div>
-                    <div id="workout principiante">
-                        <a href="./clases/index.html">
-                            <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: grayscale(1);">
-                        </a>
-                        <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout</h3>
-                    </div>                    
-                </div>
-            </div>
-            <div id="section3" class="content-section">
-                <h2>ESTILOS</h2>
-                <p>Selecciona tu estilo preferido!</p>
-            </div>
-            <div id="section4" class="content-section">
-                <h2>PLAYLIST</h2>
-                <p>Selecciona playlists previamente confeccionadas por nuestro equipo de instructores para llevar a cabo tus rutinas.</p>
-                <div class="spotify-container">
-                <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="600" height="700" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                    <div class="overlay"></div>
-                </div>
-                <style>
-                    .spotify-container {
-                    margin-top:4vw;
-                    height: 700px; /* Adjust height as needed */
-        }
-                    .spotify-container {
-            position: relative;
-        }
-        .spotify-container iframe {
+                    <div id="section3" class="content-section">
+                        <h2>ESTILOS</h2>
+                        <p>Selecciona tu estilo preferido!</p>
+                    </div>
+                    <div id="section4" class="content-section">
+                        <h2>PLAYLIST</h2>
+                        <p>Selecciona playlists previamente confeccionadas por nuestro equipo de instructores para llevar a cabo tus rutinas.</p>
+                        <div class="spotify-container">
+                        <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M" width="600" height="700" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                            <div class="overlay"></div>
+                        </div>
+                        <style>
+                            .spotify-container {
+                            margin-top:4vw;
+                            height: 700px; /* Adjust height as needed */
+                }
+                            .spotify-container {
+                    position: relative;
+                }
+                .spotify-container iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+                .overlay {
+                        border-radius: 10px;
+                position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border: none;
-        }
-        .overlay {
-                border-radius: 10px;
-        position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(206 0 225 / 19%);
-    pointer-events: none;
-        }
-
+            background-color: rgb(206 0 225 / 19%);
+            pointer-events: none;
+                }
+        
+                            
+            </style>
+                    </div>
+        
+        
+        <div id="section5" class="content-section">
+            <h2>CALENDARIO</h2>
+            <div class="calendar-container">
+                <nav class="menu">
+                    <button id="calendar-btn">Calendar</button>
+                    <button id="dance-btn">Dance Routine</button>
+                    <button id="exercises-btn">Exercises</button>
+                    <button id="diet-btn">Diet</button>
+                </nav>
+                <div class="content">
+                    <div id="calendar-section" class="section">
+                        <iframe src="https://calendar.google.com/calendar/embed?src=argentina%23holiday%40group.v.calendar.google.com&ctz=America%2FBuenos_Aires" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                    </div>
+                    <div id="dance-section" class="section" style="display: none;">
+                        <table class="fixed-calendar">
+                            <thead>
+                                <tr>
+                                    <th>Domingo</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dance Routine rows here -->
+                                <tr>
+                                    <td>Dance Class: Hip-Hop (2 hrs)</td>
+                                    <td>Dance Class: Ballet (2 hrs)</td>
+                                    <td>Dance Class: Jazz (2 hrs)</td>
+                                    <td>Dance Class: Contemporary (2 hrs)</td>
+                                    <td>Dance Class: Salsa (2 hrs)</td>
+                                    <td>Dance Class: Breakdance (2 hrs)</td>
+                                    <td>Free Day</td>
+                                </tr>
+                                <!-- More rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="exercises-section" class="section" style="display: none;">
+                        <table class="fixed-calendar">
+                            <thead>
+                                <tr>
+                                    <th>Domingo</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Exercises rows here -->
+                                <tr>
+                                    <td>Cardio + Upper Body (1 hr)</td>
+                                    <td>Leg Day + Abs (1 hr)</td>
+                                    <td>Cardio + Full Body Stretch (1 hr)</td>
+                                    <td>Upper Body Strength (1 hr)</td>
+                                    <td>Lower Body Strength (1 hr)</td>
+                                    <td>Yoga + Flexibility (1 hr)</td>
+                                    <td>Rest Day</td>
+                                </tr>
+                                <!-- More rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="diet-section" class="section" style="display: none;">
+                        <table class="fixed-calendar">
+                            <thead>
+                                <tr>
+                                    <th>Domingo</th>
+                                    <th>Lunes</th>
+                                    <th>Martes</th>
+                                    <th>Miércoles</th>
+                                    <th>Jueves</th>
+                                    <th>Viernes</th>
+                                    <th>Sábado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                <td>Desayuno: Avena con Frutas</td>
+                <td>Desayuno: Yogur Griego con Frutos Secos</td>
+                <td>Desayuno: Batido con Espinacas</td>
+                <td>Desayuno: Panqueques de Grano Integral</td>
+                <td>Desayuno: Pudín de Chía</td>
+                <td>Desayuno: Huevos con Tostada de Aguacate</td>
+                <td>Desayuno: Tazón de Batido de Frutas</td>
+            </tr>
+            <tr>
+                <td>Almuerzo: Ensalada de Pollo a la Parrilla</td>
+                <td>Almuerzo: Tazón de Quinoa y Vegetales</td>
+                <td>Almuerzo: Sándwich de Pavo con Vegetales</td>
+                <td>Almuerzo: Wrap de Pollo con Aguacate</td>
+                <td>Almuerzo: Salteado de Vegetales con Tofu</td>
+                <td>Almuerzo: Salteado de Carne de Res con Brócoli</td>
+                <td>Almuerzo: Ensalada de Atún</td>
+            </tr>
+            <tr>
+                <td>Cena: Salmón al Horno con Vegetales</td>
+                <td>Cena: Tofu Salteado con Arroz</td>
+                <td>Cena: Sopa de Lentejas con Ensalada</td>
+                <td>Cena: Espaguetis con Salsa Marinara</td>
+                <td>Cena: Camarones a la Parrilla con Quinoa</td>
+                <td>Cena: Batatas al Horno con Verduras</td>
+                <td>Cena: Pizza Vegetariana con Masa Integral</td>
+            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
                     
-    </style>
-            </div>
-
-
-<div id="section5" class="content-section">
-    <h2>CALENDARIO</h2>
-    <div class="calendar-container">
-        <nav class="menu">
-            <button id="calendar-btn">Calendar</button>
-            <button id="dance-btn">Dance Routine</button>
-            <button id="exercises-btn">Exercises</button>
-            <button id="diet-btn">Diet</button>
-        </nav>
-        <div class="content">
-            <div id="calendar-section" class="section">
-                <iframe src="https://calendar.google.com/calendar/embed?src=argentina%23holiday%40group.v.calendar.google.com&ctz=America%2FBuenos_Aires" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-            </div>
-            <div id="dance-section" class="section" style="display: none;">
-                <table class="fixed-calendar">
-                    <thead>
-                        <tr>
-                            <th>Domingo</th>
-                            <th>Lunes</th>
-                            <th>Martes</th>
-                            <th>Miércoles</th>
-                            <th>Jueves</th>
-                            <th>Viernes</th>
-                            <th>Sábado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Dance Routine rows here -->
-                        <tr>
-                            <td>Dance Class: Hip-Hop (2 hrs)</td>
-                            <td>Dance Class: Ballet (2 hrs)</td>
-                            <td>Dance Class: Jazz (2 hrs)</td>
-                            <td>Dance Class: Contemporary (2 hrs)</td>
-                            <td>Dance Class: Salsa (2 hrs)</td>
-                            <td>Dance Class: Breakdance (2 hrs)</td>
-                            <td>Free Day</td>
-                        </tr>
-                        <!-- More rows as needed -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="exercises-section" class="section" style="display: none;">
-                <table class="fixed-calendar">
-                    <thead>
-                        <tr>
-                            <th>Domingo</th>
-                            <th>Lunes</th>
-                            <th>Martes</th>
-                            <th>Miércoles</th>
-                            <th>Jueves</th>
-                            <th>Viernes</th>
-                            <th>Sábado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Exercises rows here -->
-                        <tr>
-                            <td>Cardio + Upper Body (1 hr)</td>
-                            <td>Leg Day + Abs (1 hr)</td>
-                            <td>Cardio + Full Body Stretch (1 hr)</td>
-                            <td>Upper Body Strength (1 hr)</td>
-                            <td>Lower Body Strength (1 hr)</td>
-                            <td>Yoga + Flexibility (1 hr)</td>
-                            <td>Rest Day</td>
-                        </tr>
-                        <!-- More rows as needed -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="diet-section" class="section" style="display: none;">
-                <table class="fixed-calendar">
-                    <thead>
-                        <tr>
-                            <th>Domingo</th>
-                            <th>Lunes</th>
-                            <th>Martes</th>
-                            <th>Miércoles</th>
-                            <th>Jueves</th>
-                            <th>Viernes</th>
-                            <th>Sábado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-        <td>Desayuno: Avena con Frutas</td>
-        <td>Desayuno: Yogur Griego con Frutos Secos</td>
-        <td>Desayuno: Batido con Espinacas</td>
-        <td>Desayuno: Panqueques de Grano Integral</td>
-        <td>Desayuno: Pudín de Chía</td>
-        <td>Desayuno: Huevos con Tostada de Aguacate</td>
-        <td>Desayuno: Tazón de Batido de Frutas</td>
-    </tr>
-    <tr>
-        <td>Almuerzo: Ensalada de Pollo a la Parrilla</td>
-        <td>Almuerzo: Tazón de Quinoa y Vegetales</td>
-        <td>Almuerzo: Sándwich de Pavo con Vegetales</td>
-        <td>Almuerzo: Wrap de Pollo con Aguacate</td>
-        <td>Almuerzo: Salteado de Vegetales con Tofu</td>
-        <td>Almuerzo: Salteado de Carne de Res con Brócoli</td>
-        <td>Almuerzo: Ensalada de Atún</td>
-    </tr>
-    <tr>
-        <td>Cena: Salmón al Horno con Vegetales</td>
-        <td>Cena: Tofu Salteado con Arroz</td>
-        <td>Cena: Sopa de Lentejas con Ensalada</td>
-        <td>Cena: Espaguetis con Salsa Marinara</td>
-        <td>Cena: Camarones a la Parrilla con Quinoa</td>
-        <td>Cena: Batatas al Horno con Verduras</td>
-        <td>Cena: Pizza Vegetariana con Masa Integral</td>
-    </tr>
-                    </tbody>
-                </table>
-            </div>
+                    <div id="section6" class="content-section">
+                        <h2>COMUNIDAD NAGINATTAZ</h2>
+        
+                        <!--
+                        <div id="result"></div>
+                        <script src="displayPHP.js"></script>
+                        -->
+                        
+                    </div>
+                </div>
+                </div>
+            </div>            
         </div>
-    </div>
-</div>
-            
-            <div id="section6" class="content-section">
-                <h2>COMUNIDAD NAGINATTAZ</h2>
-
-                <!--
-                <div id="result"></div>
-                <script src="displayPHP.js"></script>
-                -->
-                
-            </div>
-        </div>
-    </div>
 
     <script>
         // Toggle the search input and set up event listeners
@@ -341,7 +481,7 @@
                 searchInput.focus();
             }
         });
-
+        /*
         // Toggle the search input and set up event listeners
         document.getElementById('search2').addEventListener('click', function() {
             var searchInput = document.getElementById('search-input2');
@@ -357,7 +497,7 @@
                 searchInput.classList.add('desktop');
                 searchInput.focus();
             }
-        });
+        });*/
 
         function showContent(sectionId) {
         var sections = document.querySelectorAll('.content-section');
