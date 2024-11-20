@@ -100,8 +100,8 @@
 
                 
                if (sessionStorage.getItem('loggedIn') !== 'true') {
-                   window.location.href = './login.html'; 
-                   return; // Exit if redirecting
+                  window.location.href = './login.html'; 
+                  return; // Exit if redirecting
                 }
     
                 // If logged in, display user picture and logout button
@@ -191,25 +191,26 @@ function toggleDropdown(id) {
                         Instructores <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="instructors" class="dropdown-content">
-                        <button class="dropdown-item" id="cami-lucca">Cami Lucca</button>
-                        <button class="dropdown-item" id="cami-moroni">Cami Moroni</button>
-                        <button class="dropdown-item" id="cami-poledo">Cami Poledo</button>
-                        <button class="dropdown-item" id="cande-gonzalez">Cande Gonzalez</button>
-                        <button class="dropdown-item" id="dami-espinola">Dami Espinola</button>
-                        <button class="dropdown-item" id="fede-diaz">Fede Díaz</button>
-                        <button class="dropdown-item" id="ferna-brewer">Ferna Brewer</button>
-                        <button class="dropdown-item" id="hera-sanchez">Hera Sanchez</button>
-                        <button class="dropdown-item" id="ignacio-avello">Ignacio Avello</button>
-                        <button class="dropdown-item" id="jose-galli">Jose Galli</button>
-                        <button class="dropdown-item" id="kotho-nunez">Kotho Nuñez</button>
-                        <button class="dropdown-item" id="lil-french">Lil French</button>
-                        <button class="dropdown-item" id="mel-gabino">Mel Gabino</button>
-                        <button class="dropdown-item" id="priscila-bertolo">Priscila Bértolo</button>
-                        <button class="dropdown-item" id="valen-ferrari">Valen Ferrari</button>
-                        <button class="dropdown-item" id="valen-mendillo">Valen Mendillo</button>
-                        <button class="dropdown-item" id="vicky-branda">Vicky Branda</button>
-                        <button class="dropdown-item" id="zai-forte">Zai Forte</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('cami-lucca')">Cami Lucca</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('cami-moroni')">Cami Moroni</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('cami-poledo')">Cami Poledo</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('cande-gonzalez')">Cande Gonzalez</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('dami-espinola')">Dami Espinola</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('ferna-brewer')">Ferna Brewer</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('fede-diaz')">Fede Díaz</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('hera-sanchez')">Hera Sanchez</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('ignacio-avello')">Ignacio Avello</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('jose-galli')">Jose Galli</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('kotho-nunez')">Kotho Nuñez</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('lil-french')">Lil French</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('mel-gabino')">Mel Gabino</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('priscila-bertolo')">Priscila Bértolo</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('valen-ferrari')">Valen Ferrari</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('valen-mendillo')">Valen Mendillo</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('zai-forte')">Zai Forte</button>
+                        <button class="dropdown-item" onclick="filterByInstructor('vicky-branda')">Vicky Branda</button>
                     </div>
+                    
                     
                 
                     <!-- Playlists Section -->
@@ -243,15 +244,14 @@ function toggleDropdown(id) {
                 
 
                 <script>
-
-
+                    // Function to reset and show all items
 function showAllItems() {
     var items = document.querySelectorAll('.image-grid > div');
     items.forEach(function(item) {
         item.style.display = "block"; // Show all items
     });
 
-    // Reset the instructor filter by removing the display conditions
+    // Reset the instructor filter by removing any "active" class
     var instructorButtons = document.querySelectorAll('.dropdown-item');
     instructorButtons.forEach(function(button) {
         button.classList.remove('active'); // Reset any "active" class (if used)
@@ -269,9 +269,8 @@ function showAllItems() {
         dropdown.style.display = 'none'; // Hide dropdowns again if needed
     });
 }
-
-    // Function to filter items by type (program or class)
-    function filterItems(type, instructorId = '') {
+// Function to filter items by type (program or class)
+function filterItems(type, instructorId = '') {
     var items = document.querySelectorAll('.image-grid > div');
     items.forEach(function(item) {
         let shouldDisplay = true;
@@ -281,11 +280,12 @@ function showAllItems() {
             shouldDisplay = false;
         }
 
-        // Check if the item matches the instructor filter
+        // Check if the item matches the instructor filter (if provided)
         if (instructorId && !item.id.toLowerCase().includes(instructorId)) {
             shouldDisplay = false;
         }
 
+        // Show or hide based on filters
         if (shouldDisplay) {
             item.style.display = "block";
         } else {
@@ -293,20 +293,19 @@ function showAllItems() {
         }
     });
 }
-
 // Function to filter items by category (hiphop, contemporary, workout)
 function filterByCategory(category) {
     var items = document.querySelectorAll('.image-grid > div');
     items.forEach(function(item) {
-        // Check if the ID starts with the category name
+        // Check if the ID starts with the category name (e.g., 'hiphop', 'workout', etc.)
         if (item.id.toLowerCase().startsWith(category)) {
             item.style.display = "block"; // Show matching item
         } else {
             item.style.display = "none"; // Hide non-matching item
         }
     });
-
-    // Function to filter items by instructor name
+}
+// Function to filter items by instructor name
 function filterByInstructor(instructorId) {
     var items = document.querySelectorAll('.image-grid > div');
     items.forEach(function(item) {
@@ -318,123 +317,12 @@ function filterByInstructor(instructorId) {
         }
     });
 }
-// Add event listeners for each instructor button
-document.getElementById('vicky-branda').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('vicky-branda');
-});
-
-document.getElementById('valen-ferrari').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('valen-ferrari');
-});
-
-document.getElementById('cande-gonzalez').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('cande-gonzalez');
-});
-
-document.getElementById('dami-espinola').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('dami-espinola');
-});
-
-document.getElementById('fede-diaz').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('fede-diaz');
-});
-
-document.getElementById('mel-gabino').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('mel-gabino');
-});
-
-document.getElementById('cami-poledo').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('cami-poledo');
-});
-
-document.getElementById('lil-french').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('lil-french');
-});
-
-document.getElementById('cami-moroni').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('cami-moroni');
-});
-
-document.getElementById('jose-galli').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('jose-galli');
-});
-
-document.getElementById('valen-mendillo').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('valen-mendillo');
-});
-
-document.getElementById('priscila-bertolo').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('priscila-bertolo');
-});
-
-document.getElementById('cami-lucca').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('cami-lucca');
-});
-
-document.getElementById('hera-sanchez').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('hera-sanchez');
-});
-
-document.getElementById('kotho-nunez').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('kotho-nunez');
-});
-
-document.getElementById('ferna-brewer').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('ferna-brewer');
-});
-
-document.getElementById('ignacio-avello').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('ignacio-avello');
-});
-
-document.getElementById('zai-forte').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" classes
-    this.classList.add('active'); // Set the clicked button as "active"
-    filterByInstructor('zai-forte');
-});
-
 // Reset the "active" class on all instructor buttons when "Todas las Clases" is clicked
 document.getElementById('show-all').addEventListener('click', function() {
-    resetInstructorButtons(); // Reset "active" class on all instructor buttons
-    showAllItems(); // Show all items again
+    showAllItems(); // Reset and show all items again
 });
 
 
-}
 
                 </script>
             
@@ -683,7 +571,7 @@ document.getElementById('show-all').addEventListener('click', function() {
         });
         document.getElementById(sectionId).classList.add('active');
     }
-
+/*
 // Handle the search input
 document.getElementById('search-input').addEventListener('input', function() {
     var query = this.value.toLowerCase();
@@ -779,7 +667,7 @@ document.getElementById('search-input2').addEventListener('input', function() {
         }
     }
 });
-
+*/
 // Reset section2 to show all items
 function resetSection2() {
     var imageGridItems = document.querySelectorAll('#section2 .image-grid div');
