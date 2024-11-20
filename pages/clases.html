@@ -250,16 +250,46 @@ function showAllItems() {
     items.forEach(function(item) {
         item.style.display = "block"; // Show all items
     });
+
+    // Reset the instructor filter by removing the display conditions
+    var instructorButtons = document.querySelectorAll('.dropdown-item');
+    instructorButtons.forEach(function(button) {
+        button.classList.remove('active'); // Reset any "active" class (if used)
+    });
+
+    // Optionally, reset category filter (if any)
+    var categoryButtons = document.querySelectorAll('.dropdown-content button');
+    categoryButtons.forEach(function(button) {
+        button.classList.remove('active'); // Reset any "active" category
+    });
+
+    // Reset the dropdown visibility
+    var dropdowns = document.querySelectorAll('.dropdown-content');
+    dropdowns.forEach(function(dropdown) {
+        dropdown.style.display = 'none'; // Hide dropdowns again if needed
+    });
 }
-                    // Function to filter items by type (program or class)
-function filterItems(type) {
+
+    // Function to filter items by type (program or class)
+    function filterItems(type, instructorId = '') {
     var items = document.querySelectorAll('.image-grid > div');
     items.forEach(function(item) {
-        // Check if the ID contains the type (program or class)
-        if (item.id.toLowerCase().includes(type)) {
-            item.style.display = "block"; // Show matching item
+        let shouldDisplay = true;
+
+        // Check if the item matches the type (program or class)
+        if (type && !item.id.toLowerCase().includes(type)) {
+            shouldDisplay = false;
+        }
+
+        // Check if the item matches the instructor filter
+        if (instructorId && !item.id.toLowerCase().includes(instructorId)) {
+            shouldDisplay = false;
+        }
+
+        if (shouldDisplay) {
+            item.style.display = "block";
         } else {
-            item.style.display = "none"; // Hide non-matching item
+            item.style.display = "none";
         }
     });
 }
@@ -288,79 +318,121 @@ function filterByInstructor(instructorId) {
         }
     });
 }
-
 // Add event listeners for each instructor button
 document.getElementById('vicky-branda').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('vicky-branda');
 });
 
 document.getElementById('valen-ferrari').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('valen-ferrari');
 });
 
 document.getElementById('cande-gonzalez').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('cande-gonzalez');
 });
 
 document.getElementById('dami-espinola').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('dami-espinola');
 });
 
 document.getElementById('fede-diaz').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('fede-diaz');
 });
 
 document.getElementById('mel-gabino').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('mel-gabino');
 });
 
 document.getElementById('cami-poledo').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('cami-poledo');
 });
 
 document.getElementById('lil-french').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('lil-french');
 });
 
 document.getElementById('cami-moroni').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('cami-moroni');
 });
 
 document.getElementById('jose-galli').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('jose-galli');
 });
 
 document.getElementById('valen-mendillo').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('valen-mendillo');
 });
 
 document.getElementById('priscila-bertolo').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('priscila-bertolo');
 });
 
 document.getElementById('cami-lucca').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('cami-lucca');
 });
 
 document.getElementById('hera-sanchez').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('hera-sanchez');
 });
 
 document.getElementById('kotho-nunez').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('kotho-nunez');
 });
 
 document.getElementById('ferna-brewer').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('ferna-brewer');
 });
 
 document.getElementById('ignacio-avello').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('ignacio-avello');
 });
 
 document.getElementById('zai-forte').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" classes
+    this.classList.add('active'); // Set the clicked button as "active"
     filterByInstructor('zai-forte');
 });
+
+// Reset the "active" class on all instructor buttons when "Todas las Clases" is clicked
+document.getElementById('show-all').addEventListener('click', function() {
+    resetInstructorButtons(); // Reset "active" class on all instructor buttons
+    showAllItems(); // Show all items again
+});
+
 
 }
 
