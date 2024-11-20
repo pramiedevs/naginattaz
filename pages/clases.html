@@ -275,6 +275,93 @@ function filterByCategory(category) {
             item.style.display = "none"; // Hide non-matching item
         }
     });
+
+    // Function to filter items by instructor name
+function filterByInstructor(instructorId) {
+    var items = document.querySelectorAll('.image-grid > div');
+    items.forEach(function(item) {
+        // Check if the ID contains the instructor's ID (e.g., 'vicky-branda')
+        if (item.id.toLowerCase().includes(instructorId)) {
+            item.style.display = "block"; // Show matching item
+        } else {
+            item.style.display = "none"; // Hide non-matching item
+        }
+    });
+}
+
+// Add event listeners for each instructor button
+document.getElementById('vicky-branda').addEventListener('click', function() {
+    filterByInstructor('vicky-branda');
+});
+
+document.getElementById('valen-ferrari').addEventListener('click', function() {
+    filterByInstructor('valen-ferrari');
+});
+
+document.getElementById('cande-gonzalez').addEventListener('click', function() {
+    filterByInstructor('cande-gonzalez');
+});
+
+document.getElementById('dami-espinola').addEventListener('click', function() {
+    filterByInstructor('dami-espinola');
+});
+
+document.getElementById('fede-diaz').addEventListener('click', function() {
+    filterByInstructor('fede-diaz');
+});
+
+document.getElementById('mel-gabino').addEventListener('click', function() {
+    filterByInstructor('mel-gabino');
+});
+
+document.getElementById('cami-poledo').addEventListener('click', function() {
+    filterByInstructor('cami-poledo');
+});
+
+document.getElementById('lil-french').addEventListener('click', function() {
+    filterByInstructor('lil-french');
+});
+
+document.getElementById('cami-moroni').addEventListener('click', function() {
+    filterByInstructor('cami-moroni');
+});
+
+document.getElementById('jose-galli').addEventListener('click', function() {
+    filterByInstructor('jose-galli');
+});
+
+document.getElementById('valen-mendillo').addEventListener('click', function() {
+    filterByInstructor('valen-mendillo');
+});
+
+document.getElementById('priscila-bertolo').addEventListener('click', function() {
+    filterByInstructor('priscila-bertolo');
+});
+
+document.getElementById('cami-lucca').addEventListener('click', function() {
+    filterByInstructor('cami-lucca');
+});
+
+document.getElementById('hera-sanchez').addEventListener('click', function() {
+    filterByInstructor('hera-sanchez');
+});
+
+document.getElementById('kotho-nunez').addEventListener('click', function() {
+    filterByInstructor('kotho-nunez');
+});
+
+document.getElementById('ferna-brewer').addEventListener('click', function() {
+    filterByInstructor('ferna-brewer');
+});
+
+document.getElementById('ignacio-avello').addEventListener('click', function() {
+    filterByInstructor('ignacio-avello');
+});
+
+document.getElementById('zai-forte').addEventListener('click', function() {
+    filterByInstructor('zai-forte');
+});
+
 }
 
                 </script>
@@ -294,16 +381,16 @@ function filterByCategory(category) {
                         </div>
                     <div id="section2" class="content-section">
                         <div class="image-grid">
-                            <div id="hiphop program">
+                            <div id="hiphop program vicky-branda">
                                 <a href="./clases/index.html">
                                 <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style" style="filter: grayscale(1);" ></a>
                                 <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop</h3>
                             </div>
-                            <div id="contemporary class">
+                            <div id="contemporary class cami-lucca">
                                 <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style" style="filter: grayscale(1);">
                                 <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary</h3>
                             </div>
-                            <div id="workout class">
+                            <div id="workout class cami-lucca cami-moroni">
                                 <a href="./clases/index.html">
                                     <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style" style="filter: grayscale(1);">
                                 </a>
