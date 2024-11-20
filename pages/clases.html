@@ -99,10 +99,10 @@
                 // Check if the user is logged in
 
                 
-                if (sessionStorage.getItem('loggedIn') !== 'true') {
-                    window.location.href = './login.html'; 
-                    return; // Exit if redirecting
-                }
+            //    if (sessionStorage.getItem('loggedIn') !== 'true') {
+              //      window.location.href = './login.html'; 
+                //    return; // Exit if redirecting
+                //}
     
                 // If logged in, display user picture and logout button
                 const userContainer = document.querySelector('.user-container');
@@ -570,13 +570,7 @@ document.getElementById('zai-forte').addEventListener('click', function() {
         </div>
 
     <script>
-        function showContent(sectionId) {
-        var sections = document.querySelectorAll('.content-section');
-        sections.forEach(function(section) {
-            section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
-    }
+
         /*
         // Toggle the search input and set up event listeners
         document.getElementById('search').addEventListener('click', function() {
@@ -592,7 +586,7 @@ document.getElementById('zai-forte').addEventListener('click', function() {
                 searchInput.focus();
             }
         });
-        /*
+        
         // Toggle the search input and set up event listeners
         document.getElementById('search2').addEventListener('click', function() {
             var searchInput = document.getElementById('search-input2');
@@ -608,10 +602,16 @@ document.getElementById('zai-forte').addEventListener('click', function() {
                 searchInput.classList.add('desktop');
                 searchInput.focus();
             }
-        });
+        });*/
 
-        
+        function showContent(sectionId) {
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
     }
+
 // Handle the search input
 document.getElementById('search-input').addEventListener('input', function() {
     var query = this.value.toLowerCase();
@@ -714,7 +714,7 @@ function resetSection2() {
     imageGridItems.forEach(function(item) {
         item.style.display = 'block';
     });
-}*/
+}
 
 const plans = {
     "joaconavarro.untref@gmail.com": "",
