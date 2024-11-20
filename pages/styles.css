@@ -157,7 +157,10 @@ body {
             background-color: var(--nagimagenta);
             color: white;
         }
-
+.active-flex{
+    display: flex !important;
+    gap: 20px !important;
+}
 
         /* General Layout */
 .main-container {

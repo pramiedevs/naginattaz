@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInfo = document.getElementById('user-info');
     const signinButton = document.getElementById('g-signin-button');
     const logoutButton = document.getElementById('logout-button');
+    const calendarEventsContainer = document.getElementById('calendar-events-container'); // container to display events
 
     let isLoggedIn = false; // Track the login status
     let clientId; // Declare clientId variable
@@ -40,13 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
 
-        if (window.opener) {
-            console.log("Redirecting parent window");
-            window.opener.location.href = './clases.html'; // Redirect parent window
-        } else {
-            console.log("No opener found, redirecting this window");
-            window.location.href = './clases.html'; // Fallback for testing
-        }
+        // After login, load calendar events
+        loadCalendarEvents();
     }
 
     function initGoogleSignIn() {
@@ -57,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         google.accounts.id.initialize({
             client_id: clientId,
-            callback: handleCredentialResponse
+            callback: handleCredentialResponse,
+            scope: 'https://www.googleapis.com/auth/calendar.readonly' // Add Calendar scope here
         });
 
         google.accounts.id.renderButton(
@@ -73,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
             userInfo.style.display = 'flex';
             logoutButton.style.display = 'inline-block';
             isLoggedIn = true;
+
+            // Load calendar events if the user is already logged in
+            loadCalendarEvents();
         }
     }
 
@@ -104,6 +104,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Function to load Google Calendar events
+    function loadCalendarEvents() {
+        const accessToken = sessionStorage.getItem('idToken'); // Use ID token for auth
+        if (!accessToken) {
+            console.log("No access token found. Please authenticate.");
+            return;
+        }
+
+        // Load Google Calendar API client
+        gapi.load("client:auth2", initCalendarClient);
+    }
+
+    function initCalendarClient() {
+        gapi.auth2.init({ client_id: clientId }).then(() => {
+            // Load Calendar API
+            gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest").then(() => {
+                // Fetch the calendar events
+                getCalendarEvents();
+            });
+        });
+    }
+
+    // Function to fetch calendar events
+    function getCalendarEvents() {
+        const userEmail = sessionStorage.getItem('userEmail');
+        const accessToken = sessionStorage.getItem('idToken'); // Use ID token for authorization
+
+        gapi.client.request({
+            path: `https://www.googleapis.com/calendar/v3/calendars/${userEmail}/events`,
+            method: 'GET',
+            params: {
+                access_token: accessToken
+            }
+        }).then(response => {
+            console.log(response);
+            displayCalendarEvents(response.result.items);
+        }).catch(error => {
+            console.log('Error fetching calendar events:', error);
+        });
+    }
+
+    // Function to display calendar events
+    function displayCalendarEvents(events) {
+        calendarEventsContainer.innerHTML = ''; // Clear existing events
+
+        if (events.length === 0) {
+            calendarEventsContainer.innerHTML = '<p>No upcoming events</p>';
+            return;
+        }
+
+        events.forEach(event => {
+            const eventElement = document.createElement('div');
+            eventElement.className = 'event';
+            eventElement.innerHTML = `
+                <p><strong>Event:</strong> ${event.summary}</p>
+                <p><strong>Start:</strong> ${new Date(event.start.dateTime).toLocaleString()}</p>
+                <p><strong>End:</strong> ${new Date(event.end.dateTime).toLocaleString()}</p>
+            `;
+            calendarEventsContainer.appendChild(eventElement);
+        });
+    }
+
     // Custom button click to trigger Google Sign-In
     signinButton.addEventListener('click', () => {
         google.accounts.id.prompt(); // Show the Google sign-in dialog
@@ -114,6 +176,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
-
-    
 });
