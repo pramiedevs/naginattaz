@@ -570,7 +570,13 @@ document.getElementById('zai-forte').addEventListener('click', function() {
         </div>
 
     <script>
-
+        function showContent(sectionId) {
+        var sections = document.querySelectorAll('.content-section');
+        sections.forEach(function(section) {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
         /*
         // Toggle the search input and set up event listeners
         document.getElementById('search').addEventListener('click', function() {
@@ -604,12 +610,7 @@ document.getElementById('zai-forte').addEventListener('click', function() {
             }
         });
 
-        function showContent(sectionId) {
-        var sections = document.querySelectorAll('.content-section');
-        sections.forEach(function(section) {
-            section.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
+        
     }
 // Handle the search input
 document.getElementById('search-input').addEventListener('input', function() {
