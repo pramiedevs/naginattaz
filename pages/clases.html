@@ -398,103 +398,76 @@ document.getElementById('show-all').addEventListener('click', function() {
                         </div>
                     </div>
                     <script>
-                        let clientId = '';  // Loaded from config
-                    
-                        async function loadConfig() {
-                            try {
-                                const response = await fetch('./config.json');
-                                const config = await response.json();
-                                clientId = config.clientId; // Set clientId from config
-                                console.log('Loaded clientId from config:', clientId);
-                                initializeClient(); // Once clientId is loaded, initialize the client
-                            } catch (error) {
-                                console.error('Error loading configuration:', error);
-                            }
-                        }
-                    
-                        function initializeClient() {
-                            if (!clientId) {
-                                console.error('Client ID is missing!');
-                                return;
-                            }
-                    
-                            // Initialize Google Identity Services
-                            google.accounts.id.initialize({
-                                client_id: clientId,
-                                callback: handleCredentialResponse // Define the callback to handle the response
-                            });
-                    
-                            google.accounts.id.prompt(); // Prompt the user to sign in
-                        }
-                    
-                        // Handle the response from the sign-in attempt
-                        function handleCredentialResponse(response) {
-                            if (response && response.credential) {
-                                console.log('Sign-in successful', response);
-                    
-                                // Now you can use the ID token to authenticate with the Google API
-                                const idToken = response.credential; 
-                                loadCalendarEvents(idToken); // Pass the ID token to the function that will fetch events
-                            } else {
-                                console.error("User declined or dismissed the sign-in prompt");
-                                alert("You need to sign in to access your calendar. Please try again.");
-                            }
-                        }
-                    
-                        // Fetch calendar events using the ID token
-                        function loadCalendarEvents(idToken) {
-                            gapi.load('client', async function() {
-                                await gapi.client.init({
-                                    apiKey: 'YOUR_API_KEY',
-                                    clientId: clientId,
-                                    scope: 'https://www.googleapis.com/auth/calendar.readonly',
-                                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
-                                });
-                    
-                                // Set the token to make authenticated requests
-                                gapi.auth.setToken({
-                                    access_token: idToken
-                                });
-                    
-                                // Make the API call to get events
-                                gapi.client.calendar.events.list({
-                                    calendarId: 'primary',
-                                    timeMin: (new Date()).toISOString(),
-                                    maxResults: 10,
-                                    singleEvents: true,
-                                    orderBy: 'startTime'
-                                }).then(function(response) {
-                                    const events = response.result.items;
-                                    displayEvents(events);
-                                }).catch(function(error) {
-                                    console.error('Error loading events:', error);
-                                });
-                            });
-                        }
-                    
-                        function displayEvents(events) {
-                            const calendarContainer = document.getElementById('calendar-container');
-                            if (events.length > 0) {
-                                events.forEach(function(event) {
-                                    const eventElement = document.createElement('div');
-                                    eventElement.classList.add('event');
-                                    const eventTitle = document.createElement('h3');
-                                    eventTitle.textContent = event.summary;
-                                    const eventTime = document.createElement('p');
-                                    eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
-                                    eventElement.appendChild(eventTitle);
-                                    eventElement.appendChild(eventTime);
-                                    calendarContainer.appendChild(eventElement);
-                                });
-                            } else {
-                                calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
-                            }
-                        }
-                    
-                        window.onload = function() {
-                            loadConfig(); // Load the config and start the client initialization
-                        };
-                    </script>
+                    // Check if the user is logged in by getting the idToken from sessionStorage
+window.onload = function() {
+    const idToken = sessionStorage.getItem('idToken'); // Assume the token is stored here after login
+
+    if (idToken) {
+        console.log('User is already logged in. Proceeding to load calendar events.');
+        loadCalendarEvents(idToken); // Proceed to load calendar events using the token
+    } else {
+        console.error('User is not logged in. Redirecting to login page...');
+        window.location.href = './login.html'; // Or redirect to your login page if not logged in
+    }
+};
+
+// Function to load calendar events using the idToken
+function loadCalendarEvents(idToken) {
+    // Initialize Google API client
+    gapi.load('client', async function() {
+        try {
+            // Initialize the API client with the idToken for authentication
+            await gapi.client.init({
+                apiKey: 'YOUR_API_KEY', // Replace with your API key (if necessary)
+                clientId: 'YOUR_CLIENT_ID', // Replace with your OAuth 2.0 client ID
+                scope: 'https://www.googleapis.com/auth/calendar.readonly',
+                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+            });
+
+            // Set the OAuth token for the API client (use the idToken you already have)
+            gapi.auth.setToken({
+                access_token: idToken // Use the idToken as the access token for authentication
+            });
+
+            // Make an API call to fetch calendar events
+            const response = await gapi.client.calendar.events.list({
+                calendarId: 'primary', // Get events from the primary calendar
+                timeMin: (new Date()).toISOString(), // Get events starting from the current time
+                maxResults: 10, // Adjust as needed
+                singleEvents: true, // Only fetch single events (not recurring events)
+                orderBy: 'startTime' // Order by event start time
+            });
+
+            // Display the events on the page
+            const events = response.result.items;
+            displayEvents(events);
+        } catch (error) {
+            console.error('Error fetching calendar events:', error);
+        }
+    });
+}
+
+// Function to display the events on the page
+function displayEvents(events) {
+    const calendarContainer = document.getElementById('calendar-container');
+
+    if (events.length > 0) {
+        events.forEach(function(event) {
+            const eventElement = document.createElement('div');
+            eventElement.classList.add('event');
+            const eventTitle = document.createElement('h3');
+            eventTitle.textContent = event.summary;
+            const eventTime = document.createElement('p');
+            eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
+            eventElement.appendChild(eventTitle);
+            eventElement.appendChild(eventTime);
+            calendarContainer.appendChild(eventElement);
+        });
+    } else {
+        calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
+    }
+}
+</script>
                     
                     
 <style>
