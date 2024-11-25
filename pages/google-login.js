@@ -105,45 +105,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to load Google Calendar events
-    function loadCalendarEvents() {
-        const accessToken = sessionStorage.getItem('idToken'); // Use ID token for auth
-        if (!accessToken) {
-            console.log("No access token found. Please authenticate.");
-            return;
+function loadCalendarEvents() {
+    gapi.load("client:auth2", initCalendarClient); // Ensure the client is loaded and initialized
+}
+
+// Function to initialize Google Calendar client
+function initCalendarClient() {
+    gapi.client.init({
+        clientId: clientId,
+        scope: 'https://www.googleapis.com/auth/calendar.readonly'
+    }).then(() => {
+        // Now we can make the API call to fetch calendar events
+        getCalendarEvents();
+    }).catch(error => {
+        console.error("Error initializing the calendar client:", error);
+    });
+}
+
+// Function to fetch calendar events
+function getCalendarEvents() {
+    const accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+    if (!accessToken) {
+        console.log("No access token found. Please authenticate.");
+        return;
+    }
+
+    // Use 'primary' for the user's primary calendar
+    gapi.client.request({
+        path: `https://www.googleapis.com/calendar/v3/calendars/primary/events`,
+        method: 'GET',
+        params: {
+            access_token: accessToken
         }
+    }).then(response => {
+        console.log(response);
+        displayCalendarEvents(response.result.items);
+    }).catch(error => {
+        console.log('Error fetching calendar events:', error);
+    });
+}
 
-        // Load Google Calendar API client
-        gapi.load("client:auth2", initCalendarClient);
-    }
-
-    function initCalendarClient() {
-        gapi.auth2.init({ client_id: clientId }).then(() => {
-            // Load Calendar API
-            gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest").then(() => {
-                // Fetch the calendar events
-                getCalendarEvents();
-            });
-        });
-    }
-
-    // Function to fetch calendar events
-    function getCalendarEvents() {
-        const userEmail = sessionStorage.getItem('userEmail');
-        const accessToken = sessionStorage.getItem('idToken'); // Use ID token for authorization
-
-        gapi.client.request({
-            path: `https://www.googleapis.com/calendar/v3/calendars/${userEmail}/events`,
-            method: 'GET',
-            params: {
-                access_token: accessToken
-            }
-        }).then(response => {
-            console.log(response);
-            displayCalendarEvents(response.result.items);
-        }).catch(error => {
-            console.log('Error fetching calendar events:', error);
-        });
-    }
 
     // Function to display calendar events
     function displayCalendarEvents(events) {
