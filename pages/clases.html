@@ -10,6 +10,7 @@
     <script src="https://accounts.google.com/gsi/client"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="./wating.js"></script>
+    <link rel="icon" href="nagi.jpeg" type="image/x-icon">
 </head>
 <body class="no-scrollbar">
     <div class="loading">
@@ -410,36 +411,33 @@ document.getElementById('show-all').addEventListener('click', function() {
                         function loadCalendarEvents(idToken) {
                           // Initialize Google API client using gapi.auth2 (the old method)
                           gapi.load('client:auth2', function() {
-                              gapi.auth2.init({
-                                  client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your OAuth 2.0 client ID
-                                  scope: 'https://www.googleapis.com/auth/calendar.readonly' // Scopes for reading calendar events
-                              }).then(function() {
-                                  // Get the auth instance
-                                  const authInstance = gapi.auth2.getAuthInstance();
-                      
-                                  // Manually set the ID token from sessionStorage or elsewhere
-                                  if (authInstance.isSignedIn.get()) {
-                                      console.log('User is already signed in.');
-                      
-                                      // Get the current signed-in user's token
-                                      const user = authInstance.currentUser.get();
-                                      const idToken = user.getAuthResponse().id_token;
-                      
-                                      // Call function to load calendar events with the ID token
-                                      fetchCalendarEvents(idToken);
-                                  } else {
-                                      console.log('User is not signed in. Redirecting...');
-                                      // Redirect to login or handle sign-in if needed
-                                      authInstance.signIn().then(function() {
-                                          const user = authInstance.currentUser.get();
-                                          const idToken = user.getAuthResponse().id_token;
-                                          fetchCalendarEvents(idToken);
-                                      });
-                                  }
-                              }).catch(function(error) {
-                                  console.error('Error initializing Google API client', error);
-                              });
-                          });
+    console.log("gapi loaded");
+
+    gapi.auth2.init({
+        client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your OAuth client ID
+        scope: 'https://www.googleapis.com/auth/calendar.readonly'
+    }).then(function() {
+        console.log('Google API client initialized');
+        const authInstance = gapi.auth2.getAuthInstance();
+
+        // Check if user is signed in
+        if (authInstance.isSignedIn.get()) {
+            console.log('User is signed in');
+            const user = authInstance.currentUser.get();
+            const idToken = user.getAuthResponse().id_token;
+            fetchCalendarEvents(idToken);
+        } else {
+            console.log('User is not signed in');
+            authInstance.signIn().then(function() {
+                const user = authInstance.currentUser.get();
+                const idToken = user.getAuthResponse().id_token;
+                fetchCalendarEvents(idToken);
+            });
+        }
+    }).catch(function(error) {
+        console.error('Error initializing Google API client', error);
+    });
+});
                         }
                       
                         // Function to fetch the calendar events using the idToken
