@@ -25,7 +25,7 @@
     </style>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-        let clientId = 'clientId": "425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
+        let clientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your client ID
         let accessToken = '';
         let userEmail = ''; // To store logged-in user's email
 
@@ -126,14 +126,10 @@
             google.accounts.id.initialize({
     client_id: clientId,
     callback: handleCredentialResponse,
-    scope: 'https://www.googleapis.com/auth/calendar.readonly' // Add Calendar scope here
+    scope: 'https://www.googleapis.com/auth/calendar.readonly' // Calendar scope
 });
 
-            google.accounts.id.renderButton(
-                document.getElementById('signin-button'),
-                { theme: 'outline', size: 'large' }
-            );
-        }
+}
 
         // Initialize Google Sign-In after the window is loaded and the script is available
         window.onload = function() {
@@ -142,7 +138,6 @@
     </script>
 </head>
 <body>
-    <div id="signin-button"></div> <!-- Google Sign-In button -->
     <div id="calendar-container">
         <!-- Calendar will be dynamically embedded here -->
     </div>
