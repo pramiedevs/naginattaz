@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logout-button');
     const calendarEventsContainer = document.getElementById('calendar-events-container'); // container to display events
 
-    let isLoggedIn = false; // Track the login status
+    let isLoggedIn = false; // Track login status
     let clientId; // Declare clientId variable
 
     async function loadConfig() {
@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('userPic', userInfoData.picture);
         sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
-
         
         if (window.opener) {
             console.log("Redirecting parent window");
@@ -49,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("No opener found, redirecting this window");
             window.location.href = './clases.html'; // Fallback for testing
         }
+
         // After login, load calendar events
         loadGoogleCalendar();
     }
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         google.accounts.id.renderButton(
-            document.getElementById('g-signin-button'),
+            signinButton,
             { theme: 'outline', size: 'large' }
         );
     }
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Load the gapi client
+        // Load the gapi client and initialize the calendar client
         gapi.load("client:auth2", initCalendarClient);
     }
 
@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
             gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest").then(() => {
                 // Fetch user's calendar settings
                 getCalendarSettings(userEmail);
+            }).catch(error => {
+                console.error("Error loading the Calendar API:", error);
             });
         });
     }
@@ -98,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function getCalendarSettings(userEmail) {
         const accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
 
+        // Use the access token to make a request
         gapi.client.request({
             path: `https://www.googleapis.com/calendar/v3/calendars/${userEmail}/settings`,
             method: 'GET',
@@ -105,10 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 access_token: accessToken
             }
         }).then(response => {
-            const timeZone = response.result.timeZone; // Get user's time zone
-
-            // Dynamically create the iframe for the calendar
-            createCalendarIframe(userEmail, timeZone);
+            if (response.result.timeZone) {
+                const timeZone = response.result.timeZone; // Get user's time zone
+                // Dynamically create the iframe for the calendar
+                createCalendarIframe(userEmail, timeZone);
+            } else {
+                console.error("No time zone found in response:", response);
+            }
         }).catch(error => {
             console.error('Error fetching calendar settings:', error);
         });
@@ -143,6 +149,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
-
-    
 });
