@@ -138,10 +138,14 @@ function getCalendarEvents() {
             access_token: accessToken
         }
     }).then(response => {
-        console.log(response);
-        displayCalendarEvents(response.result.items);
+        console.log("API Response:", response);
+        if (response && response.result && response.result.items) {
+            displayCalendarEvents(response.result.items);
+        } else {
+            console.error("No events found or API response format is incorrect.");
+        }
     }).catch(error => {
-        console.log('Error fetching calendar events:', error);
+        console.error('Error fetching calendar events:', error);
     });
 }
 
