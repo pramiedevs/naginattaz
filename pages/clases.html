@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="./calendar.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js" defer></script>
-    <script src="https://accounts.google.com/gsi/client"></script>                
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>              
 
     <script src="./wating.js"></script>
     <link rel="icon" href="nagi.jpeg" type="image/x-icon">
@@ -392,110 +394,116 @@ document.getElementById('show-all').addEventListener('click', function() {
                         <div id="calendar-container">
                             <!-- Calendar events will be dynamically inserted here -->
                         </div>
+                        <button id="login-button">Sign in with Google</button>
+
                     </div>
                     
-                
                     <script>
-                        // Check if the user is logged in by getting the email from sessionStorage
-                        window.onload = function() {
-                            const userEmail = sessionStorage.getItem('userEmail'); // Get user email from sessionStorage
-                            if (userEmail) {
-                                console.log('User is logged in. Proceeding to load calendar events.');
-                                loadCalendarEvents(userEmail); // Proceed to load calendar events
-                            } else {
-                                console.error('User is not logged in. Redirecting to login page...');
-                                window.location.href = './login.html'; // Or redirect to login page
-                            }
-                        };
-                
-                        // Initialize Google Identity Services (GIS) and fetch calendar events
-                        function loadCalendarEvents(userEmail) {
-                            const googleClientId = '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com'; // Replace with your OAuth 2.0 client ID
-                
-                            // Create an instance of the Google API Client
-                            window.google.accounts.id.initialize({
-                                client_id: googleClientId,
-                                callback: handleCredentialResponse
+                        // Initialize the Google API client and calendar events loading process
+                        function initClient() {
+                            gapi.client.init({
+                                'apiKey': 'AIzaSyDEfHAHtttroqzBeMxPxPkF7lbHlCuqbtU', // Replace with your API key
+                                'clientId': '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your Client ID
+                                'scope': 'https://www.googleapis.com/auth/calendar.readonly', // Read-only access to calendar
+                                'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+                            }).then(function() {
+                                // Load user's events after successful authentication
+                                gapi.auth2.getAuthInstance().isSignedIn.listen(listEvents); // Listen to login state changes
+                                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                                    listEvents(); // Call to fetch events if already signed in
+                                }
                             });
-                
-                            // Prompt the user to sign in (if not already signed in)
-                            google.accounts.id.prompt();
-                
-                            // Callback to handle the token response
-                            function handleCredentialResponse(response) {
-                                console.log("ID Token:", response.credential);
-                
-                                // Now, use the Google API client to fetch calendar events
-                                gapi.load('client', async function() {
-                                    try {
-                                        await gapi.client.init({
-                                            apiKey: 'AIzaSyDEfHAHtttroqzBeMxPxPkF7lbHlCuqbtU', // Your API Key
-                                            clientId: googleClientId,
-                                            discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
-                                            scope: 'https://www.googleapis.com/auth/calendar.readonly'
-                                        });
-                
-                                        // Fetch events
-                                        const response = await gapi.client.calendar.events.list({
-                                            calendarId: 'primary',
-                                            timeMin: (new Date()).toISOString(),
-                                            maxResults: 10,
-                                            singleEvents: true,
-                                            orderBy: 'startTime'
-                                        });
-                
-                                        // Display the events
-                                        const events = response.result.items;
-                                        displayEvents(events);
-                                    } catch (error) {
-                                        console.error('Error initializing Google API client:', error);
-                                    }
-                                });
-                            }
                         }
-                
-                        // Display the events on the page
-                        function displayEvents(events) {
-                            const calendarContainer = document.getElementById('calendar-container');
-                
-                            if (events.length > 0) {
-                                events.forEach(function(event) {
-                                    const eventElement = document.createElement('div');
-                                    eventElement.classList.add('event');
-                                    const eventTitle = document.createElement('h3');
-                                    eventTitle.textContent = event.summary;
-                                    const eventTime = document.createElement('p');
-                                    eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
-                                    eventElement.appendChild(eventTitle);
-                                    eventElement.appendChild(eventTime);
-                                    calendarContainer.appendChild(eventElement);
-                                });
-                            } else {
-                                calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
-                            }
+                    
+                        // Load the API client
+                        function loadAPIClient() {
+                            gapi.load('client:auth2', initClient);
                         }
+                    
+                        // Handle Google Sign-In
+                        function handleCredentialResponse(response) {
+                            // ID token will be used to authenticate the user
+                            const idToken = response.credential;
+                            console.log("ID Token:", idToken); // For debugging purposes
+                    
+                            // Use the token to authenticate and load events
+                            gapi.auth2.getAuthInstance().signIn({ 'ux_mode': 'redirect', 'scope': 'profile email' });
+                        }
+                    
+                        // Sign-in process for Google login
+                        function handleSignInClick() {
+                            google.accounts.id.prompt(); // Google Sign-In prompt to log the user in
+                        }
+                    
+                        // List user's calendar events
+                        function listEvents() {
+                            gapi.client.calendar.events.list({
+                                'calendarId': 'primary', // Use the user's primary calendar
+                                'timeMin': (new Date()).toISOString(),
+                                'showDeleted': false,
+                                'singleEvents': true,
+                                'maxResults': 10, // Number of events to display
+                                'orderBy': 'startTime'
+                            }).then(function(response) {
+                                var events = response.result.items;
+                                var eventsContainer = document.getElementById('calendar-container');
+                    
+                                // Clear previous events
+                                eventsContainer.innerHTML = '';
+                    
+                                if (events.length > 0) {
+                                    events.forEach(function(event) {
+                                        var eventDiv = document.createElement('div');
+                                        eventDiv.className = 'event';
+                                        eventDiv.innerHTML = `
+                                            <h4>${event.summary}</h4>
+                                            <p><strong>Start:</strong> ${event.start.dateTime || event.start.date}</p>
+                                            <p><strong>End:</strong> ${event.end.dateTime || event.end.date}</p>
+                                        `;
+                                        eventsContainer.appendChild(eventDiv);
+                                    });
+                                } else {
+                                    eventsContainer.innerHTML = '<p>No upcoming events found.</p>';
+                                }
+                            }).catch(function(error) {
+                                console.log('Error fetching calendar events:', error);
+                            });
+                        }
+                    
+                        // Load Google Identity Services and sign-in callback
+                        google.accounts.id.initialize({
+                            client_id: 'YOUR_CLIENT_ID', // Replace with your Google Client ID
+                            callback: handleCredentialResponse
+                        });
+                    
+                        // Render the sign-in button
+                        google.accounts.id.renderButton(
+                            document.getElementById("login-button"),
+                            { theme: "outline", size: "large" } // Customize button style
+                        );
+                    
+                        // Load the Google API client when the page is ready
+                        loadAPIClient();
+                    
                     </script>
                       
                     
                     
-<style>
-    .event {
-        border: 1px solid #ddd;
-        padding: 10px;
-        margin: 10px 0;
-        background-color: #f9f9f9;
-    }
-
-    .event h3 {
-        margin: 0;
-        font-size: 1.2em;
-    }
-
-    .event p {
-        margin: 5px 0 0;
-        color: #555;
-    }
-</style>
+                      <style>
+                        /* Add your custom styles for the calendar container */
+                        #calendar-container {
+                            width: 100%;
+                            min-height: 400px;
+                            border: 1px solid #ddd;
+                            padding: 20px;
+                        }
+                        .event {
+                            margin: 10px 0;
+                            padding: 10px;
+                            background-color: #f4f4f4;
+                            border-left: 5px solid #4CAF50;
+                        }
+                    </style>
 
                     
                     
