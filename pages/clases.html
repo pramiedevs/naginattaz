@@ -397,87 +397,97 @@ document.getElementById('show-all').addEventListener('click', function() {
                             <!-- Calendar will be dynamically embedded here -->
                         </div>
                     </div>
-                    <script src="https://apis.google.com/js/api.js"></script>
-<script>
-    // Initialize the Google API client
-    function initializeClient() {
-        const clientID = sessionStorage.clientId; // Get the client ID from sessionStorage
-        const scope = 'https://www.googleapis.com/auth/calendar.readonly'; // Set the desired scope
-
-        console.log('Client ID:', clientID); // Debugging line
-
-        // Ensure that clientID is available
-        if (!clientID) {
-            console.error('Client ID is missing!');
-            return;
-        }
-
-        // Initialize the Google API client with the given credentials
-        gapi.load('client:auth2', function() {
-            gapi.client.init({
-                clientId: clientID, // Provide the client ID
-                scope: scope, // Provide the scope
-                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'] // Discovery doc for Calendar API
-            }).then(function() {
-                console.log('Google API client initialized');
-                // Check if the user is already signed in
-                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                    loadCalendarEvents(); // If signed in, load the calendar events
-                } else {
-                    // Sign in the user if they are not signed in yet
-                    gapi.auth2.getAuthInstance().signIn().then(function() {
-                        loadCalendarEvents(); // Once signed in, load the events
-                    }).catch(function(error) {
-                        console.error('Sign-in failed:', error);
-                    });
-                }
-            }).catch(function(error) {
-                console.error('Error initializing Google API client:', error);
-            });
-        });
-    }
-
-    // Fetch calendar events from the user's Google Calendar
-    function loadCalendarEvents() {
-        gapi.client.calendar.events.list({
-            calendarId: 'primary', // Primary calendar
-            timeMin: (new Date()).toISOString(), // Get only future events
-            maxResults: 10, // Limit the number of events
-            singleEvents: true, // Expand recurring events
-            orderBy: 'startTime' // Order by start time
-        }).then(function(response) {
-            const events = response.result.items;
-            displayEvents(events); // Call function to display events
-        }).catch(function(error) {
-            console.error('Error loading events:', error);
-        });
-    }
-
-    // Display events on the webpage
-    function displayEvents(events) {
-        const calendarContainer = document.getElementById('calendar-container');
-        if (events.length > 0) {
-            events.forEach(function(event) {
-                const eventElement = document.createElement('div');
-                eventElement.classList.add('event');
-                const eventTitle = document.createElement('h3');
-                eventTitle.textContent = event.summary;
-                const eventTime = document.createElement('p');
-                eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
-                eventElement.appendChild(eventTitle);
-                eventElement.appendChild(eventTime);
-                calendarContainer.appendChild(eventElement);
-            });
-        } else {
-            calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
-        }
-    }
-
-    // Initialize the API client when the page loads
-    window.onload = function() {
-        initializeClient(); // Call initializeClient to kick off OAuth and API interaction
-    };
-</script>
+                    <script>
+                        // Declare clientId variable
+                        let clientId = '';
+                    
+                        // Asynchronously load the config.json file and get the clientId
+                        async function loadConfig() {
+                            try {
+                                const response = await fetch('./config.json');
+                                const config = await response.json();
+                                clientId = config.clientId; // Set clientId from config
+                                console.log('Loaded clientId from config:', clientId);
+                                initializeClient(); // Once clientId is loaded, initialize the API client
+                            } catch (error) {
+                                console.error('Error loading configuration:', error);
+                            }
+                        }
+                    
+                        // Initialize the Google API client with OAuth2
+                        function initializeClient() {
+                            const scope = 'https://www.googleapis.com/auth/calendar.readonly'; // Define the required scope
+                    
+                            if (!clientId) {
+                                console.error('Client ID is missing!'); // If clientId is not loaded, exit early
+                                return;
+                            }
+                    
+                            gapi.load('client:auth2', function() {
+                                gapi.client.init({
+                                    clientId: clientId, // Use the clientId from the loaded config
+                                    scope: scope,
+                                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'] // Discovery doc for Calendar API
+                                }).then(function() {
+                                    console.log('Google API client initialized');
+                                    // Check if the user is already signed in
+                                    if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                                        loadCalendarEvents(); // If signed in, load events
+                                    } else {
+                                        // Sign in the user if they are not signed in
+                                        gapi.auth2.getAuthInstance().signIn().then(function() {
+                                            loadCalendarEvents(); // Once signed in, load the events
+                                        }).catch(function(error) {
+                                            console.error('Sign-in failed:', error);
+                                        });
+                                    }
+                                }).catch(function(error) {
+                                    console.error('Error initializing Google API client:', error);
+                                });
+                            });
+                        }
+                    
+                        // Fetch calendar events from the user's Google Calendar
+                        function loadCalendarEvents() {
+                            gapi.client.calendar.events.list({
+                                calendarId: 'primary', // Primary calendar
+                                timeMin: (new Date()).toISOString(), // Get only future events
+                                maxResults: 10, // Limit the number of events
+                                singleEvents: true, // Expand recurring events
+                                orderBy: 'startTime' // Order by start time
+                            }).then(function(response) {
+                                const events = response.result.items;
+                                displayEvents(events); // Call function to display events
+                            }).catch(function(error) {
+                                console.error('Error loading events:', error);
+                            });
+                        }
+                    
+                        // Display events on the webpage
+                        function displayEvents(events) {
+                            const calendarContainer = document.getElementById('calendar-container');
+                            if (events.length > 0) {
+                                events.forEach(function(event) {
+                                    const eventElement = document.createElement('div');
+                                    eventElement.classList.add('event');
+                                    const eventTitle = document.createElement('h3');
+                                    eventTitle.textContent = event.summary;
+                                    const eventTime = document.createElement('p');
+                                    eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
+                                    eventElement.appendChild(eventTitle);
+                                    eventElement.appendChild(eventTime);
+                                    calendarContainer.appendChild(eventElement);
+                                });
+                            } else {
+                                calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
+                            }
+                        }
+                    
+                        // Initialize the application when the page loads
+                        window.onload = function() {
+                            loadConfig(); // Load the config file and initialize the client
+                        };
+                    </script>
 <style>
     .event {
         border: 1px solid #ddd;
