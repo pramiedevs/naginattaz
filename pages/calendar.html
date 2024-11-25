@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Calendar</title>
+    <title>User Google Calendar</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,24 +12,114 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
         #calendar-container {
             width: 100%;
             max-width: 1200px;
             margin: 20px;
         }
+        #signin-button {
+            margin-bottom: 20px;
+        }
     </style>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        let clientId = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'; // Replace with your client ID
+        let accessToken = '';
+        let userEmail = ''; // To store logged-in user's email
+
+        function handleCredentialResponse(response) {
+            const user = response.credential;
+            const userInfo = JSON.parse(atob(user.split('.')[1]));
+            userEmail = userInfo.email;  // Get email from JWT
+
+            console.log('Logged in as: ', userEmail);
+
+            // Get access token from the response and store it for later use
+            accessToken = response.credential;
+
+            // After login, load the user's calendar
+            loadCalendarEvents();
+        }
+
+        function loadCalendarEvents() {
+            if (!accessToken) {
+                console.log("No access token found. Please authenticate.");
+                return;
+            }
+
+            // Load the Google API client
+            gapi.load('client:auth2', initCalendarClient);
+        }
+
+        function initCalendarClient() {
+            gapi.auth2.init({ client_id: clientId }).then(() => {
+                gapi.client.load('https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest').then(() => {
+                    getCalendarEvents();
+                });
+            });
+        }
+
+        function getCalendarEvents() {
+            if (!accessToken) {
+                console.log("No access token found.");
+                return;
+            }
+
+            // Use the logged-in user's email to display their calendar
+            gapi.client.request({
+                path: `https://www.googleapis.com/calendar/v3/calendars/${userEmail}/events`,  // Use the logged-in user's email
+                method: 'GET',
+                params: {
+                    access_token: accessToken
+                }
+            }).then(response => {
+                console.log(response);
+                const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(userEmail)}&ctz=America%2FSao_Paulo`;
+                createCalendarIframe(calendarUrl);
+            }).catch(error => {
+                console.error('Error fetching calendar events:', error);
+            });
+        }
+
+        function createCalendarIframe(calendarUrl) {
+            const iframe = document.createElement('iframe');
+            iframe.src = calendarUrl;
+            iframe.style = "border: 0";
+            iframe.width = "800";
+            iframe.height = "600";
+            iframe.frameBorder = "0";
+            iframe.scrolling = "no";
+            
+            // Clear the previous content and append the new iframe
+            document.getElementById('calendar-container').innerHTML = '';
+            document.getElementById('calendar-container').appendChild(iframe);
+        }
+
+        function initGoogleSignIn() {
+            google.accounts.id.initialize({
+                client_id: clientId,
+                callback: handleCredentialResponse,
+                scope: 'https://www.googleapis.com/auth/calendar.readonly'  // Request the calendar.readonly scope
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById('signin-button'),
+                { theme: 'outline', size: 'large' }
+            );
+        }
+
+        // Initialize Google Sign-In
+        window.onload = function() {
+            initGoogleSignIn();
+        };
+    </script>
 </head>
 <body>
+    <div id="signin-button"></div> <!-- Google Sign-In button -->
     <div id="calendar-container">
-        <h2>Google Calendar for joaconavarro.untref@gmail.com</h2>
-        <iframe src="https://calendar.google.com/calendar/embed?src=joaconavarro.untref%40gmail.com&ctz=America%2FSao_Paulo" 
-                style="border: 0" 
-                width="800" 
-                height="600" 
-                frameborder="0" 
-                scrolling="no">
-        </iframe>
+        <!-- Calendar will be dynamically embedded here -->
     </div>
 </body>
 </html>
