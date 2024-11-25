@@ -413,30 +413,36 @@ document.getElementById('show-all').addEventListener('click', function() {
                           gapi.load('client:auth2', function() {
     console.log("gapi loaded");
 
+    gapi.load('client:auth2', function() {
+    console.log("gapi loaded");
+
     gapi.auth2.init({
-        client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your OAuth client ID
-        scope: 'https://www.googleapis.com/auth/calendar.readonly'
+        client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Ensure this is correct
+        scope: 'https://www.googleapis.com/auth/calendar.readonly',
     }).then(function() {
-        console.log('Google API client initialized');
+        console.log('Google API client initialized successfully');
         const authInstance = gapi.auth2.getAuthInstance();
 
-        // Check if user is signed in
         if (authInstance.isSignedIn.get()) {
             console.log('User is signed in');
             const user = authInstance.currentUser.get();
             const idToken = user.getAuthResponse().id_token;
-            fetchCalendarEvents(idToken);
+            fetchCalendarEvents(idToken);  // Proceed to fetch events
         } else {
             console.log('User is not signed in');
             authInstance.signIn().then(function() {
                 const user = authInstance.currentUser.get();
                 const idToken = user.getAuthResponse().id_token;
-                fetchCalendarEvents(idToken);
+                fetchCalendarEvents(idToken);  // Fetch events after signing in
+            }).catch(function(signInError) {
+                console.error("Sign-in failed: ", signInError);
             });
         }
     }).catch(function(error) {
-        console.error('Error initializing Google API client', error);
+        console.error('Error initializing Google API client: ', error);
     });
+});
+
 });
                         }
                       
