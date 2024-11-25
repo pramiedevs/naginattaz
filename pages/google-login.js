@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('idToken', response.credential);
         sessionStorage.setItem('loggedIn', 'true');
 
+        
+        if (window.opener) {
+            console.log("Redirecting parent window");
+            window.opener.location.href = './clases.html'; // Redirect parent window
+        } else {
+            console.log("No opener found, redirecting this window");
+            window.location.href = './clases.html'; // Fallback for testing
+        }
         // After login, load calendar events
         loadCalendarEvents();
     }
