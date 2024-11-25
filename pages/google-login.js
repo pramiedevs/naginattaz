@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch('./config.json');
             const config = await response.json();
             clientId = config.clientId; // Set clientId from config
+            sessionStorage.setItem('clientId', clientId);
             initGoogleSignIn(); // Call init after setting clientId
         } catch (error) {
             console.error('Error loading configuration:', error);
