@@ -399,9 +399,9 @@ document.getElementById('show-all').addEventListener('click', function() {
                     </div>
                     
                     <script>
-                        // Ensure that both the Google Identity Services (GIS) and Google API Client are loaded
-                        function onLoadCallback() {
-                            // Initialize Google API Client
+                        // Function to load Google API client and identity services
+                        function loadGoogleAPIScripts() {
+                            // Load Google API Client (gapi)
                             gapi.load('client:auth2', initClient);
                     
                             // Initialize Google Identity Services (GIS) for login
@@ -417,7 +417,7 @@ document.getElementById('show-all').addEventListener('click', function() {
                             );
                         }
                     
-                        // This is the initialization function for the Google API client
+                        // This function initializes the Google API client
                         function initClient() {
                             gapi.client.init({
                                 'apiKey': 'AIzaSyDEfHAHtttroqzBeMxPxPkF7lbHlCuqbtU', // Replace with your API key
@@ -480,9 +480,15 @@ document.getElementById('show-all').addEventListener('click', function() {
                             });
                         }
                     
-                        // Call this function when the page has fully loaded
-                        onLoadCallback();
-                    
+                        // Ensure that both scripts are loaded before calling onLoadCallback
+                        window.onload = function() {
+                            // Delay the function to make sure both Google scripts are fully loaded
+                            if (typeof google !== 'undefined' && typeof gapi !== 'undefined') {
+                                loadGoogleAPIScripts();
+                            } else {
+                                console.log("Google API scripts not loaded yet");
+                            }
+                        };
                     </script>
                       
                     
