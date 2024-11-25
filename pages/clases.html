@@ -55,9 +55,6 @@
             <div class="left-panel desktop">
                 <button onclick="showContent('section1')">INICIO</button>
                 <button onclick="showContent('section2')">CLASES</button>
-                <button onclick="showContent('section3')">COMUNIDAD</button>
-                <button onclick="showContent('section4')">PLAYLIST</button>
-                <button onclick="showContent('section5')">CALENDARIO</button>
             </div>
 
             <!--
@@ -70,9 +67,6 @@
         <div class="left-panel mobile">
             <button onclick="showContent('section1')">INICIO</button>
             <button onclick="showContent('section2')">CLASES</button>
-            <button onclick="showContent('section3')">COMUNIDAD</button>
-            <button onclick="showContent('section4')">PLAYLIST</button>
-            <button onclick="showContent('section5')">CALENDARIO</button>
             <div id="image-preview-container" class="image-preview-container"></div>
             <input type="text" id="search-input2" class="desktop" placeholder=" Buscar clases...">
             <button id="search2">🔍</button>
@@ -219,9 +213,9 @@ function toggleDropdown(id) {
                         Playlists <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="playlists" class="dropdown-content">
-                        <button class="dropdown-item">Playlist 1</button>
-                        <button class="dropdown-item">Playlist 2</button>
-                        <button class="dropdown-item">Playlist 3</button>
+                        <button class="dropdown-item" onclick="showContent('section4')">Playlist 1</button>
+                        <button class="dropdown-item" onclick="showContent('section4')">Playlist 2</button>
+                        <button class="dropdown-item" onclick="showContent('section4')">Playlist 3</button>
                     </div>
                 
                     <!-- Calendario Section -->
