@@ -98,6 +98,12 @@
         }
 
         function initGoogleSignIn() {
+            if (typeof google === 'undefined') {
+                // Retry initialization once the Google API is available
+                setTimeout(initGoogleSignIn, 100);
+                return;
+            }
+
             google.accounts.id.initialize({
                 client_id: clientId,
                 callback: handleCredentialResponse,
@@ -110,7 +116,7 @@
             );
         }
 
-        // Initialize Google Sign-In
+        // Initialize Google Sign-In after the window is loaded and the script is available
         window.onload = function() {
             initGoogleSignIn();
         };
