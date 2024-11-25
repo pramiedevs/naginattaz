@@ -344,11 +344,27 @@ background-color: var(--nagivioleta);
             display: block;
         }
 
-.calendar-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
+        #calendar-events-container {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            min-height: 100px;  /* Make sure it's large enough to display content */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .event {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        
+        .event p {
+            margin: 5px 0;
+        }
 
 .menu {
     display: flex;
