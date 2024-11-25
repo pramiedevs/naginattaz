@@ -399,59 +399,69 @@ document.getElementById('show-all').addEventListener('click', function() {
                     </div>
                     
                     <script>
-                        // Initialize the Google API client and calendar events loading process
+                        // Ensure that both the Google Identity Services (GIS) and Google API Client are loaded
+                        function onLoadCallback() {
+                            // Initialize Google API Client
+                            gapi.load('client:auth2', initClient);
+                    
+                            // Initialize Google Identity Services (GIS) for login
+                            google.accounts.id.initialize({
+                                client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your Google Client ID
+                                callback: handleCredentialResponse
+                            });
+                    
+                            // Render the Sign-In button
+                            google.accounts.id.renderButton(
+                                document.getElementById("login-button"),
+                                { theme: "outline", size: "large" } // Customize button style
+                            );
+                        }
+                    
+                        // This is the initialization function for the Google API client
                         function initClient() {
                             gapi.client.init({
                                 'apiKey': 'AIzaSyDEfHAHtttroqzBeMxPxPkF7lbHlCuqbtU', // Replace with your API key
                                 'clientId': '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your Client ID
-                                'scope': 'https://www.googleapis.com/auth/calendar.readonly', // Read-only access to calendar
+                                'scope': 'https://www.googleapis.com/auth/calendar.readonly', // Calendar read-only scope
                                 'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
                             }).then(function() {
-                                // Load user's events after successful authentication
-                                gapi.auth2.getAuthInstance().isSignedIn.listen(listEvents); // Listen to login state changes
+                                // Add listener for sign-in state changes
+                                gapi.auth2.getAuthInstance().isSignedIn.listen(listEvents);
+                    
+                                // If the user is already signed in, list the events
                                 if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                                    listEvents(); // Call to fetch events if already signed in
+                                    listEvents();
                                 }
                             });
                         }
                     
-                        // Load the API client
-                        function loadAPIClient() {
-                            gapi.load('client:auth2', initClient);
-                        }
-                    
-                        // Handle Google Sign-In
+                        // Handle credential response after user login
                         function handleCredentialResponse(response) {
-                            // ID token will be used to authenticate the user
                             const idToken = response.credential;
                             console.log("ID Token:", idToken); // For debugging purposes
                     
-                            // Use the token to authenticate and load events
-                            gapi.auth2.getAuthInstance().signIn({ 'ux_mode': 'redirect', 'scope': 'profile email' });
-                        }
-                    
-                        // Sign-in process for Google login
-                        function handleSignInClick() {
-                            google.accounts.id.prompt(); // Google Sign-In prompt to log the user in
+                            // Authenticate with Google API Client using the ID token
+                            gapi.auth2.getAuthInstance().signIn();
                         }
                     
                         // List user's calendar events
                         function listEvents() {
                             gapi.client.calendar.events.list({
-                                'calendarId': 'primary', // Use the user's primary calendar
+                                'calendarId': 'primary', // User's primary calendar
                                 'timeMin': (new Date()).toISOString(),
                                 'showDeleted': false,
                                 'singleEvents': true,
-                                'maxResults': 10, // Number of events to display
+                                'maxResults': 10, // Limit the number of events to display
                                 'orderBy': 'startTime'
                             }).then(function(response) {
                                 var events = response.result.items;
                                 var eventsContainer = document.getElementById('calendar-container');
                     
-                                // Clear previous events
+                                // Clear any previous events
                                 eventsContainer.innerHTML = '';
                     
                                 if (events.length > 0) {
+                                    // Display each event
                                     events.forEach(function(event) {
                                         var eventDiv = document.createElement('div');
                                         eventDiv.className = 'event';
@@ -470,20 +480,8 @@ document.getElementById('show-all').addEventListener('click', function() {
                             });
                         }
                     
-                        // Load Google Identity Services and sign-in callback
-                        google.accounts.id.initialize({
-                            client_id: 'YOUR_CLIENT_ID', // Replace with your Google Client ID
-                            callback: handleCredentialResponse
-                        });
-                    
-                        // Render the sign-in button
-                        google.accounts.id.renderButton(
-                            document.getElementById("login-button"),
-                            { theme: "outline", size: "large" } // Customize button style
-                        );
-                    
-                        // Load the Google API client when the page is ready
-                        loadAPIClient();
+                        // Call this function when the page has fully loaded
+                        onLoadCallback();
                     
                     </script>
                       
