@@ -8,6 +8,7 @@
     <script src="./calendar.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js" defer></script>
     <script src="https://accounts.google.com/gsi/client"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
     <script src="./wating.js"></script>
 </head>
 <body class="no-scrollbar">
@@ -209,7 +210,7 @@ function toggleDropdown(id) {
                     
                 
                     <!-- Playlists Section -->
-                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('playlists')">
+                    <button class="panel-button" onclick="toggleDropdown('playlists')">
                         Playlists <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="playlists" class="dropdown-content">
