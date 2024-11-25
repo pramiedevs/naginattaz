@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="./calendar.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js" defer></script>
-    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
     <script src="./wating.js"></script>
 </head>
 <body class="no-scrollbar">
@@ -398,8 +398,7 @@ document.getElementById('show-all').addEventListener('click', function() {
                         </div>
                     </div>
                     <script>
-                        // Declare clientId variable
-                        let clientId = '';
+                        let clientId = '';  // We'll load this from the config file
                     
                         // Asynchronously load the config.json file and get the clientId
                         async function loadConfig() {
@@ -414,52 +413,63 @@ document.getElementById('show-all').addEventListener('click', function() {
                             }
                         }
                     
-                        // Initialize the Google API client with OAuth2
+                        // Initialize Google Identity Services for OAuth2
                         function initializeClient() {
-                            const scope = 'https://www.googleapis.com/auth/calendar.readonly'; // Define the required scope
+                            const scope = 'https://www.googleapis.com/auth/calendar.readonly'; // Set scope for Calendar API
                     
                             if (!clientId) {
                                 console.error('Client ID is missing!'); // If clientId is not loaded, exit early
                                 return;
                             }
                     
-                            gapi.load('client:auth2', function() {
-                                gapi.client.init({
-                                    clientId: clientId, // Use the clientId from the loaded config
-                                    scope: scope,
-                                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'] // Discovery doc for Calendar API
-                                }).then(function() {
-                                    console.log('Google API client initialized');
-                                    // Check if the user is already signed in
-                                    if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                                        loadCalendarEvents(); // If signed in, load events
-                                    } else {
-                                        // Sign in the user if they are not signed in
-                                        gapi.auth2.getAuthInstance().signIn().then(function() {
-                                            loadCalendarEvents(); // Once signed in, load the events
-                                        }).catch(function(error) {
-                                            console.error('Sign-in failed:', error);
-                                        });
-                                    }
-                                }).catch(function(error) {
-                                    console.error('Error initializing Google API client:', error);
-                                });
+                            // Use the new Google Identity Services library to initialize authentication
+                            google.accounts.id.initialize({
+                                client_id: clientId, // Pass your client ID here
+                                callback: handleCredentialResponse // Define the callback to handle the response
                             });
+                    
+                            google.accounts.id.prompt(); // Prompt the user to sign in if they aren't already
+                    
+                        }
+                    
+                        // Handle the credential response after the user signs in
+                        function handleCredentialResponse(response) {
+                            console.log('Credential Response:', response);
+                    
+                            // The response will contain an ID token, which you can use to authenticate with your server or API
+                            const idToken = response.credential; // This is the ID token that you need for authentication
+                    
+                            // Now, you can use the ID token to authenticate the user and retrieve Google Calendar events
+                            loadCalendarEvents(idToken); // Pass the ID token to the function that will fetch events
                         }
                     
                         // Fetch calendar events from the user's Google Calendar
-                        function loadCalendarEvents() {
-                            gapi.client.calendar.events.list({
-                                calendarId: 'primary', // Primary calendar
-                                timeMin: (new Date()).toISOString(), // Get only future events
-                                maxResults: 10, // Limit the number of events
-                                singleEvents: true, // Expand recurring events
-                                orderBy: 'startTime' // Order by start time
-                            }).then(function(response) {
-                                const events = response.result.items;
-                                displayEvents(events); // Call function to display events
-                            }).catch(function(error) {
-                                console.error('Error loading events:', error);
+                        function loadCalendarEvents(idToken) {
+                            gapi.load('client', async function() {
+                                await gapi.client.init({
+                                    apiKey: 'YOUR_API_KEY', // You may still need an API key for some Google API requests
+                                    clientId: clientId, // The OAuth 2.0 client ID
+                                    scope: 'https://www.googleapis.com/auth/calendar.readonly',
+                                    discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+                                });
+                    
+                                gapi.auth.setToken({ // Use the ID token to set the authentication token
+                                    access_token: idToken
+                                });
+                    
+                                // Now fetch events
+                                gapi.client.calendar.events.list({
+                                    calendarId: 'primary', // Primary calendar
+                                    timeMin: (new Date()).toISOString(), // Only upcoming events
+                                    maxResults: 10, // Limit the number of events
+                                    singleEvents: true, // Expand recurring events
+                                    orderBy: 'startTime' // Sort by start time
+                                }).then(function(response) {
+                                    const events = response.result.items;
+                                    displayEvents(events); // Call function to display events
+                                }).catch(function(error) {
+                                    console.error('Error loading events:', error);
+                                });
                             });
                         }
                     
@@ -488,6 +498,7 @@ document.getElementById('show-all').addEventListener('click', function() {
                             loadConfig(); // Load the config file and initialize the client
                         };
                     </script>
+                    
 <style>
     .event {
         border: 1px solid #ddd;
