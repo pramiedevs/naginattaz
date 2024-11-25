@@ -126,7 +126,7 @@
             google.accounts.id.initialize({
     client_id: clientId,
     callback: handleCredentialResponse,
-    scope: 'https://www.googleapis.com/auth/calendar'  // Request read/write permissions
+    scope: 'https://www.googleapis.com/auth/calendar.readonly' // Add Calendar scope here
 });
 
             google.accounts.id.renderButton(
