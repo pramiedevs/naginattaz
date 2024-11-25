@@ -124,10 +124,10 @@
             }
 
             google.accounts.id.initialize({
-                client_id: clientId,
-                callback: handleCredentialResponse,
-                scope: 'https://www.googleapis.com/auth/calendar.readonly'  // Request the calendar.readonly scope
-            });
+    client_id: clientId,
+    callback: handleCredentialResponse,
+    scope: 'https://www.googleapis.com/auth/calendar'  // Request read/write permissions
+});
 
             google.accounts.id.renderButton(
                 document.getElementById('signin-button'),
