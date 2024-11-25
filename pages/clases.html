@@ -402,6 +402,70 @@ document.getElementById('show-all').addEventListener('click', function() {
                         console.log(sessionStorage.clientID)
                         console.log(sessionStorage.idToken)
 
+                        function initializeClient() {
+        const clientID = sessionStorage.clientID; // The client ID you have in sessionStorage
+        const scope = 'https://www.googleapis.com/auth/calendar.readonly'; // Permission to access calendar events
+
+        gapi.load('client:auth2', function() {
+            gapi.client.init({
+                clientId: clientID,
+                scope: scope,
+                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+            }).then(function() {
+                // If already authenticated, load events
+                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                    loadCalendarEvents();
+                } else {
+                    // Otherwise, sign in the user
+                    gapi.auth2.getAuthInstance().signIn().then(function() {
+                        loadCalendarEvents();
+                    });
+                }
+            }).catch(function(error) {
+                console.error('Error initializing Google API client:', error);
+            });
+        });
+    }
+
+    function loadCalendarEvents() {
+        // List upcoming events from the user's primary calendar
+        gapi.client.calendar.events.list({
+            calendarId: 'primary', // Refers to the primary calendar
+            timeMin: (new Date()).toISOString(), // Only upcoming events
+            maxResults: 10, // Limit to 10 events
+            singleEvents: true, // Expand recurring events into single instances
+            orderBy: 'startTime' // Sort events by start time
+        }).then(function(response) {
+            const events = response.result.items;
+            displayEvents(events); // Call the function to display the events
+        }).catch(function(error) {
+            console.error('Error retrieving calendar events:', error);
+        });
+    }
+
+    function displayEvents(events) {
+        const calendarContainer = document.getElementById('calendar-container');
+        if (events.length > 0) {
+            events.forEach(function(event) {
+                const eventElement = document.createElement('div');
+                eventElement.classList.add('event');
+                const eventTitle = document.createElement('h3');
+                eventTitle.textContent = event.summary;
+                const eventTime = document.createElement('p');
+                eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
+                eventElement.appendChild(eventTitle);
+                eventElement.appendChild(eventTime);
+                calendarContainer.appendChild(eventElement);
+            });
+        } else {
+            calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
+        }
+    }
+
+    window.onload = function() {
+        initializeClient(); // Initialize the client and sign the user in
+    };
+
                     </script>
                     
                     
