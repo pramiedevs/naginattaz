@@ -392,12 +392,16 @@ document.getElementById('show-all').addEventListener('click', function() {
                     </div>
         
         
-            <div id="section5" class="content-section">
-                <h2>CALENDARIO</h2>
-                <div id="calendar-events-container" style="text-align: center;">
-                    <!-- Calendar will be dynamically embedded here -->
-                </div>
-            </div>
+                    <div id="section5" class="content-section">
+                        <h2>CALENDARIO</h2>
+                        <button id="view-calendar-button">View Calendar</button>
+                    </div>
+                    
+                    <script>
+                        document.getElementById('view-calendar-button').addEventListener('click', function() {
+                            window.location.href = './calendar.html';  // This will redirect to a new page where the calendar is displayed
+                        });
+                    </script>
                     
                     
         <div id="section6" class="content-section">
