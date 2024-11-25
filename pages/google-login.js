@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = './clases.html'; // Fallback for testing
         }
         // After login, load calendar events
-        loadCalendarEvents();
+        loadGoogleCalendar();
     }
 
     function initGoogleSignIn() {
@@ -66,118 +66,72 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         google.accounts.id.renderButton(
-            signinButton,
+            document.getElementById('g-signin-button'),
             { theme: 'outline', size: 'large' }
         );
+    }
 
+    async function loadGoogleCalendar() {
         // Check if user is already logged in
-        const savedPic = sessionStorage.getItem('userPic');
-        const idToken = sessionStorage.getItem('idToken');
-        if (savedPic && idToken) {
-            userPic.src = savedPic;
-            userInfo.style.display = 'flex';
-            logoutButton.style.display = 'inline-block';
-            isLoggedIn = true;
-
-            // Load calendar events if the user is already logged in
-            loadCalendarEvents();
-        }
-    }
-
-    function handleLogout() {
-        if (!isLoggedIn) {
-            console.warn("User is not signed in.");
+        const accessToken = sessionStorage.getItem('idToken');
+        if (!accessToken) {
+            console.log("No access token found. Please authenticate.");
             return;
         }
 
-        // Clear user data and update UI
-        const idToken = sessionStorage.getItem('idToken');
-        if (idToken) {
-            google.accounts.id.revoke(idToken, () => {
-                userPic.src = '';
-                userInfo.style.display = 'none';
+        // Load the gapi client
+        gapi.load("client:auth2", initCalendarClient);
+    }
 
-                // Reset login status
-                isLoggedIn = false;
-
-                // Clear session storage
-                sessionStorage.removeItem('userEmail');
-                sessionStorage.removeItem('userPic');
-                sessionStorage.removeItem('idToken');
-                sessionStorage.removeItem('loggedIn');
-                window.location.href = '../index.html';
+    function initCalendarClient() {
+        gapi.auth2.init({ client_id: clientId }).then(() => {
+            // Once initialized, get the user's email and time zone
+            const userEmail = sessionStorage.getItem('userEmail');
+            gapi.client.load("https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest").then(() => {
+                // Fetch user's calendar settings
+                getCalendarSettings(userEmail);
             });
-        } else {
-            console.warn("No ID token found for revocation.");
-        }
-    }
-
-    // Function to load Google Calendar events
-function loadCalendarEvents() {
-    gapi.load("client:auth2", initCalendarClient); // Ensure the client is loaded and initialized
-}
-
-// Function to initialize Google Calendar client
-function initCalendarClient() {
-    gapi.client.init({
-        clientId: clientId,
-        scope: 'https://www.googleapis.com/auth/calendar.readonly'
-    }).then(() => {
-        // Now we can make the API call to fetch calendar events
-        getCalendarEvents();
-    }).catch(error => {
-        console.error("Error initializing the calendar client:", error);
-    });
-}
-
-// Function to fetch calendar events
-function getCalendarEvents() {
-    const accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
-    if (!accessToken) {
-        console.log("No access token found. Please authenticate.");
-        return;
-    }
-
-    // Use 'primary' for the user's primary calendar
-    gapi.client.request({
-        path: `https://www.googleapis.com/calendar/v3/calendars/primary/events`,
-        method: 'GET',
-        params: {
-            access_token: accessToken
-        }
-    }).then(response => {
-        console.log("API Response:", response);
-        if (response && response.result && response.result.items) {
-            displayCalendarEvents(response.result.items);
-        } else {
-            console.error("No events found or API response format is incorrect.");
-        }
-    }).catch(error => {
-        console.error('Error fetching calendar events:', error);
-    });
-}
-
-
-    // Function to display calendar events
-    function displayCalendarEvents(events) {
-        calendarEventsContainer.innerHTML = ''; // Clear existing events
-
-        if (events.length === 0) {
-            calendarEventsContainer.innerHTML = '<p>No upcoming events</p>';
-            return;
-        }
-
-        events.forEach(event => {
-            const eventElement = document.createElement('div');
-            eventElement.className = 'event';
-            eventElement.innerHTML = `
-                <p><strong>Event:</strong> ${event.summary}</p>
-                <p><strong>Start:</strong> ${new Date(event.start.dateTime).toLocaleString()}</p>
-                <p><strong>End:</strong> ${new Date(event.end.dateTime).toLocaleString()}</p>
-            `;
-            calendarEventsContainer.appendChild(eventElement);
         });
     }
+
+    // Function to fetch user's time zone and generate calendar iframe
+    function getCalendarSettings(userEmail) {
+        const accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+
+        gapi.client.request({
+            path: `https://www.googleapis.com/calendar/v3/calendars/${userEmail}/settings`,
+            method: 'GET',
+            params: {
+                access_token: accessToken
+            }
+        }).then(response => {
+            const timeZone = response.result.timeZone; // Get user's time zone
+
+            // Dynamically create the iframe for the calendar
+            createCalendarIframe(userEmail, timeZone);
+        }).catch(error => {
+            console.error('Error fetching calendar settings:', error);
+        });
+    }
+
+    // Function to create and embed the calendar iframe dynamically
+    function createCalendarIframe(userEmail, timeZone) {
+        const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(userEmail)}&ctz=${encodeURIComponent(timeZone)}`;
+        const iframe = document.createElement('iframe');
+        iframe.src = calendarUrl;
+        iframe.style = "border: 0";
+        iframe.width = "800";
+        iframe.height = "600";
+        iframe.frameBorder = "0";
+        iframe.scrolling = "no";
+        
+        // Clear the previous content and append the new iframe
+        calendarEventsContainer.innerHTML = '';
+        calendarEventsContainer.appendChild(iframe);
+    }
+
+    // Initialize Google Sign-In
+    loadConfig();
 
     // Custom button click to trigger Google Sign-In
     signinButton.addEventListener('click', () => {
@@ -189,4 +143,6 @@ function getCalendarEvents() {
 
     // Handle logout button click
     logoutButton.addEventListener('click', handleLogout);
+
+    
 });
