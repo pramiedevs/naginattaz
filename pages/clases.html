@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="./calendar.js" defer></script>
     <script src="https://player.vimeo.com/api/player.js" defer></script>
-    <script src="https://accounts.google.com/gsi/client"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
     <script src="./wating.js"></script>
     <link rel="icon" href="nagi.jpeg" type="image/x-icon">
 </head>
@@ -390,108 +388,87 @@ document.getElementById('show-all').addEventListener('click', function() {
         
                     <div id="section5" class="content-section">
                         <div id="calendar-container">
-                            <!-- Calendar will be dynamically embedded here -->
+                            <!-- Calendar events will be dynamically inserted here -->
                         </div>
                     </div>
+                    
+                
+                    <script src="https://apis.google.com/js/api.js"></script>
+                
                     <script>
-                        // Check if the user is logged in by getting the idToken from sessionStorage
+                        // On page load
                         window.onload = function() {
-                          const idToken = sessionStorage.getItem('idToken'); // Assume the token is stored here after login
-                      
-                          if (idToken) {
-                              console.log('User is already logged in. Proceeding to load calendar events.');
-                              loadCalendarEvents(idToken); // Proceed to load calendar events using the token
-                          } else {
-                              console.error('User is not logged in. Redirecting to login page...');
-                              window.location.href = './login.html'; // Or redirect to your login page if not logged in
-                          }
+                            const userEmail = sessionStorage.getItem('userEmail'); // Get user email from sessionStorage
+                            if (userEmail) {
+                                console.log('User is logged in. Proceeding to load calendar events.');
+                                loadCalendarEvents(userEmail); // Proceed to load calendar events
+                            } else {
+                                console.error('User is not logged in. Redirecting to login page...');
+                                window.location.href = './login.html'; // Or redirect to login page
+                            }
                         };
-                      
-                        // Function to load calendar events using the idToken
-                        function loadCalendarEvents(idToken) {
-                          // Initialize Google API client using gapi.auth2 (the old method)
-                          gapi.load('client:auth2', function() {
-    console.log("gapi loaded");
-
-    gapi.load('client:auth2', function() {
-    console.log("gapi loaded");
-
-    gapi.auth2.init({
-        client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Ensure this is correct
-        scope: 'https://www.googleapis.com/auth/calendar.readonly',
-    }).then(function() {
-        console.log('Google API client initialized successfully');
-        const authInstance = gapi.auth2.getAuthInstance();
-
-        if (authInstance.isSignedIn.get()) {
-            console.log('User is signed in');
-            const user = authInstance.currentUser.get();
-            const idToken = user.getAuthResponse().id_token;
-            fetchCalendarEvents(idToken);  // Proceed to fetch events
-        } else {
-            console.log('User is not signed in');
-            authInstance.signIn().then(function() {
-                const user = authInstance.currentUser.get();
-                const idToken = user.getAuthResponse().id_token;
-                fetchCalendarEvents(idToken);  // Fetch events after signing in
-            }).catch(function(signInError) {
-                console.error("Sign-in failed: ", signInError);
-            });
-        }
-    }).catch(function(error) {
-        console.error('Error initializing Google API client: ', error);
-    });
-});
-
-});
+                
+                        // Load Google Calendar events
+                        function loadCalendarEvents(userEmail) {
+                            // Load the Google API client
+                            gapi.load('client:auth2', async function() {
+                                try {
+                                    // Initialize the API client
+                                    await gapi.client.init({
+                                        apiKey: 'AIzaSyDEfHAHtttroqzBeMxPxPkF7lbHlCuqbtU', // Replace with your API key
+                                        clientId: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your OAuth 2.0 client ID
+                                        scope: 'https://www.googleapis.com/auth/calendar.readonly',
+                                        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
+                                    });
+                
+                                    // Make sure the user is signed in (we assume they are already signed in)
+                                    const authInstance = gapi.auth2.getAuthInstance();
+                                    if (authInstance.isSignedIn.get()) {
+                                        console.log('User is signed in.');
+                
+                                        // Fetch events from Google Calendar
+                                        const response = await gapi.client.calendar.events.list({
+                                            calendarId: 'primary', // Use primary calendar
+                                            timeMin: (new Date()).toISOString(), // Get events starting from now
+                                            maxResults: 10, // Limit to 10 events (adjust as needed)
+                                            singleEvents: true, // Expand recurring events
+                                            orderBy: 'startTime' // Sort events by start time
+                                        });
+                
+                                        // Display the events
+                                        const events = response.result.items;
+                                        displayEvents(events);
+                                    } else {
+                                        console.error('User is not signed in.');
+                                        authInstance.signIn(); // Force sign-in if not already signed in
+                                    }
+                                } catch (error) {
+                                    console.error('Error initializing Google API client:', error);
+                                }
+                            });
                         }
-                      
-                        // Function to fetch the calendar events using the idToken
-                        function fetchCalendarEvents(idToken) {
-                          // Set the OAuth token (access token) for the API client using the idToken
-                          gapi.auth.setToken({
-                            access_token: idToken // Use the idToken as the access token for authentication
-                          });
-                      
-                          // Make an API call to fetch calendar events
-                          gapi.client.load('calendar', 'v3', function() {
-                              const request = gapi.client.calendar.events.list({
-                                  calendarId: 'primary', // Get events from the primary calendar
-                                  timeMin: (new Date()).toISOString(), // Get events starting from the current time
-                                  maxResults: 10, // Adjust as needed
-                                  singleEvents: true, // Only fetch single events (not recurring events)
-                                  orderBy: 'startTime' // Order by event start time
-                              });
-                      
-                              // Handle the response from the API
-                              request.execute(function(response) {
-                                  if (response.items && response.items.length > 0) {
-                                      displayEvents(response.items); // Display events on the page
-                                  } else {
-                                      document.getElementById('calendar-container').innerHTML = '<p>No upcoming events found.</p>';
-                                  }
-                              });
-                          });
-                        }
-                      
+                
                         // Function to display the events on the page
                         function displayEvents(events) {
-                          const calendarContainer = document.getElementById('calendar-container');
-                          calendarContainer.innerHTML = ''; // Clear previous events
-                      
-                          events.forEach(function(event) {
-                              const eventElement = document.createElement('div');
-                              eventElement.classList.add('event');
-                              const eventTitle = document.createElement('h3');
-                              eventTitle.textContent = event.summary;
-                              const eventTime = document.createElement('p');
-                              eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
-                              eventElement.appendChild(eventTitle);
-                              eventElement.appendChild(eventTime);
-                              calendarContainer.appendChild(eventElement);
-                          });
+                            const calendarContainer = document.getElementById('calendar-container');
+                
+                            if (events.length > 0) {
+                                events.forEach(function(event) {
+                                    const eventElement = document.createElement('div');
+                                    eventElement.classList.add('event');
+                                    const eventTitle = document.createElement('h3');
+                                    eventTitle.textContent = event.summary;
+                                    const eventTime = document.createElement('p');
+                                    eventTime.textContent = new Date(event.start.dateTime || event.start.date).toLocaleString();
+                                    eventElement.appendChild(eventTitle);
+                                    eventElement.appendChild(eventTime);
+                                    calendarContainer.appendChild(eventElement);
+                                });
+                            } else {
+                                calendarContainer.innerHTML = '<p>No upcoming events found.</p>';
+                            }
                         }
-                      </script>
+                    </script>
                       
                     
                     
