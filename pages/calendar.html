@@ -29,20 +29,23 @@
         let accessToken = '';
         let userEmail = ''; // To store logged-in user's email
 
+        // Handle response from Google Sign-In
         function handleCredentialResponse(response) {
             const user = response.credential;
             const userInfo = JSON.parse(atob(user.split('.')[1]));
             userEmail = userInfo.email;  // Get email from JWT
 
             console.log('Logged in as: ', userEmail);
+            console.log('Access Token:', response.credential); // Log the access token
 
-            // Get access token from the response and store it for later use
+            // Store the access token for API requests
             accessToken = response.credential;
 
             // After login, load the user's calendar
             loadCalendarEvents();
         }
 
+        // Load the calendar events
         function loadCalendarEvents() {
             if (!accessToken) {
                 console.log("No access token found. Please authenticate.");
@@ -53,14 +56,21 @@
             gapi.load('client:auth2', initCalendarClient);
         }
 
+        // Initialize Google Calendar API client
         function initCalendarClient() {
+            console.log('Initializing Google Calendar client...');
             gapi.auth2.init({ client_id: clientId }).then(() => {
                 gapi.client.load('https://content.googleapis.com/discovery/v1/apis/calendar/v3/rest').then(() => {
                     getCalendarEvents();
+                }).catch(error => {
+                    console.error('Error loading Google Calendar API:', error);
                 });
+            }).catch(error => {
+                console.error('Error initializing Google Auth:', error);
             });
         }
 
+        // Fetch the logged-in user's calendar events
         function getCalendarEvents() {
             if (!accessToken) {
                 console.log("No access token found.");
@@ -68,6 +78,7 @@
             }
 
             // Use the logged-in user's email to display their calendar
+            console.log('Fetching calendar events for:', userEmail);  // Log the user email
             gapi.client.request({
                 path: `https://www.googleapis.com/calendar/v3/calendars/${userEmail}/events`,  // Use the logged-in user's email
                 method: 'GET',
@@ -75,14 +86,21 @@
                     access_token: accessToken
                 }
             }).then(response => {
-                console.log(response);
-                const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(userEmail)}&ctz=America%2FSao_Paulo`;
-                createCalendarIframe(calendarUrl);
+                console.log('Calendar events response:', response);  // Log the response to check if the API returns events
+                if (response.result.items && response.result.items.length > 0) {
+                    // If events are found, display them
+                    const calendarUrl = `https://calendar.google.com/calendar/embed?src=${encodeURIComponent(userEmail)}&ctz=America%2FSao_Paulo`;
+                    createCalendarIframe(calendarUrl);
+                } else {
+                    console.log('No events found in the calendar.');
+                    document.getElementById('calendar-container').innerHTML = '<p>No upcoming events found.</p>';
+                }
             }).catch(error => {
                 console.error('Error fetching calendar events:', error);
             });
         }
 
+        // Create and embed the calendar iframe
         function createCalendarIframe(calendarUrl) {
             const iframe = document.createElement('iframe');
             iframe.src = calendarUrl;
@@ -97,6 +115,7 @@
             document.getElementById('calendar-container').appendChild(iframe);
         }
 
+        // Initialize Google Sign-In
         function initGoogleSignIn() {
             if (typeof google === 'undefined') {
                 // Retry initialization once the Google API is available
