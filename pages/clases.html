@@ -392,31 +392,32 @@ document.getElementById('show-all').addEventListener('click', function() {
         
                     <div id="section5" class="content-section">
                         <div id="calendar-container">
+                            <h2>Hace click en los eventos y copialos a tu calendario!!!</h2>
                             <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&mode=AGENDA&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                            <br>
+                            <h3> También podes agregar tus propios eventos y tareas:</h3>
+                            <form id="eventForm">
+                                <label for="eventTitle">Título del Evento:</label>
+                                <input type="text" id="eventTitle" name="eventTitle" required><br><br>
+                              
+                                <label for="eventDate">Fecha:</label>
+                                <input type="date" id="eventDate" name="eventDate" required><br><br>
+                              
+                                <label for="eventStartTime">Hora de comienzo (HH:MM):</label>
+                                <input type="time" id="eventStartTime" name="eventStartTime" required><br><br>
+                              
+                                <label for="eventEndTime">Hora de finalización (HH:MM):</label>
+                                <input type="time" id="eventEndTime" name="eventEndTime" required><br><br>
+                              
+                                <label for="eventDetails">Detalles:</label>
+                                <textarea id="eventDetails" name="eventDetails" required></textarea><br><br>
+                              
+                                <label for="eventLocation">Ubicación:</label>
+                                <input type="text" id="eventLocation" name="eventLocation" required><br><br>
+                              
+                                <button type="submit">Agregar a mi Calendario</button>
+                              </form>
                         </div>
-                        <h2>Hace click en los eventos y copialos a tu calendario!!!</h2>
-                        <h3> También podes agregar tus propios eventos y tareas:</h3>
-<form id="eventForm">
-  <label for="eventTitle">Título del Evento:</label>
-  <input type="text" id="eventTitle" name="eventTitle" required><br><br>
-
-  <label for="eventDate">Fecha:</label>
-  <input type="date" id="eventDate" name="eventDate" required><br><br>
-
-  <label for="eventStartTime">Hora de comienzo (HH:MM):</label>
-  <input type="time" id="eventStartTime" name="eventStartTime" required><br><br>
-
-  <label for="eventEndTime">Hora de finalización (HH:MM):</label>
-  <input type="time" id="eventEndTime" name="eventEndTime" required><br><br>
-
-  <label for="eventDetails">Detalles:</label>
-  <textarea id="eventDetails" name="eventDetails" required></textarea><br><br>
-
-  <label for="eventLocation">Ubicación:</label>
-  <input type="text" id="eventLocation" name="eventLocation" required><br><br>
-
-  <button type="submit">Agregar a mi Calendario</button>
-</form>
     </div>
                     
 
@@ -447,8 +448,6 @@ document.getElementById('show-all').addEventListener('click', function() {
     window.open(calendarUrl, '_blank');
   });
 </script>
-
-                    
                     
                       <style>
                         /* Add your custom styles for the calendar container */
@@ -465,7 +464,7 @@ document.getElementById('show-all').addEventListener('click', function() {
                         padding: 20px 25px;
                         backdrop-filter: blur(10px); /* Frosted glass effect */
                         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-                        max-width: 400px; /* Reduced width for a more compact look */
+                        max-width: 200px; /* Reduced width for a more compact look */
                         width: 100%;
                         }
 
