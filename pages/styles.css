@@ -136,7 +136,6 @@ body {
         .left-panel {
             justify-content: center;
             display: flex;
-            flex-wrap: wrap; /* Allows the buttons to wrap to the next line */
         }
         
         .left-panel button {
