@@ -392,12 +392,14 @@ document.getElementById('show-all').addEventListener('click', function() {
         
                     <div id="section5" class="content-section">
                         <div id="calendar-container">
-                            <div class="iframe-container"><h2>Hace click en los eventos y copialos a tu calendario!!!</h2>
-                                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&showTz=0&mode=AGENDA&title=Naginattaz&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5" style="border-width:0" width="400" height="600" frameborder="0" scrolling="no"></iframe>
+                            <div class="iframe-container">
+                                <h2>Calendario Naginattaz</h2>
+                                <p>Copia los eventos agendados a tu propio calendario.</p>
+                                <iframe src="https://calendar.google.com/calendar/embed?height=800&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&showTz=0&mode=AGENDA&title=Naginattaz&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5" style="border-width:0" width="600" height="600" frameborder="0" scrolling="no"></iframe>
                                 <br></div>
                             <div style="padding-right: 20px;">
                                 
-                            <h3> También podes agregar tus propios eventos y tareas:</h3>
+                            <p> También podes agregar tus propios eventos y tareas:</p>
                             <form id="eventForm">
                                 <label for="eventTitle">Título del Evento:</label>
                                 <input type="text" id="eventTitle" name="eventTitle" required><br><br>
@@ -461,7 +463,7 @@ document.getElementById('show-all').addEventListener('click', function() {
                             min-height: 400px;
                         }
                         .iframe-container{
-                            width:70%;
+                            width:50%;
                             padding: 0 20px;
                         }
                          /* Glassy container styling */
@@ -491,7 +493,7 @@ document.getElementById('show-all').addEventListener('click', function() {
                         }
 
                         input, textarea, button {
-                        width: 100%;
+                        width: 85%;
                         padding: 10px; /* Reduced padding */
                         margin: 6px 0; /* Reduced margin between elements */
                         border: none;
