@@ -394,29 +394,29 @@ document.getElementById('show-all').addEventListener('click', function() {
                         <div id="calendar-container">
                             <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&mode=AGENDA&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                         </div>
-                        <h2>Create Your Event</h2>
+                        <h2>Agregá los eventos a tu calendario!!!</h2>
 <form id="eventForm">
-  <label for="eventTitle">Event Title:</label>
+  <label for="eventTitle">Título del Evento:</label>
   <input type="text" id="eventTitle" name="eventTitle" required><br><br>
 
-  <label for="eventDate">Event Date:</label>
+  <label for="eventDate">Fecha:</label>
   <input type="date" id="eventDate" name="eventDate" required><br><br>
 
-  <label for="eventStartTime">Start Time (HH:MM):</label>
+  <label for="eventStartTime">Hora de comienzo (HH:MM):</label>
   <input type="time" id="eventStartTime" name="eventStartTime" required><br><br>
 
-  <label for="eventEndTime">End Time (HH:MM):</label>
+  <label for="eventEndTime">Hora de finalización (HH:MM):</label>
   <input type="time" id="eventEndTime" name="eventEndTime" required><br><br>
 
-  <label for="eventDetails">Event Details:</label>
+  <label for="eventDetails">Detalles:</label>
   <textarea id="eventDetails" name="eventDetails" required></textarea><br><br>
 
-  <label for="eventLocation">Event Location:</label>
+  <label for="eventLocation">Ubicación:</label>
   <input type="text" id="eventLocation" name="eventLocation" required><br><br>
 
-  <button type="submit">Add to My Calendar</button>
+  <button type="submit">Agregar a mi Calendario</button>
 </form>
-                    </div>
+    </div>
                     
 
 <script>
@@ -457,79 +457,78 @@ document.getElementById('show-all').addEventListener('click', function() {
                             border: 1px solid #ddd;
                             padding: 20px;
                         }
+                         /* Glassy container styling */
+                        .form-container {
+                        background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+                        border-radius: 15px;
+                        padding: 20px 25px;
+                        backdrop-filter: blur(10px); /* Frosted glass effect */
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                        max-width: 400px; /* Reduced width for a more compact look */
+                        width: 100%;
+                        }
 
-                        /* Glassy container styling */
-    .form-container {
-      background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
-      border-radius: 15px;
-      padding: 30px;
-      backdrop-filter: blur(10px); /* Frosted glass effect */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      max-width: 500px;
-      width: 100%;
-    }
+                        h2 {
+                        text-align: center;
+                        color: #fff;
+                        margin-bottom: 15px;
+                        font-size: 1.8rem; /* Slightly smaller font size */
+                        font-weight: 500;
+                        }
 
-    h2 {
-      text-align: center;
-      color: #fff;
-      margin-bottom: 20px;
-      font-size: 2rem;
-      font-weight: 500;
-    }
+                        label {
+                        font-size: 0.9rem; /* Smaller label text */
+                        color: #fff;
+                        margin-bottom: 5px;
+                        display: block;
+                        }
 
-    label {
-      font-size: 1rem;
-      color: #fff;
-      margin-bottom: 5px;
-      display: block;
-    }
+                        input, textarea, button {
+                        width: 100%;
+                        padding: 10px; /* Reduced padding */
+                        margin: 6px 0; /* Reduced margin between elements */
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 0.95rem; /* Slightly smaller font size */
+                        background-color: rgba(255, 255, 255, 0.2);
+                        color: #fff;
+                        transition: background-color 0.3s, transform 0.3s;
+                        }
 
-    input, textarea, button {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #fff;
-      transition: background-color 0.3s, transform 0.3s;
-    }
+                        /* Form inputs and textarea */
+                        input[type="text"],
+                        input[type="date"],
+                        input[type="time"],
+                        textarea {
+                        background-color: rgba(255, 255, 255, 0.3);
+                        }
 
-    /* Form inputs and textarea */
-    input[type="text"],
-    input[type="date"],
-    input[type="time"],
-    textarea {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
+                        textarea {
+                        resize: vertical;
+                        min-height: 70px; /* Reduced height for textarea */
+                        }
 
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
+                        /* Button styling */
+                        button {
+                        background-color: #f0a1f1; /* Soft pink */
+                        color: #fff;
+                        font-weight: bold;
+                        }
 
-    /* Button styling */
-    button {
-      background-color: #f0a1f1; /* Soft pink */
-      color: #fff;
-      font-weight: bold;
-    }
+                        button:hover {
+                        background-color: #6a2e8e; /* Dark violet */
+                        transform: scale(1.05);
+                        }
 
-    button:hover {
-      background-color: #6a2e8e; /* Dark violet */
-      transform: scale(1.05);
-    }
+                        /* Input hover effect */
+                        input:hover, textarea:hover {
+                        background-color: #f0a1f1; /* Soft pink on hover */
+                        }
 
-    /* Input hover effect */
-    input:hover, textarea:hover {
-      background-color: #f0a1f1; /* Soft pink on hover */
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      background-color: #6a2e8e; /* Dark violet focus */
-    }
+                        input:focus, textarea:focus {
+                        outline: none;
+                        background-color: #6a2e8e; /* Dark violet focus */
+                        }
                     </style>
 
                     
