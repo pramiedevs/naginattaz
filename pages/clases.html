@@ -392,105 +392,10 @@ document.getElementById('show-all').addEventListener('click', function() {
         
                     <div id="section5" class="content-section">
                         <div id="calendar-container">
-                            <!-- Calendar events will be dynamically inserted here -->
+                            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&mode=WEEK&title=Naginattaz&src=cHJhbWlldGVzdEBnbWFpbC5jb20&src=ZXMuYXIjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                         </div>
-                        <button id="login-button">Sign in with Google</button>
 
                     </div>
-                    
-                    <script>
-                        // Function to load Google API client and identity services
-                        function loadGoogleAPIScripts() {
-                            // Load Google API Client (gapi)
-                            gapi.load('client:auth2', initClient);
-                    
-                            // Initialize Google Identity Services (GIS) for login
-                            google.accounts.id.initialize({
-                                client_id: '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your Google Client ID
-                                callback: handleCredentialResponse
-                            });
-                    
-                            // Render the Sign-In button
-                            google.accounts.id.renderButton(
-                                document.getElementById("login-button"),
-                                { theme: "outline", size: "large" } // Customize button style
-                            );
-                        }
-                    
-                        // This function initializes the Google API client
-                        function initClient() {
-                            gapi.client.init({
-                                'apiKey': 'AIzaSyDEfHAHtttroqzBeMxPxPkF7lbHlCuqbtU', // Replace with your API key
-                                'clientId': '425627947718-26j5n0t5t3kme55govd3n463ogolfjbo.apps.googleusercontent.com', // Replace with your Client ID
-                                'scope': 'https://www.googleapis.com/auth/calendar.readonly', // Calendar read-only scope
-                                'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest']
-                            }).then(function() {
-                                // Add listener for sign-in state changes
-                                gapi.auth2.getAuthInstance().isSignedIn.listen(listEvents);
-                    
-                                // If the user is already signed in, list the events
-                                if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                                    listEvents();
-                                }
-                            });
-                        }
-                    
-                        // Handle credential response after user login
-                        function handleCredentialResponse(response) {
-                            const idToken = response.credential;
-                            console.log("ID Token:", idToken); // For debugging purposes
-                    
-                            // Authenticate with Google API Client using the ID token
-                            gapi.auth2.getAuthInstance().signIn();
-                        }
-                    
-                        // List user's calendar events
-                        function listEvents() {
-                            gapi.client.calendar.events.list({
-                                'calendarId': 'primary', // User's primary calendar
-                                'timeMin': (new Date()).toISOString(),
-                                'showDeleted': false,
-                                'singleEvents': true,
-                                'maxResults': 10, // Limit the number of events to display
-                                'orderBy': 'startTime'
-                            }).then(function(response) {
-                                var events = response.result.items;
-                                var eventsContainer = document.getElementById('calendar-container');
-                    
-                                // Clear any previous events
-                                eventsContainer.innerHTML = '';
-                    
-                                if (events.length > 0) {
-                                    // Display each event
-                                    events.forEach(function(event) {
-                                        var eventDiv = document.createElement('div');
-                                        eventDiv.className = 'event';
-                                        eventDiv.innerHTML = `
-                                            <h4>${event.summary}</h4>
-                                            <p><strong>Start:</strong> ${event.start.dateTime || event.start.date}</p>
-                                            <p><strong>End:</strong> ${event.end.dateTime || event.end.date}</p>
-                                        `;
-                                        eventsContainer.appendChild(eventDiv);
-                                    });
-                                } else {
-                                    eventsContainer.innerHTML = '<p>No upcoming events found.</p>';
-                                }
-                            }).catch(function(error) {
-                                console.log('Error fetching calendar events:', error);
-                            });
-                        }
-                    
-                        // Ensure that both scripts are loaded before calling onLoadCallback
-                        window.onload = function() {
-                            // Delay the function to make sure both Google scripts are fully loaded
-                            if (typeof google !== 'undefined' && typeof gapi !== 'undefined') {
-                                loadGoogleAPIScripts();
-                            } else {
-                                console.log("Google API scripts not loaded yet");
-                            }
-                        };
-                    </script>
-                      
                     
                     
                       <style>
@@ -500,12 +405,6 @@ document.getElementById('show-all').addEventListener('click', function() {
                             min-height: 400px;
                             border: 1px solid #ddd;
                             padding: 20px;
-                        }
-                        .event {
-                            margin: 10px 0;
-                            padding: 10px;
-                            background-color: #f4f4f4;
-                            border-left: 5px solid #4CAF50;
                         }
                     </style>
 
