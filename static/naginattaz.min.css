@@ -22,7 +22,7 @@ img{vertical-align:middle;max-width:200%;display:inline-block}html.w-mod-touch *
 
 .w-col-3{width:45%}
 
-.w-col-4{width:33.3333%}.w-col-5{width:41.6667%}.w-col-6{width:50%}.w-col-7{width:58.3333%}.w-col-8{width:66.6667%}.w-col-9{width:75%}.w-col-10{width:83.3333%}.w-col-11{width:91.6667%}.w-col-12{width:100%}.w-hidden-main{display:none!important}
+.w-col-4{width:33.3333%}.w-col-5{width:41.6667%}.w-col-6{width:33%}.w-col-7{width:58.3333%}.w-col-8{width:66.6667%}.w-col-9{width:75%}.w-col-10{width:83.3333%}.w-col-11{width:91.6667%}.w-col-12{width:100%}.w-hidden-main{display:none!important}
 
 
 @media screen and (max-width:991px){
@@ -395,7 +395,7 @@ padding:2px;}
 
 .div-block-171{background-color:var(--nagirosa);border-top-left-radius:20px;border-top-right-radius:20px;padding-top:1vw;padding-bottom:1vw;position:absolute;top:0%;bottom:auto;left:0%;right:0%;transform:translateY(-98%)}.div-block-172{margin-top:5vw}
 
-.pricing_cta{color:var(--nagimagenta);text-align:center;letter-spacing:.2vw;background-color:var(--nagirosa);border-radius:4px;margin-top:2vw;padding:1.5vw 3vw;font-family:Poppins,sans-serif;font-size:1.2vw;font-weight:700;line-height:2vw;display:block}
+.pricing_cta{color:var(--nagimagenta);text-align:center;letter-spacing:.2vw;background-color:var(--nagirosa);border-radius:4px;margin-top:2vw;padding:1.5vw 3vw;font-family:Poppins,sans-serif;font-size:.7rem;font-weight:700;line-height:2vw;display:block}
 
 .pricing_cta:hover{background-color:var(--nagimagenta);color:#111}
 
@@ -405,7 +405,7 @@ padding:2px;}
   background-color:var(--nagivioleta);
 }
 
-.pricing_cta.free{color:var(--black-2);background-color:#ebefef;margin-top:0}.text-block-51{color:#111;font-family:"Sequel 100 Wide",Arial,sans-serif;font-size:6vw;font-weight:600;line-height:6vw}.text-span-3{font-size:1.5vw;font-weight:500}
+.pricing_cta.free{color:var(--black-2);background-color:#ebefef;margin-top:0}.text-block-51{color:#111;font-family:"Sequel 100 Wide",Arial,sans-serif;font-size:2rem;font-weight:600;line-height:6vw}.text-span-3{font-size:1.5vw;font-weight:500}
 
 .pricing-value-text{color:var(--nagimagenta);text-align:center;letter-spacing:.2vw;width:100%;margin-top:0;margin-bottom:0;font-family:Poppins,sans-serif;font-size:1.2vw;font-weight:700;line-height:1.85vw}
 
