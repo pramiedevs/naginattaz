@@ -635,8 +635,11 @@ document.getElementById('show-all').addEventListener('click', function() {
 
         function showContent(sectionId) {
         var sections = document.querySelectorAll('.content-section');
+        const insta= document.getElementById(section6);
+
         sections.forEach(function(section) {
             section.classList.remove('active');
+            insta.classList.remove('active');
         });
         document.getElementById(sectionId).classList.add('active');
     }
