@@ -157,12 +157,12 @@ function toggleDropdown(id) {
                 <!-- Left Panel (30%) -->
                 <div id="panel" class="panel">
                     <!-- Clases Section -->
-                    <button class="panel-button" onclick="showContent('section2'); showAllItems()">
+                    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); showAllItems()">
                         Todas las Clases <span class="arrow">&#x2192;</span>
                     </button>
                     
                     <!-- Clases Individuales Section -->
-                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('clases'); filterItems('class')">
+                    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('clases'); filterItems('class')">
                         Clases Individuales <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="clases" class="dropdown-content">
@@ -171,12 +171,12 @@ function toggleDropdown(id) {
                     </div>
                     
                     <!-- Programas Section -->
-                    <button class="panel-button" onclick="showContent('section2'); filterItems('program')">
+                    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); filterItems('program')">
                         Programas <span class="arrow">&#x2192;</span>
                     </button>
                     
                     <!-- Estilos Section -->
-                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('categories')">
+                    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('categories')">
                         Estilos <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="categories" class="dropdown-content">
@@ -186,7 +186,7 @@ function toggleDropdown(id) {
                     </div>
                     
                     <!-- Instructores Section -->
-                    <button class="panel-button" onclick="showContent('section2'); toggleDropdown('instructors')">
+                    <button class="panel-button" onclick="showContent('section2');hideInstagramFeed(); toggleDropdown('instructors')">
                         Instructores <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="instructors" class="dropdown-content">
@@ -213,7 +213,7 @@ function toggleDropdown(id) {
                     
                 
                     <!-- Playlists Section -->
-                    <button class="panel-button" onclick="toggleDropdown('playlists')">
+                    <button class="panel-button" onclick="toggleDropdown('playlists');hideInstagramFeed()">
                         Playlists <span class="arrow">&#x2193;</span>
                     </button>
                     <div id="playlists" class="dropdown-content">
@@ -223,7 +223,7 @@ function toggleDropdown(id) {
                     </div>
                 
                     <!-- Calendario Section -->
-                    <button class="panel-button" onclick="showContent('section5')">
+                    <button class="panel-button" onclick="showContent('section5');hideInstagramFeed()">
                         Calendario <span class="arrow">&#x2193;</span>
                     </button>
                 
@@ -595,6 +595,12 @@ document.getElementById('show-all').addEventListener('click', function() {
                 // Add class to section6 to trigger flex display
                 section6.classList.add('active-flex');
             }
+            function hideInstagramFeed() {
+                const instagramFeedContainer = document.getElementById('instagram-feed');
+                const section6 = document.getElementById('section6');
+                // Add class to section6 to trigger flex display
+                section6.classList.remove('active-flex');
+            }
         </script>
         
 
@@ -635,11 +641,9 @@ document.getElementById('show-all').addEventListener('click', function() {
 
         function showContent(sectionId) {
         var sections = document.querySelectorAll('.content-section');
-        const insta= document.getElementById(section6);
 
         sections.forEach(function(section) {
             section.classList.remove('active');
-            insta.classList.remove('active');
         });
         document.getElementById(sectionId).classList.add('active');
     }
