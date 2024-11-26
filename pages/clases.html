@@ -394,8 +394,58 @@ document.getElementById('show-all').addEventListener('click', function() {
                         <div id="calendar-container">
                             <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&mode=WEEK&title=Naginattaz&src=cHJhbWlldGVzdEBnbWFpbC5jb20&src=ZXMuYXIjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%230B8043" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                         </div>
-
                     </div>
+                    <h2>Create Your Event</h2>
+<form id="eventForm">
+  <label for="eventTitle">Event Title:</label>
+  <input type="text" id="eventTitle" name="eventTitle" required><br><br>
+
+  <label for="eventDate">Event Date:</label>
+  <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+  <label for="eventStartTime">Start Time (HH:MM):</label>
+  <input type="time" id="eventStartTime" name="eventStartTime" required><br><br>
+
+  <label for="eventEndTime">End Time (HH:MM):</label>
+  <input type="time" id="eventEndTime" name="eventEndTime" required><br><br>
+
+  <label for="eventDetails">Event Details:</label>
+  <textarea id="eventDetails" name="eventDetails" required></textarea><br><br>
+
+  <label for="eventLocation">Event Location:</label>
+  <input type="text" id="eventLocation" name="eventLocation" required><br><br>
+
+  <button type="submit">Add to My Calendar</button>
+</form>
+
+<script>
+  document.getElementById('eventForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    
+    // Get form values
+    const eventTitle = document.getElementById('eventTitle').value;
+    const eventDate = document.getElementById('eventDate').value;
+    const eventStartTime = document.getElementById('eventStartTime').value;
+    const eventEndTime = document.getElementById('eventEndTime').value;
+    const eventDetails = document.getElementById('eventDetails').value;
+    const eventLocation = document.getElementById('eventLocation').value;
+
+    // Combine date and time to create the full datetime in UTC format
+    const startDateTime = new Date(`${eventDate}T${eventStartTime}:00Z`).toISOString();
+    const endDateTime = new Date(`${eventDate}T${eventEndTime}:00Z`).toISOString();
+
+    // Format the datetime in Google Calendar format: YYYYMMDDTHHMMSSZ
+    const startFormatted = startDateTime.replace(/[-:]/g, '').slice(0, 15) + 'Z';
+    const endFormatted = endDateTime.replace(/[-:]/g, '').slice(0, 15) + 'Z';
+
+    // Create the Google Calendar event URL
+    const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startFormatted}/${endFormatted}&details=${encodeURIComponent(eventDetails)}&location=${encodeURIComponent(eventLocation)}&sf=true&output=xml`;
+
+    // Open the Google Calendar with pre-filled details
+    window.open(calendarUrl, '_blank');
+  });
+</script>
+
                     
                     
                       <style>
