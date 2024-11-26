@@ -392,9 +392,11 @@ document.getElementById('show-all').addEventListener('click', function() {
         
                     <div id="section5" class="content-section">
                         <div id="calendar-container">
-                            <h2>Hace click en los eventos y copialos a tu calendario!!!</h2>
-                            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&mode=AGENDA&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-                            <br>
+                            <div><h2>Hace click en los eventos y copialos a tu calendario!!!</h2>
+                                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FArgentina%2FBuenos_Aires&showPrint=0&mode=AGENDA&src=cHJhbWlldGVzdEBnbWFpbC5jb20&color=%23039BE5" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+                                <br></div>
+                            <div>
+                                
                             <h3> También podes agregar tus propios eventos y tareas:</h3>
                             <form id="eventForm">
                                 <label for="eventTitle">Título del Evento:</label>
@@ -417,6 +419,8 @@ document.getElementById('show-all').addEventListener('click', function() {
                               
                                 <button type="submit">Agregar a mi Calendario</button>
                               </form>
+                            </div>
+                            
                         </div>
     </div>
                     
@@ -452,9 +456,9 @@ document.getElementById('show-all').addEventListener('click', function() {
                       <style>
                         /* Add your custom styles for the calendar container */
                         #calendar-container {
+                            display: flex;
                             width: 100%;
                             min-height: 400px;
-                            border: 1px solid #ddd;
                             padding: 20px;
                         }
                          /* Glassy container styling */
