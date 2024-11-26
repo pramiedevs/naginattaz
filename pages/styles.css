@@ -342,16 +342,6 @@ background-color: var(--nagivioleta);
         .content-section.active {
             display: block;
         }
-
-        #calendar-events-container {
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            margin-top: 20px;
-            min-height: 100px;  /* Make sure it's large enough to display content */
-            display: flex;
-            flex-direction: column;
-        }
         
         .event {
             margin-bottom: 10px;
@@ -395,20 +385,6 @@ background-color: var(--nagivioleta);
     overflow-y: auto;
 }
 
-.fixed-calendar {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.fixed-calendar th, .fixed-calendar td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-.fixed-calendar th {
-    background-color: #f4f4f4;
-}
 .mobile{
     display:none;
 }
