@@ -359,25 +359,43 @@ document.getElementById('show-all').addEventListener('click', function() {
                             <script>
                                 // Function to check if the lock is visible and disable interaction if it is
                                 function disableInteractionsIfLocked() {
-                                    const lockIcon = document.getElementById('lock-icon');
-                                    const containerClass = document.getElementById('class');
-                                    const containerProgram = document.getElementById('program');
-                                    const clases = document.getElementsByClassName('img-clases');
-                                    
-                                    // Check if the lock icon is visible
-                                    if (lockIcon && lockIcon.style.display !== 'none') {
-                                        // Lock is visible, disable interaction by setting pointer-events to 'none'
-                                        containerClass.style.pointerEvents = 'none';
-                                        containerProgram.style.pointerEvents = 'none';
-                                        clases.style.filter = 'blur(5px)';
-                                                                        } else {
-                                        // Lock is not visible, re-enable interaction by setting pointer-events to 'auto'
-                                        containerClass.style.pointerEvents = 'auto';
-                                        containerProgram.style.pointerEvents = 'auto';
+                                  const lockIcon = document.getElementById('lock-icon');
+                                  const containerClass = document.getElementById('class');
+                                  const containerProgram = document.getElementById('program');
+                                  const clases = document.getElementsByClassName('img-clases');
+                              
+                                  if (lockIcon) {
+                                    // Use getComputedStyle to check visibility
+                                    const lockVisible = window.getComputedStyle(lockIcon).display !== 'none';
+                              
+                                    if (lockVisible) {
+                                      // Disable interaction
+                                      containerClass.style.pointerEvents = 'none';
+                                      containerProgram.style.pointerEvents = 'none';
+                              
+                                      // Apply blur effect to each image
+                                      for (let img of clases) {
+                                        img.style.filter = 'blur(1px)';
+                                      }
+                                    } else {
+                                      // Re-enable interaction
+                                      containerClass.style.pointerEvents = 'auto';
+                                      containerProgram.style.pointerEvents = 'auto';
+                              
+                                      // Remove blur effect from each image
+                                      for (let img of clases) {
+                                        img.style.filter = 'none';
+                                      }
                                     }
+                                  }
                                 }
+                              
+                                // Run the function initially
                                 disableInteractionsIfLocked();
-                            </script>
+                              
+                                // Optionally, add an observer or event to detect changes dynamically
+                              </script>
+                              
                                               
                         </div>
                     </div>
