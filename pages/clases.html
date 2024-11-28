@@ -327,7 +327,7 @@ document.getElementById('show-all').addEventListener('click', function() {
             
                     <div id="section1" class="content-section active">
                         <div class="image-container">
-                            <img src="../src/BANNERPRINCIPAL_1.png" style="width:100%; margin-bottom: 2vh;">
+                            <img src="../src/BANNERPRINCIPAL_1.webp" style="width:100%; margin-bottom: 2vh;">
                         </div>                
                         <!-- <iframe src="https://player.vimeo.com/video/1019631883?&player_&controls=0&autoplay=1&muted=1&loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position: inherit; width:1200px;height:100%;" title="nagi video"></iframe> -->            
                         </div>
@@ -335,22 +335,22 @@ document.getElementById('show-all').addEventListener('click', function() {
                         <div class="image-grid">
                             <div id="hiphop program vicky-branda">
                                 <a href="./clases/index.html">
-                                <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Hip Hop Dance Style"></a>
+                                <img class="img-clases" src="../src/hiphop.webp" loading="lazy" alt="Hip Hop Dance Style"></a>
                                 <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;">Hip Hop</h3>
                             </div>
                             <div id="contemporary class cami-lucca">
-                                <img class="img-clases" src="../src/contemporary.png" loading="lazy" alt="Contemporary Dance Style">
+                                <img class="img-clases" src="../src/contemporary.webp" loading="lazy" alt="Contemporary Dance Style">
                                 <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Contemporary</h3>
                             </div>
                             <div id="workout class cami-lucca cami-moroni">
                                 <a href="./clases/index.html">
-                                    <img class="img-clases" src="../src/workout.png" loading="lazy" alt="Workout Dance Style">
+                                    <img class="img-clases" src="../src/workout.webp" loading="lazy" alt="Workout Dance Style">
                                 </a>
                                 <h3 style="width: 100%;position: absolute;bottom: -75px;z-index: 1000;"> Workout</h3>
                             </div>
                             <div id="heels class vicky branda" style="position: relative;">
                                 <a href="./clases/index.html">
-                                    <img class="img-clases" src="../src/hiphop.png" loading="lazy" alt="Heels Dance Style">
+                                    <img class="img-clases" src="../src/hiphop.webp" loading="lazy" alt="Heels Dance Style">
                                 </a>
                                 <h3 style="width: 100%; position: absolute; bottom: -75px; z-index: 1000;">Heels</h3>
                                 <!-- Add the lock icon on top of the image and center it -->
@@ -362,13 +362,15 @@ document.getElementById('show-all').addEventListener('click', function() {
                                     const lockIcon = document.getElementById('lock-icon');
                                     const containerClass = document.getElementById('class');
                                     const containerProgram = document.getElementById('program');
+                                    const clases = document.getElementsByClassName('img-clases');
                                     
                                     // Check if the lock icon is visible
                                     if (lockIcon && lockIcon.style.display !== 'none') {
                                         // Lock is visible, disable interaction by setting pointer-events to 'none'
                                         containerClass.style.pointerEvents = 'none';
                                         containerProgram.style.pointerEvents = 'none';
-                                    } else {
+                                        clases.style.filter = 'blur(5px)';
+                                                                        } else {
                                         // Lock is not visible, re-enable interaction by setting pointer-events to 'auto'
                                         containerClass.style.pointerEvents = 'auto';
                                         containerProgram.style.pointerEvents = 'auto';
