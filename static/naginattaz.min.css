@@ -157,7 +157,7 @@ li{
 
 .vimeo-bg{
   background-color: var(--nagivioleta)!important;
-  margin:0 12px;
+  margin:0 auto;
   padding: 0 !important;
   width:95%!important;
   border-radius: 20px;
