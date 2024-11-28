@@ -33,12 +33,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
+        }        
         body{            
             background: linear-gradient(0.25turn, #111111, #26152e, #430e53, #382142, #0f0f0f); /* Initial background color */
             transition: background-color 0.5s ease; /* Smooth transition for background color */
         }
+        .logo-index img {
+            z-index: 100000;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 200px;
+}
         .container {
             margin:0 30px;
             background-color: var(--nagiobispo) ;
@@ -96,7 +103,13 @@
     </style>
 </head>
 <body>
+    <div class="logo-index">
+        <a href="../index.html" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
+            <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black."/>
+        </a>
+    </div>
     <div class="gif-background" id="gifBackground"></div>
+    
     <div class="container">
         
         <img src="../src/BANNERPRINCIPAL_1_mob.png" class="image" alt="Image">
