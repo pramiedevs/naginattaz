@@ -363,27 +363,36 @@ document.getElementById('show-all').addEventListener('click', function() {
                             <script>
                                 // Function to check if the lock is visible and disable interaction if it is
                                 function disableInteractionsIfLocked() {
-                                  const lockIcon = document.getElementById('lock-icon');
-                                  const clases = document.getElementsByClassName('img-clases');
+                                  // Select all lock icons
+                                  const lockIcons = document.querySelectorAll('#lock-icon');
                               
-                                  if (lockIcon) {
+                                  // Iterate over each lock icon
+                                  lockIcons.forEach(lockIcon => {
                                     // Use getComputedStyle to check visibility
                                     const lockVisible = window.getComputedStyle(lockIcon).display !== 'none';
                               
-                                    if (lockVisible) {
-                                      // Apply blur effect to each image
-                                      for (let img of clases) {
-                                        img.style.filter = 'blur(1px)';
-                                        img.style.pointerEvents = 'none'; // Ensure no interaction with the blurred image
-                                      }
-                                    } else {
-                                      // Remove blur effect from each image
-                                      for (let img of clases) {
-                                        img.style.filter = 'none';
-                                        img.style.pointerEvents = 'auto';
+                                    // Find the parent container of the lock icon
+                                    const parentContainer = lockIcon.closest('div');
+                              
+                                    if (parentContainer) {
+                                      // Get the image inside this container
+                                      const img = parentContainer.querySelector('.img-clases');
+                              
+                                      if (lockVisible) {
+                                        // If the lock icon is visible, blur the image and disable interaction
+                                        if (img) {
+                                          img.style.filter = 'blur(1px)';
+                                          img.style.pointerEvents = 'none';
+                                        }
+                                      } else {
+                                        // If the lock icon is not visible, remove blur and re-enable interaction
+                                        if (img) {
+                                          img.style.filter = 'none';
+                                          img.style.pointerEvents = 'auto';
+                                        }
                                       }
                                     }
-                                  }
+                                  });
                                 }
                               
                                 // Ensure the script runs after the DOM content is fully loaded
@@ -391,13 +400,14 @@ document.getElementById('show-all').addEventListener('click', function() {
                                   disableInteractionsIfLocked();
                                 });
                               
-                                // Optionally, add a listener to dynamically detect changes to the lock icon's visibility
-                                const lockIcon = document.getElementById('lock-icon');
-                                if (lockIcon) {
+                                // Add a MutationObserver to dynamically detect changes to the lock icon's visibility
+                                const lockIcons = document.querySelectorAll('#lock-icon');
+                                lockIcons.forEach(lockIcon => {
                                   const observer = new MutationObserver(disableInteractionsIfLocked);
                                   observer.observe(lockIcon, { attributes: true, attributeFilter: ['style', 'class'] });
-                                }
+                                });
                               </script>
+                              
                               
                               
                                               
