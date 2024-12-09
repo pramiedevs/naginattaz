@@ -1,4 +1,4 @@
-/* Root Variables for Day Mode (6am - 2pm) */
+/* Root Variables for Day Mode (6am - 6pm) */
 :root {
     --main-color: #9b3397;
     --secondary-color: #14a59e;
@@ -8,17 +8,7 @@
 
 }
 
-/* Noon Mode Variables (2pm - 8pm) */
-:root.noon {
-    --main-color: #efb638;
-    --secondary-color: #ed5b43;
-    --cta-color: #302c2a;
-    --hover-color: #993333;
-    --special-color:#d00000;
-
-}
-
-/* Dark Mode Variables (8pm - 6am) */
+/* Dark Mode Variables (6pm - 6am) */
 :root.darkmode {
     --main-color: #067993;
     --secondary-color: #3c104e;
