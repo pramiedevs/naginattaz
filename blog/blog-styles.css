@@ -235,11 +235,19 @@ header .menu ul li a:hover {
     position: relative;
     overflow: hidden;
     perspective: 1000px;
+    margin: 20px;
+    border: 1px solid black;
 }
 
 .parallax .text {
     flex: 1;
 }
+
+.reverse-parallax{
+    display:flex;
+    flex-direction: row-reverse;
+}
+
 .parallax-text-right{
     padding-left: 100px ;
 }

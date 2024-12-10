@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "Artículo 1",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.",
+        "img": "./imgs/1.jpg"
+    },
+    {
+        "id": 2,
+        "title": "Artículo 2",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.",
+        "img": "./imgs/2.jpg"
+    },
+    {
+        "id": 3,
+        "title": "Artículo 3",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.",
+        "img": "./imgs/3.jpg"
+    }
+]

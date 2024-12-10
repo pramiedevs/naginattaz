@@ -19,17 +19,17 @@
             <style>
                 .nagilogo img{
                     position: absolute;
-                    left:0;
+                    left: 0;
                     margin-left: 20px;
-                    top:0;
+                    top: 0;
                     margin-top: 20px;
-                    max-width:200px;
+                    max-width: 200px;
                 }
             </style>
         </div>
         <div class="logo" id="logo-container">
             <span id="loading-text" class="orbitron-title-light">Loading<span id="dots"></span></span>
-            <span id="logo-text" class="hidden orbitron-title">naginattaz blog</span> <!-- Placeholder for logo -->
+            <span id="logo-text" class="hidden orbitron-title">naginattaz blog</span>
         </div>
         <button id="dark-mode-toggle" class="light" aria-label="Toggle dark mode">
             <span id="icon">🌙</span>
@@ -42,52 +42,143 @@
             </ul>
         </nav>
     </header>
-
-    <section id="reviews">
-
+    
+    <!-- White background section -->
+    <section class="nav-actions">
+        <div class="left-button"></div>
+        <div class="right-button">
+            <button id="admin-button" class="admin-button">Admin</button>
+        </div>
     </section>
+    
+    <!-- Style for the new section -->
+    <style>
+        .nav-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+    
+        .left-button {
+            flex: 1;
+        }
+    
+        .right-button {
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+        }
+    
+        #admin-button {
+            padding: 10px 20px;
+            background: rgb(76, 68, 105);
+            color:rgb(216, 164, 240);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        #admin-button:hover {
+            color: black;
+            background: rgba(216, 164, 240, 0.842); /* Subtle hover effect */
+        }
+    
+        #create-blog-entry {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        #create-blog-entry:hover {
+            background-color: #218838;
+        }
+    
+        .hidden-button {
+            display: none;
+        }
+        .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .hidden-button {
+            display: none;
+        }
+
+        button.editar, button.eliminar {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.editar:hover, button.eliminar:hover {
+            background-color: #0056b3;
+        }
+
+        .guardar-cambios {
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .guardar-cambios:hover {
+        background-color: #218838;
+        }
+        .cambiar-imagen{
+            position:absolute;
+            top: 20px;
+            right:20px;
+            padding: 10px 20px;
+            background: rgb(76, 68, 105);
+            color:rgb(216, 164, 240);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cambiar-imagen:hover{
+            color: rgb(255, 255, 255);
+            background: #222222b4; /* Subtle hover effect */
+        }
+        .guardar-imagen {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.guardar-imagen:hover {
+    background-color: #218838;
+}
+
+    </style>
+       
 
     <!-- Main Section -->
     <main id="home">
-        <!-- Article 1 -->
-        <article class="parallax">
-            <div class="text parallax-text-left">
-                <h2>Artículo 1</h2>
-                <p class="glass nunito-p">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.
-                </p>
-            </div>
-            <div class="image" data-rotate="left">
-                <img src="./imgs/1.jpg" alt="Ejemplo 1">
-            </div>
-        </article>
-        <!-- Article 2 -->
-        <article class="parallax">
-            <div class="image" data-rotate="right">
-                <img src="./imgs/2.jpg" alt="Ejemplo 2">
-            </div>
-            <div class="text parallax-text-right">
-                <h2>Artículo 2</h2>
-                <p class="glass">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.
-                </p>
-            </div>
-        </article>
-        <!-- Article 3 -->
-        <article class="parallax">
-            <div class="text parallax-text-left">
-                <h2>Artículo 3</h2>
-                <p class="glass">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel odio nec mi tempor dignissim. Proin a scelerisque orci. Etiam efficitur lorem vel mi suscipit pellentesque.
-                </p>
-            </div>
-            <div class="image" data-rotate="left">
-                <img src="./imgs/3.jpg" alt="Ejemplo 3">
-            </div>
-        </article>
+        <!-- Articles will be dynamically rendered here by the JavaScript -->
     </main>
 
     <!-- Footer -->
@@ -96,5 +187,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="./blog.js"></script>
+
 </body>
 </html>
