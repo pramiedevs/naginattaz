@@ -27,6 +27,76 @@
   }}();
 </script>
 
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  .team-section {
+    padding: 2rem;
+    background-color: #f4f6ff;
+  }
+  .team-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 2rem;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
+  }
+  .team-card {
+    width:150px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  .team-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
+  .team-info {
+    padding: 1rem;
+  }
+  .team-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .team-role {
+    font-size: 1rem;
+    color: #7d7d7d;
+    margin-bottom: 1rem;
+  }
+  .team-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .team-social a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  .team-social a:hover {
+    color: #7a5cff;
+  }
+</style>
 
 <!-- No Highlight www.flowbase.co -->
 <!-- Block out any accidental highlighting of the tab buttons for added polish -->
@@ -92,28 +162,6 @@
 	margin-right: auto !important;
   margin-left: auto !important;
 }
-
-/* 
-Make the following elements inherit typography styles from the parent and not have hardcoded values. 
-Important: You will not be able to style for example "All Links" in Designer with this CSS applied.
-Uncomment this CSS to use it in the project. Leave this message for future hand-off.
-*/
-/*
-a,
-.w-input,
-.w-select,
-.w-tab-link,
-.w-nav-link,
-.w-dropdown-btn,
-.w-dropdown-toggle,
-.w-dropdown-link {
-  color: inherit;
-  text-decoration: inherit;
-  font-size: inherit;
-}
-*/
-
-/* Apply "..." after 3 lines of text */
 .text-style-3lines {
 	display: -webkit-box;
 	overflow: hidden;
@@ -121,8 +169,6 @@ a,
   line-clamp: 3;
 	-webkit-box-orient: vertical;
 }
-
-/* Apply "..." after 2 lines of text */
 .text-style-2lines {
 	display: -webkit-box;
 	overflow: hidden;
@@ -131,12 +177,10 @@ a,
 	-webkit-box-orient: vertical;
 }
 
-/* Adds inline flex display */
 .display-inlineflex {
   display: inline-flex;
 }
 
-/* These classes are never overwritten */
 .hide {
   display: none !important;
 }
@@ -258,36 +302,159 @@ margin: 0rem !important;
 
     </div>
     <div data-animation="default" class="navbar10_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbcf" role="banner" data-duration="400">
-    <div class="navbar10_container">
-      <a href="https://joaconavarro.github.io/naginattaz/" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
-        <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
-      </a>
-    
-    <nav role="navigation" class="navbar10_menu w-nav-menu">
-      <div class="navbar10_menu-left">
-        <a href="./team.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link titlefont">TEAM</a>
-        <a href="../pages/clases.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link titlefont">CLASES</a>
-        <a href="../#reviews" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link titlefont">MEMBRESÍAS</a>
-        <a href="./nagidatta.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold w-nav-link titlefont">#NAGIDATTA</a>
-        <div data-hover="true" data-delay="300" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbdd" class="navbar10_menu-dropdown w-dropdown">
-        <div class="navbar10_dropdown-toggle text-size-tiny text-weight-semibold text-style-allcaps w-dropdown-toggle"></div>
+      <div class="navbar10_container">
+        <a href="https://naginattaz.com" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
+          <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
+        </a>
       </div>
-        
-<nav class="navbar10_dropdown-list w-dropdown-list">
-  <div class="navbar10_container">
-    <div class="navbar10_dropdown-content">
-      <div class="navbar10_dropdown-content-left">
-  </div>
     </div>
-  </div>
-
-
-<script src="https://player.vimeo.com/api/player.js"></script>
-
-
-</div>
-</div>
-
-</div>
+  
+    <main>
+      <section class="team-section">
+        <h2 class="team-heading">Meet Our Team</h2>
+        <div class="team-grid">
+          <!-- Team Member 1 -->
+          <div class="team-card">
+            <img src="./static/team1.jpg" alt="Luna Turner">
+            <div class="team-info">
+              <h3 class="team-name">Luna Turner</h3>
+              <p class="team-role">Founder</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Team Member 2 -->
+          <div class="team-card">
+            <img src="./static/team2.jpg" alt="Bryant Hall">
+            <div class="team-info">
+              <h3 class="team-name">Bryant Hall</h3>
+              <p class="team-role">Developer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Team Member 3 -->
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope ns</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Team Member 3 -->
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          <!-- Team Member 3 -->
+          <div class="team-card">
+            <img src="./static/team3.jpg" alt="Hope Watkins">
+            <div class="team-info">
+              <h3 class="team-name">Hope Watkins</h3>
+              <p class="team-role">Designer</p>
+              <div class="team-social">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </body>
 </body>
 </html>
