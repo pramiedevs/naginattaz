@@ -32,18 +32,52 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
   }
+  .navbar10_logo-link{
+    margin-top: 
+    20px!important;
+  }
+  @media screen and (max-width: 991px) {
+    .navbar10_menu{
+      width: max-content;
+    border-bottom: 1px solid var(--\<unknown\|relume-variable-border-color-1\>);
+    background-color: rgba(255, 255, 255, 0)!important;
+    -webkit-text-fill-color: inherit;
+    background-clip: border-box;
+    align-items: flex-start;
+    height: 30px!important;
+    margin-left: 0;
+    padding: 1rem 5% 6.5rem;
+    transition: height .5s;
+    position: absolute!important;
+    top:150px;
+  right: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    overflow: hidden!important;
+  }
+  .navbar10_link.text-size-tiny.text-style-allcaps.text-weight-semibold {
+        margin-left: 30px!important;
+        margin-right: 0;
+    }
+    .navbar10_logo-link{
+      position: absolute!important;
+    top:30px;
+    left: 50%;
+  transform: translate(-50%, -50%);
+  }
+  }
+  
   .team-section {
     padding: 2rem;
-    background-color: #f4f6ff;
   }
   .team-heading {
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    color: #4a4a4a;
-    margin-bottom: 2rem;
+    color: #cb87ff;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
   }
   .team-grid {
     display: grid;
@@ -52,25 +86,52 @@
     justify-items: center;
   }
   .team-card {
-    width:150px;
-    height: 200px;
+    width:220px;
+    height: 350px;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
   }
-  .team-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
+  .team-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.social{
+  border-radius: 10px !important;
+  position: relative;
+  z-index: 1;
+  height: 25px!important;
+  margin-top: 0!important;
+  margin-left: 25px;
+  display: none;
+}
+.social:hover{
+  background: violet;
+}
+
+.team-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  background-color: #7a5cff;
+}
+
+.team-card:hover .team-role {
+  color: white; /* Change team role text color to white */
+}
+.team-card:hover .social {
+  display: block; 
+}
+
   .team-card img {
-    width: 100%;
+    margin-top: 10px;
+    width: 80%;
     height: auto;
     border-radius: 10px 10px 0 0;
   }
   .team-info {
     padding: 1rem;
+    color:black;
   }
   .team-name {
     font-size: 1.25rem;
@@ -82,6 +143,7 @@
     color: #7d7d7d;
     margin-bottom: 1rem;
   }
+  
   .team-social {
     display: flex;
     justify-content: center;
@@ -308,148 +370,399 @@ margin: 0rem !important;
         </a>
       </div>
     </div>
-  
+
+    <nav role="navigation" class="navbar10_menu w-nav-menu">
+      <div class="navbar10_menu-left">
+        <a href="./pages/team.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">TEAM</a>
+        <a href="./pages/clases.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">ENTRENAMIENTO</a>
+        <a href="./blog/blog.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont  w-nav-link">BLOG</a>
+        <a id="store" href="./naginattaz/store.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">STORE
+          <img class="cart-button-image" src="../naginattaz/jpegs/carros.png" alt="Carrito" style="width:20px; border-radius: 0%; margin-left: 20px;">
+        </a>
+        <style>
+          #store {
+              color: rgb(255, 185, 185); /* initial color */
+              text-decoration: none; /* optional: removes underline */
+          }
+          #store:hover {
+              color: violet; /* color on hover */
+          }
+      </style>
+
+        <div data-hover="true" data-delay="300" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbdd" class="navbar10_menu-dropdown w-dropdown">
+        <div class="navbar10_dropdown-toggle text-size-tiny text-weight-semibold text-style-allcaps w-dropdown-toggle">
+        </div>
+</div>
+</div>
+</div>
+</nav>
+
     <main>
       <section class="team-section">
-        <h2 class="team-heading">Conocé nuestro equipo!</h2>
+        <div class="team-heading" ><h2 >Nuestro Equipo!</h2></div>
+        
+
         <div class="team-grid">
-          <!-- Team Member 1 -->
-          <div class="team-card">
-            <img src="./static/team1.jpg" alt="Luna Turner">
-            <div class="team-info">
-              <h3 class="team-name">Luna Turner</h3>
-              <p class="team-role">Founder</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Team Member 2 -->
-          <div class="team-card">
-            <img src="./static/team2.jpg" alt="Bryant Hall">
-            <div class="team-info">
-              <h3 class="team-name">Bryant Hall</h3>
-              <p class="team-role">Developer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Team Member 3 -->
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope ns</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          <!-- Team Member 3 -->
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="team-card">
-            <img src="./static/team3.jpg" alt="Hope Watkins">
-            <div class="team-info">
-              <h3 class="team-name">Hope Watkins</h3>
-              <p class="team-role">Designer</p>
-              <div class="team-social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-envelope"></i></a>
-              </div>
-            </div>
-          </div>
+          <!-- Vicky Branda -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Vicky Branda">
+  <div class="team-info">
+    <h3 class="team-name">Vicky Branda</h3>
+    <p class="team-role">Fundadora de Naginattaz. Bailarina y profesora.</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Valen Ferrari -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Valen Ferrari">
+  <div class="team-info">
+    <h3 class="team-name">Valen Ferrari</h3>
+    <p class="team-role">Bailarina y profesora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Cande Gonzalez -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Cande Gonzalez">
+  <div class="team-info">
+    <h3 class="team-name">Cande Gonzalez</h3>
+    <p class="team-role">Bailarina, profesora y coreógrafa</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Dami Espinola -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Dami Espinola">
+  <div class="team-info">
+    <h3 class="team-name">Dami Espinola</h3>
+    <p class="team-role">Bailarín y profesor</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Fede Díaz -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Fede Díaz">
+  <div class="team-info">
+    <h3 class="team-name">Fede Díaz</h3>
+    <p class="team-role">Bailarín y performer aéreo</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Mel Gabino -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Mel Gabino">
+  <div class="team-info">
+    <h3 class="team-name">Mel Gabino</h3>
+    <p class="team-role">Bailarina, profesora y coreógrafa</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Cami Poledo -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Cami Poledo">
+  <div class="team-info">
+    <h3 class="team-name">Cami Poledo</h3>
+    <p class="team-role">Bailarina y profesora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Lil French -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Lil French">
+  <div class="team-info">
+    <h3 class="team-name">Lil French</h3>
+    <p class="team-role">Profesor, competidor y acróbata</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Cami Moroni -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Cami Moroni">
+  <div class="team-info">
+    <h3 class="team-name">Cami Moroni</h3>
+    <p class="team-role">Bailarina y profesora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Jose Galli -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Jose Galli">
+  <div class="team-info">
+    <h3 class="team-name">Jose Galli</h3>
+    <p class="team-role">Bailarina, profesora y coreógrafa</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Valen Mendillo -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Valen Mendillo">
+  <div class="team-info">
+    <h3 class="team-name">Valen Mendillo</h3>
+    <p class="team-role">Freestyler, profesora y gestora de eventos</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Priscila Bértolo -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Priscila Bértolo">
+  <div class="team-info">
+    <h3 class="team-name">Priscila Bértolo</h3>
+    <p class="team-role">Bailarina y profesora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Cami Lucca -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Cami Lucca">
+  <div class="team-info">
+    <h3 class="team-name">Cami Lucca</h3>
+    <p class="team-role">Bailarina, profesora y coreógrafa</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Hera Sanchez -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Hera Sanchez">
+  <div class="team-info">
+    <h3 class="team-name">Hera Sanchez</h3>
+    <p class="team-role">Bailarín y profesor</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Flor Nena -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Flor Nena">
+  <div class="team-info">
+    <h3 class="team-name">Flor Nena</h3>
+    <p class="team-role">Bailarina y profesora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Ferna Brewer -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Ferna Brewer">
+  <div class="team-info">
+    <h3 class="team-name">Ferna Brewer</h3>
+    <p class="team-role">Artista escénica, investigadora del movimiento y profesora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Ignacio Avello -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Ignacio Avello">
+  <div class="team-info">
+    <h3 class="team-name">Ignacio Avello</h3>
+    <p class="team-role">Bailarín y profesor</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Zai Forte -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Zai Forte">
+  <div class="team-info">
+    <h3 class="team-name">Zai Forte</h3>
+    <p class="team-role">Bailarina, profesora y productora</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Mica Sepiurka -->
+<div class="team-card">
+  <img src="https://png.pngtree.com/png-vector/20220611/ourmid/pngtree-person-gray-photo-placeholder-man-silhouette-on-gray-background-png-image_4826253.png" alt="Mica Sepiurka">
+  <div class="team-info">
+    <h3 class="team-name">Mica Sepiurka</h3>
+    <p class="team-role">Profesora de Educación Física y Técnica en Género y Deporte</p>
+    <div class="team-social">
+      <a href="https://www.instagram.com" target="_blank" >
+        <img src="../static/608c99b93d180f3731fc7100_INSTAGRAM.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+      <a href="https://www.tiktok.com" target="_blank" class="footer-social-link w-inline-block">
+        <img src="../static/608c99ba93584b7d2daa16ad_TIKTOK.svg" loading="lazy" alt="" class="social"/>
+        <div class="footer-nav-link"></div>
+      </a>
+    </div>
+  </div>
+</div>
+
         </div>
       </section>
     </main>
