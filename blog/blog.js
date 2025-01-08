@@ -1,284 +1,264 @@
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('admin-button').addEventListener('click', toggleAdminMode);
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const map = document.getElementById("map");
+    const fullArticle = document.getElementById("full-article");
+    const fullArticleContent = document.getElementById("full-article-content");
+    const closeArticle = document.getElementById("close-article");
 
-function toggleAdminMode() {
-    const buttonsToToggle = document.querySelectorAll('.hidden-button');
 
-    // Toggle visibility of all hidden buttons
-    buttonsToToggle.forEach(button => {
-        button.classList.toggle('hidden-button');
+    let isMobile = window.matchMedia("(max-width: 960px)").matches;
+
+    let x = isMobile ? 50 : 13; // Center horizontally on mobile (50%)
+    let y = isMobile ? 20 : 10; // Adjust padding from the top
+    let direction = isMobile ? 0 : 1; // Use column layout on mobile
+    
+    fetch("/articles.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(articles => {
+            articles.forEach((article, index) => {
+                // Create article card
+                const card = document.createElement("div");
+                card.className = "article-card";
+                card.style.left = isMobile ? "50%" : `${x}%`;
+                card.style.transform = isMobile ? "translateX(-50%)" : "none"; // Center horizontally on mobile
+                card.style.top = `${y}%`;
+                card.innerHTML = `
+                    <img src="${article.img}" alt="${article.title}">
+                    <h3>${article.title}</h3>
+                    <small>${article.createdAt}</small>
+                `;
+                
+                if (isMobile) {
+                    // For mobile, stack articles vertically with 20% spacing
+                    y += 70;
+                } else {
+                    // For desktop, alternate between left and right
+                    if (direction === 1) {
+                        x += 45; // Move right
+                    } else {
+                        x -= 45; // Move left
+                    }
+                    y += 45; // Move down for the next row
+                    direction *= -1; // Switch direction for next article
+    
+                    // Ensure articles stay within bounds
+                    if (x < 10) x = 10;
+                    if (x > 90) x = 90;
+                }
+                card.addEventListener("click", () => {
+                    const isAdminMode = localStorage.getItem("isAdminMode") === "true";
+                
+                    fullArticleContent.innerHTML = `
+                        <small>Created on: ${article.createdAt}</small>
+                        <h2>${article.title}</h2>
+                        <img src="${article.img}" alt="${article.title}" class="article-image" style="max-width: 100%;">
+                        <p>${article.text}</p>
+                        ${
+                            isAdminMode
+                                ? `<div class="article-controls">
+                                     <button class="upload-button">Change Picture URL</button>
+                                     <button class="edit-button">Edit</button>
+                                     <button class="delete-button">Delete</button>
+                                   </div>`
+                                : ""
+                        }
+                    `;
+                
+                    // Make the fullArticle visible
+                    fullArticle.style.display = "flex"; // Ensure fullArticle is set to visible
+                
+                    // Attach event listeners to the buttons if admin mode is active
+                    if (isAdminMode) {
+                        setupArticleActions(article, fullArticleContent);
+                    }
+                });
+                map.appendChild(card);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching articles:", error);
+        });
+    
+
+
+    // Close full article
+    closeArticle.addEventListener("click", () => {
+        fullArticle.style.display = "none";
     });
 
-    // Ensure "Crear nueva entrada de blog" button exists
-    const leftButtonDiv = document.querySelector('.left-button');
-    if (leftButtonDiv) {
-        console.log('Found left-button container:', leftButtonDiv);
+    // Dragging functionality
+    let isDragging = false;
+    let startX, startY;
 
-        let createBlogEntryButton = document.getElementById('create-blog-entry');
-        if (!createBlogEntryButton) {
-            console.log('Creating "Crear nueva entrada de blog" button...');
-            
-            // Dynamically create the button
-            createBlogEntryButton = document.createElement('button');
-            createBlogEntryButton.id = 'create-blog-entry';
-            createBlogEntryButton.textContent = 'Crear nueva entrada de blog';
-            createBlogEntryButton.className = 'hidden-button'; // Start hidden
+    map.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        map.style.cursor = "grabbing";
+    });
 
-            // Append the button to the left-button container
-            leftButtonDiv.appendChild(createBlogEntryButton);
-            console.log('Button created:', createBlogEntryButton);
+    map.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
 
-            // Add functionality to the button
-            createBlogEntryButton.addEventListener('click', showCreateBlogForm);
+        map.scrollLeft -= dx;
+        map.scrollTop -= dy;
+
+        startX = e.clientX;
+        startY = e.clientY;
+    });
+
+    map.addEventListener("mouseup", () => {
+        isDragging = false;
+        map.style.cursor = "grab";
+    });
+
+    map.addEventListener("mouseleave", () => {
+        isDragging = false;
+        map.style.cursor = "grab";
+    });
+
+    function setupArticleActions(article, articleElement) {
+        const uploadButton = articleElement.querySelector(".upload-button");
+        const editButton = articleElement.querySelector(".edit-button");
+        const deleteButton = articleElement.querySelector(".delete-button");
+    
+        if (uploadButton) {
+            uploadButton.addEventListener("click", () => {
+                // Handle Change Picture URL
+                const imageElement = articleElement.querySelector(".article-image");
+            uploadButton.remove();
+    
+            const inputField = document.createElement("input");
+            inputField.type = "text";
+            inputField.className = "url-input";
+            inputField.placeholder = "Enter new image URL";
+    
+            const saveButton = document.createElement("button");
+            saveButton.className = "save-url";
+            saveButton.textContent = "Save";
+    
+            imageElement.insertAdjacentElement("afterend", inputField);
+            inputField.insertAdjacentElement("afterend", saveButton);
+    
+            saveButton.addEventListener("click", () => {
+                const newUrl = inputField.value.trim();
+                if (newUrl) {
+                    article.img = newUrl; // Update local object
+                    updateImageUrl(article.id, newUrl, articleElement); // Update server
+    
+                    inputField.remove();
+                    saveButton.remove();
+    
+                    uploadButton.textContent = "Change Picture URL";
+                    articleElement.querySelector(".article-controls").appendChild(uploadButton);
+                    setupArticleActions(article, articleElement);
+                } else {
+                    alert("Please enter a valid URL.");
+                }
+            });
+            });
         }
-
-        // Toggle visibility
-        createBlogEntryButton.classList.toggle('hidden-button');
-    } else {
-        console.error('Left button container not found.');
+        
+        if (editButton) {
+            editButton.addEventListener("click", () => {
+                const titleElement = articleElement.querySelector("h2");
+            const textElement = articleElement.querySelector("p");
+        
+            if (titleElement.isContentEditable) {
+                // Save changes
+                const newTitle = titleElement.textContent.trim();
+                const newText = textElement.innerHTML.trim(); // Use innerHTML to preserve formatting
+        
+                titleElement.contentEditable = "false";
+                textElement.contentEditable = "false";
+                editButton.textContent = "Edit";
+        
+                // Save the updated content to the server
+                fetch("/update-article", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ id: article.id, title: newTitle, text: newText }),
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error("Failed to update article.");
+                        article.title = newTitle;
+                        article.text = newText;
+                        console.log("Article updated successfully.");
+                        location.reload();
+                    })
+                    .catch(error => console.error("Error updating article:", error));
+            } else {
+                // Enable editing
+                titleElement.contentEditable = "true";
+                textElement.contentEditable = "true";
+                editButton.textContent = "Save";
+            }
+            });
+        }
+        
+        if (deleteButton) {
+            deleteButton.addEventListener("click", () => {
+                if (confirm("Are you sure you want to delete this article?")) {
+                    fetch("/delete-article", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ id: article.id }),
+                    })
+                        .then(response => {
+                            if (!response.ok) throw new Error("Failed to delete article.");
+                            fullArticle.style.display = "none";
+                            document.querySelector(`.article-card[data-id="${article.id}"]`).remove();
+                            console.log("Article deleted successfully.");
+                            location.reload();
+    
+                        })
+                        .catch(error => console.error("Error deleting article:", error));
+                }
+            });
+        }
+        
     }
-}
 
-function showCreateBlogForm() {
-    alert('Mostrar formulario para crear nueva entrada de blog.');
-}
-
-function showCreateBlogForm() {
-    console.log('Creating form for new blog entry...');
-
-    // Create the form container
-    const formContainer = document.createElement('div');
-    formContainer.id = 'create-blog-form-container';
-    formContainer.innerHTML = `
-        <form id="create-blog-form">
-            <h3>Crear nueva entrada de blog</h3>
-            <label for="title">Título:</label>
-            <input type="text" id="title" name="title" required placeholder="Enter the title">
-            
-            <label for="text">Texto:</label>
-            <textarea id="text" name="text" required placeholder="Enter the text"></textarea>
-
-            <label for="img">Imagen URL:</label>
-            <input type="text" id="img" name="img" required placeholder="Enter the image URL">
-
-            <button type="submit">Guardar</button>
-            <button type="button" id="cancel-button">Cancelar</button>
-        </form>
-    `;
-
-    // Append the form to the left-button container (or wherever you'd like to display it)
-    const leftButtonDiv = document.querySelector('.left-button');
-    leftButtonDiv.appendChild(formContainer);
-
-    // Show the form (by default, it will be displayed)
-    formContainer.classList.remove('hidden-button');
-
-    // Add event listener for form submission
-    document.getElementById('create-blog-form').addEventListener('submit', handleFormSubmit);
-
-    // Add event listener for the cancel button
-    document.getElementById('cancel-button').addEventListener('click', () => {
-        formContainer.remove();
-    });
-}
-
-function handleFormSubmit(event) {
-    event.preventDefault();  // Prevent default form submission
-
-    const title = document.getElementById('title').value;
-    const text = document.getElementById('text').value;
-    const img = document.getElementById('img').value;
-
-    // Add new article data to the articlesData array
-    const newArticle = {
-        id: articlesData.length + 1,
-        title: title,
-        text: text,
-        img: img
-    };
-
-    articlesData.push(newArticle);
-
-    // Save the updated articles
-    saveArticles();
-
-    // Remove the form after submission
-    document.getElementById('create-blog-form-container').remove();
-}
-
-function saveArticles() {
-    console.log('Saving articles:', JSON.stringify(articlesData, null, 2));
-    alert('Artículo guardado con éxito.');
-    renderArticles();  // Re-render the articles to show the new one
-}
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const articlesContainer = document.querySelector('main');
-    let articlesData = [];
-
-    // Fetch JSON Data
-    function fetchArticles() {
-        return fetch('articles.json')
-            .then(response => response.json())
+    // Update image URL on the server
+    function updateImageUrl(id, newUrl, articleElement) {
+        fetch(`/update-image-url`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ id, img: newUrl }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to update image URL.");
+                }
+                return response.json();
+            })
             .then(data => {
-                articlesData = data;
-                renderArticles();
+                console.log("Image URL updated successfully:", data);
+                const imageElement = articleElement.querySelector(".article-image");
+                imageElement.src = newUrl;
+            })
+            .catch(error => {
+                console.error("Error updating image URL:", error);
+                alert("Failed to update image URL. Please try again.");
             });
     }
 
-    // Render Articles
-    function renderArticles() {
-        const articlesContainer = document.getElementById('home'); // Assuming the main container is #home
-        articlesContainer.innerHTML = ''; // Clear existing articles
-        articlesData.forEach((article, index) => {
-            const articleElement = createArticleElement(article, index);
-            articlesContainer.appendChild(articleElement);
+    function toggleAdminControls(isAdmin) {
+        const controls = document.querySelectorAll(".upload-button, .edit-button, .delete-button");
+        controls.forEach(control => {
+            control.style.display = isAdmin ? "inline-block" : "none"; // Show only if admin mode is active
         });
     }
-
-    // Create Article Element
-    function createArticleElement(article, index) {
-        const articleEl = document.createElement('article');
-        articleEl.className = 'parallax';
-        articleEl.dataset.id = article.id;
-    
-        // Determine the text alignment class based on the article's index
-        const textAlignmentClass = index % 2 === 0 ? 'parallax-text-right' : 'parallax-text-left';
-    
-        // Alternate the order of text and image sections
-        const contentHTML =
-            index % 2 === 0
-                ? `
-                    <div class="image" data-rotate="right">
-                        <img src="${article.img}" alt="Ejemplo ${article.id}">
-                        <button class="hidden-button cambiar-imagen">Cambiar Imagen</button>
-                        <input type="file" class="hidden-button upload-image" accept="image/*" style="display: none;">
-                        <button class="hidden-button guardar-imagen">Guardar Imagen</button>
-                    </div>
-                    <div class="text ${textAlignmentClass}">
-                        <h2>${article.title}</h2>
-                        <p class="glass nunito-p">${article.text}</p>
-                    </div>
-                `
-                : `
-                    <div class="text ${textAlignmentClass}">
-                        <h2>${article.title}</h2>
-                        <p class="glass nunito-p">${article.text}</p>
-                    </div>
-                    <div class="image" data-rotate="left">
-                        <img src="${article.img}" alt="Ejemplo ${article.id}">
-                        <button class="hidden-button cambiar-imagen">Cambiar Imagen</button>
-                        <input type="file" class="hidden-button upload-image" accept="image/*" style="display: none;">
-                        <button class="hidden-button guardar-imagen">Guardar Imagen</button>
-                    </div>
-                `;
-    
-        articleEl.innerHTML = `
-            ${contentHTML}
-            <div class="top-right-buttons">
-                <button class="hidden-button editar">Editar</button>
-                <button class="hidden-button eliminar">Eliminar</button>
-            </div>
-        `;
-    
-        const editButton = articleEl.querySelector('.editar');
-        const deleteButton = articleEl.querySelector('.eliminar');
-        const changeImageButton = articleEl.querySelector('.cambiar-imagen');
-        const uploadInput = articleEl.querySelector('.upload-image');
-        const saveImageButton = articleEl.querySelector('.guardar-imagen');
-        const imageElement = articleEl.querySelector('img');
-    
-        // Add Edit Functionality
-        editButton.addEventListener('click', () => enableEditing(articleEl, article.id));
-    
-        // Add Delete Functionality
-        deleteButton.addEventListener('click', () => confirmDeletion(article.id));
-    
-        // Add Image Change Functionality
-        changeImageButton.addEventListener('click', () => uploadInput.click());
-        uploadInput.addEventListener('change', (event) => previewImage(event, imageElement, saveImageButton));
-        saveImageButton.addEventListener('click', () => saveImage(article.id, imageElement.src));
-    
-        return articleEl;
-    }
-    
-    
-
-
-
-    // Enable Editing
-    function enableEditing(articleEl, articleId) {
-        const titleEl = articleEl.querySelector('h2');
-        const textEl = articleEl.querySelector('p');
-
-        titleEl.contentEditable = true;
-        textEl.contentEditable = true;
-        titleEl.style.border = '1px dashed #007bff';
-        textEl.style.border = '1px dashed #007bff';
-
-        const saveButton = document.createElement('button');
-        saveButton.textContent = 'Guardar Cambios';
-        saveButton.className = 'guardar-cambios';
-        saveButton.style.marginTop = '10px';
-        articleEl.querySelector('.text').appendChild(saveButton);
-
-        saveButton.addEventListener('click', () => {
-            titleEl.contentEditable = false;
-            textEl.contentEditable = false;
-            titleEl.style.border = 'none';
-            textEl.style.border = 'none';
-            saveButton.remove();
-
-            // Save changes to JSON data
-            const updatedArticle = articlesData.find(a => a.id === articleId);
-            updatedArticle.title = titleEl.textContent;
-            updatedArticle.text = textEl.textContent;
-            saveArticles();
-        });
-    }
-
-    // Confirm and Delete Article
-    function confirmDeletion(articleId) {
-        const confirmation = confirm('¿Estás seguro de que deseas eliminar este artículo?');
-        if (confirmation) {
-            articlesData = articlesData.filter(a => a.id !== articleId);
-            saveArticles();
-        }
-    }
-
-    // Preview Image
-    function previewImage(event, imageElement, saveButton) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                imageElement.src = e.target.result;
-                saveButton.classList.remove('hidden-button');
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    // Save Image
-    function saveImage(articleId, imageUrl) {
-        const confirmation = confirm('¿Guardar cambios para reemplazar la imagen?');
-        if (confirmation) {
-            const updatedArticle = articlesData.find(a => a.id === articleId);
-            updatedArticle.img = imageUrl;
-            saveArticles();
-        }
-    }
-
-    // Save Articles to JSON (Placeholder for Server-Side Save)
-    function saveArticles() {
-        console.log('Saving articles:', JSON.stringify(articlesData, null, 2));
-        alert('Cambios guardados.');
-        renderArticles(); // Re-render with updates
-    }
-
-
-    // Fetch and Render Articles
-    fetchArticles();
 });

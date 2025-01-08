@@ -1,193 +1,364 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="../static/naginattaz.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAGINATTAZ BLOG</title>
-    <link rel="stylesheet" href="./blog-styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div>
-            <a href="../index.html" aria-current="page" class="nagilogo">
-                <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black."/>
-            </a>
-            <style>
-                .nagilogo img{
-                    position: absolute;
-                    left: 0;
-                    margin-left: 20px;
-                    top: 0;
-                    margin-top: 20px;
-                    max-width: 200px;
-                }
-            </style>
-        </div>
-        <div class="logo" id="logo-container">
-            <span id="loading-text" class="orbitron-title-light">Loading<span id="dots"></span></span>
-            <span id="logo-text" class="hidden orbitron-title">naginattaz blog</span>
-        </div>
-        <button id="dark-mode-toggle" class="light" aria-label="Toggle dark mode">
-            <span id="icon">🌙</span>
-        </button>
-        <nav class="menu">
-            <ul>
-                <li><a href="./blog.html" class="nunito-t">Inicio</a></li>
-                <li><a href="../pages/team.html" class="nunito-t">Sobre Nosotros</a></li>
-                <li><a href="../naginattaz/store.html" class="nunito-t">Store</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <!-- White background section -->
-    <section class="nav-actions">
-        <div class="left-button"></div>
-        <div class="right-button">
-            <button id="admin-button" class="admin-button">Admin</button>
-        </div>
-    </section>
-    
-    <!-- Style for the new section -->
+    <title>NagiBlog</title>
     <style>
-        .nav-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: white;
-            padding: 10px 20px;
-            box-sizing: border-box;
+        
+  @media screen and (max-width: 991px) {
+    .navbar10_menu{
+      width: max-content;
+    border-bottom: 1px solid var(--\<unknown\|relume-variable-border-color-1\>);
+    background-color: rgba(255, 255, 255, 0)!important;
+    -webkit-text-fill-color: inherit;
+    background-clip: border-box;
+    align-items: flex-start;
+    height: 30px!important;
+    margin-left: 0;
+    padding: 1rem 5% 6.5rem;
+    transition: height .5s;
+    position: absolute!important;
+    top:150px;
+  right: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    overflow: hidden!important;
+    margin-top: 0!important;
+  }
+  .navbar10_link.text-size-tiny.text-style-allcaps.text-weight-semibold {
+        margin-left: 30px!important;
+        margin-right: 0;
+    }
+    .navbar10_logo-link{
+      position: absolute!important;
+    top:30px;
+    left: 50%;
+  transform: translate(-50%, -50%);
+  }
+  .team-heading {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  .article-card:hover {
+    transform: none!important;
+}
+  }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100dvh;
+            background-image: url(./StockCake-Sacred\ Moonlit\ Path_1734011337.jpg);
+            background-position: top;
+            overflow: hidden;
         }
-    
-        .left-button {
-            flex: 1;
+
+        #articles-container {
+            margin-top: 30px;
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            overflow: auto;
         }
-    
-        .right-button {
-            display: flex;
-            justify-content: flex-end;
-            flex: 1;
-        }
-    
-        #admin-button {
-            padding: 10px 20px;
-            background: rgb(76, 68, 105);
-            color:rgb(216, 164, 240);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-    
-        #admin-button:hover {
-            color: black;
-            background: rgba(216, 164, 240, 0.842); /* Subtle hover effect */
-        }
-    
-        #create-blog-entry {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-    
-        #create-blog-entry:hover {
-            background-color: #218838;
-        }
-    
-        .hidden-button {
-            display: none;
-        }
-        .top-right-buttons {
+        
+
+        .map {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+            overflow: auto;
+            z-index: 100;
+            margin-bottom: 20px;
+        }
+
+        .map::-webkit-scrollbar {
+        width: 12px; /* Scrollbar width */
+        }
+
+        .map::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Track color */
+        padding: 2px; /* Padding inside the track */
+        }
+
+        .map::-webkit-scrollbar-thumb {
+        background-color: #af8be0; /* Violet color */
+        border-radius: 6px; /* Rounded corners */
+        min-height: 15px; /* Minimum thumb height */
+        max-height: 30px; /* Maximum thumb height */
+        }
+
+        .map::-webkit-scrollbar-thumb:hover {
+        background-color: #8f5bca; /* Darker violet on hover */
+        }
+        .article-card {
+            position: absolute;
+            width: 360px;
+            height: 250px;
+            background-color: #dcdadce6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .hidden-button {
+        .article-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.article-card:hover {
+    transform: scale(1.2)!important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    background-color: #6a4c93;
+}
+
+.article-card:hover img {
+    border-color: white; /* Change the border color to white */
+    filter: brightness(1.5); /* Optional: Make the image appear brighter */
+}
+
+.article-card:hover h3 {
+    color: white; /* Change the text color to white */
+}
+
+
+        .article-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: fill;
+            border: solid 2px rgb(148, 61, 148);
+        }
+
+        .article-card h3 {
+            margin: 10px 0 0;
+            font-size: 14px;
+            text-align: center;
+            color: #4c4c6d; /* Violet-gray text color */
+        }
+
+        .full-article {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
             display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
         }
 
-        button.editar, button.eliminar {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .full-article-content {
+            position: relative;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 1200px;
+            max-height: 90%;
+            overflow-y: auto;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            color: #7a5cff;
         }
 
-        button.editar:hover, button.eliminar:hover {
-            background-color: #0056b3;
-        }
-
-        .guardar-cambios {
-            padding: 5px 10px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .guardar-cambios:hover {
-        background-color: #218838;
-        }
-        .cambiar-imagen{
-            position:absolute;
+        .close-button {
+            position: fixed;
             top: 20px;
-            right:20px;
-            padding: 10px 20px;
-            background: rgb(76, 68, 105);
-            color:rgb(216, 164, 240);
+            right: 20px;
+            background-color: #6a4c93; /* Violet color */
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 101;
+            transition: transform 0.3s ease;
         }
-        .cambiar-imagen:hover{
-            color: rgb(255, 255, 255);
-            background: #222222b4; /* Subtle hover effect */
-        }
-        .guardar-imagen {
-    padding: 5px 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
 
-.guardar-imagen:hover {
-    background-color: #218838;
-}
+        .close-button:hover {
+            transform: scale(1.1);
+        }
 
     </style>
-       
+    
+</head>
+<body>
+    <header class="header">
+        <div data-animation="default" class="navbar10_component w-nav" data-easing2="ease" fs-scrolldisable-element="smart-nav" data-easing="ease" data-collapse="medium" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbcf" role="banner" data-duration="400">
+            <div class="navbar10_container">
+              <a href="https://naginattaz.com" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
+                <img src="../src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
+              </a>
+            </div>
+          </div>
+      
+          <nav role="navigation" class="navbar10_menu w-nav-menu">
+            <div class="navbar10_menu-left">
+              <a href="../pages/team.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">TEAM</a>
+              <a href="../pages/clases.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">ENTRENAMIENTO</a>
+              <a href="../blog/blog.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont  w-nav-link">BLOG</a>
+              <a id="store" href="../naginattaz/store.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">STORE
+                <img class="cart-button-image" src="../naginattaz/jpegs/carros.png" alt="Carrito" style="width:20px; border-radius: 0%; margin-left: 20px;">
+              </a>
+              <style>
+                #store {
+                    color: rgb(255, 185, 185); /* initial color */
+                    text-decoration: none; /* optional: removes underline */
+                }
+                #store:hover {
+                    color: violet; /* color on hover */
+                }
+                .navbar10_logo-link{
+    margin-top: 
+    20px!important;
+  }
+  .navbar10_menu{
+    margin-top: -80px!important;
+    z-index: 1000000!important;
+    position: relative!important;
 
-    <!-- Main Section -->
-    <main id="home">
-        <!-- Articles will be dynamically rendered here by the JavaScript -->
+  }
+  
+  .team-section {
+    padding: 2rem;
+  }
+  .team-heading {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #cb87ff;
+    margin-bottom: 4rem;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
+  }
+  .team-card {
+    width:220px;
+    height: 350px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .team-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.social{
+  border-radius: 10px !important;
+  position: relative;
+  z-index: 1;
+  height: 25px!important;
+  margin-top: 0!important;
+  margin-left: 25px;
+  display: none;
+}
+.social:hover{
+  background: violet;
+}
+
+.team-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  background-color: #7a5cff;
+}
+
+.team-card:hover .team-role {
+  color: white; /* Change team role text color to white */
+}
+.team-card:hover .social {
+  display: block; 
+}
+
+  .team-card img {
+    margin-top: 10px;
+    width: 80%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+  }
+  .team-info {
+    padding: 1rem;
+    color:black;
+  }
+  .team-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+  .team-role {
+    font-size: 1rem;
+    color: #7d7d7d;
+    margin-bottom: 1rem;
+  }
+  
+  .team-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .team-social a {
+    text-decoration: none;
+    color: #4a4a4a;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  .team-social a:hover {
+    color: #7a5cff;
+  }
+</style>
+            </style>
+      
+              <div data-hover="true" data-delay="300" data-w-id="22b31b6e-0227-378d-eaf5-deaab988bbdd" class="navbar10_menu-dropdown w-dropdown">
+              <div class="navbar10_dropdown-toggle text-size-tiny text-weight-semibold text-style-allcaps w-dropdown-toggle">
+              </div>
+    </header>
+    <div class="team-heading">
+        NAGIBLOG
+    </div>
+
+    <main id="articles-container">
+        <div class="map" id="map"></div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Naginattaz. Todos los derechos reservados.</p>
-    </footer>
+    <div class="full-article" id="full-article">
+        <div class="full-article-content nunito-p" id="full-article-content"></div>
+        <button class="close-button" id="close-article">&times;</button>
+    </div>
 
+
+    <script src="admin.js"></script>
+
+    <script src="blog.js"></script>
+    <script src="newEntry.js"></script>
     <script src="script.js"></script>
-    <script src="./blog.js"></script>
 
+    
 </body>
 </html>
