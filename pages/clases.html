@@ -59,7 +59,9 @@
             <div class="left-panel desktop">
                 <button onclick="showContent('section1')">INICIO</button>
                 <button onclick="showContent('section2')">CLASES</button>
+                <button onclick = "window.location.href = './nagidatta/nagidatta.html'">NAGIDATTA</button>
             </div>
+        
 
             <!--
         <div class="header-right desktop">
@@ -98,10 +100,10 @@
                 // Check if the user is logged in
 
                 
-            if (sessionStorage.getItem('loggedIn') !== 'true') {
-                window.location.href = './login.html'; 
-                return; // Exit if redirecting
-            }
+            //if (sessionStorage.getItem('loggedIn') !== 'true') {
+              //  window.location.href = './login.html'; 
+                //return; // Exit if redirecting
+            //}
     
                 // If logged in, display user picture and logout button
                 const userContainer = document.querySelector('.user-container');

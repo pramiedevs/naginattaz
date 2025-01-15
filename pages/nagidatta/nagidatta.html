@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slanted Sections Layout</title>
+    <link href="/static/naginattaz.min.css" rel="stylesheet" type="text/css"/>
+
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
 
-        header, footer {
-            height: 15%;
-            background-color: #333;
-            color: white;
+        header{
+            height: 25%;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 2rem;
         }
 
         main {
@@ -26,6 +28,17 @@
             position: relative;
         }
 
+        .navbar10_container {
+    border: 0 #000;
+    justify-content: space-between;
+    align-items: center;
+    width: auto !important;
+    height: 100%;
+    margin-left: 0;
+    margin-right: auto;
+    display: flex;
+    margin-top: 1.5vw;
+}
 
 .hidden {
     display: none;
@@ -113,7 +126,7 @@
 
         .yellow:before {
             z-index: -1;            
-    background-image: url('/StockCake-Neon\ Music\ Dreams_1736881931.jpg');
+    background-image: url('./StockCake-Neon\ Music\ Dreams_1736881931.jpg');
     background-size: cover;
     background-position: center;
         }
@@ -121,7 +134,7 @@
         .orange:before {
             z-index: -1;
             
-    background-image: url('/StockCake-Holding\ Yellow\ Megaphone_1736881895.jpg');
+    background-image: url('./StockCake-Holding\ Yellow\ Megaphone_1736881895.jpg');
     background-size: cover;
     background-position: center;
         }
@@ -140,7 +153,7 @@
 }
 
         .red:before {
-            background-image: url('/StockCake-Flame\ Dancer\ Rising_1736881908.jpg');
+            background-image: url('./StockCake-Flame\ Dancer\ Rising_1736881908.jpg');
     background-size: cover;
     background-position: center;            z-index: -2;
         }
@@ -174,10 +187,10 @@
     top: 0;
     left: -1;
     width: 180%;
-    height: 103%;
+    height: 100%;
     z-index: -4; /* Ensure it's behind the text and overlay */
     transform: skewX(0deg);
-    background-image: url('/BANNERPRINCIPAL_1_mob.webp');
+    background-image: url('./BANNERPRINCIPAL_1_mob.webp');
     background-size: cover;
     background-position: center;
     transform-origin: top left;
@@ -236,7 +249,27 @@ padding-left:40px ;}
 </head>
 <body>
     <header>
-        <h1>Slanted Sections Layout</h1>
+        <div class="navbar10_container">
+            <a href="../index.html" aria-current="page" class="navbar10_logo-link w-nav-brand w--current">
+              <img src="/src/logos/LOGOS_1.png" alt="NAGINATTAZ logo in black." class="navbar10_logo icon-height-xlarge"/>
+            </a>
+          </div>
+        <div class="navbar10_menu-left">
+            <a href="/pages/team.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">TEAM</a>
+            <a href="/pages/clases.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">ENTRENAMIENTO</a>
+            <a href="/blog/blog.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont  w-nav-link">BLOG</a>
+            <a id="store" href="/naginattaz/store.html" class="navbar10_link text-size-tiny text-style-allcaps text-weight-semibold titlefont w-nav-link">STORE
+              <img class="cart-button-image" src="/naginattaz/jpegs/carros.png" alt="Carrito" style="width:20px; border-radius: 0%; margin-left: 20px;">
+            </a>
+            <style>
+              #store {
+                  color: rgb(255, 185, 185); /* initial color */
+                  text-decoration: none; /* optional: removes underline */
+              }
+              #store:hover {
+                  color: violet; /* color on hover */
+              }
+          </style>
     </header>
     <main id="main-sections">
         <div class="section yellow" data-active-section="music">
@@ -275,10 +308,6 @@ padding-left:40px ;}
         
     </div>
     
-    <script src="/sections.js"></script>
-
-    <footer>
-        <p>Footer Content</p>
-    </footer>
+    <script src="./sections.js"></script>
 </body>
 </html>
