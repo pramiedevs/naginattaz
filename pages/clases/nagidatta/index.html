@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slanted Sections Layout</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header, footer {
+            height: 15%;
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            height:75dvh;
+            width: 105%;
+            display: flex;
+            position: relative;
+        }
+
+
+.hidden {
+    display: none;
+}
+
+#active-container {
+    display: none; /* Ensure the active container is hidden by default */
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ae34c7;
+
+}
+
+#close-button {
+    display: none; /* Hide the close button initially */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: #ccc;
+    border: none;
+    cursor: pointer;
+}
+
+#active-container.visible #close-button {
+    display: block; /* Show close button when active section is visible */
+}
+
+        .section {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in;
+        }
+        .section:before, .section:after {
+    pointer-events: none;
+}
+        .section:hover{
+            transform: scale(1.04);
+        }
+
+        .section img{
+            width:50%;
+                        border: solid white 2px;
+
+        }
+        .section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: skewX(-15deg);
+            transform-origin: top left;
+            z-index: -1;
+            border: solid white 2px;
+        }
+
+        
+        .yellow:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10;
+    width: 180%;
+    height: 100%;
+    opacity: 0.5; /* Adjust the transparency of the image */
+    z-index: 2; /* Ensure it's behind the text and overlay */
+    transform: skewX(0deg);
+    transform-origin: top left;
+}
+
+        .yellow:before {
+            z-index: -1;            
+    background-image: url('/StockCake-Neon\ Music\ Dreams_1736881931.jpg');
+    background-size: cover;
+    background-position: center;
+        }
+
+        .orange:before {
+            z-index: -1;
+            
+    background-image: url('/StockCake-Holding\ Yellow\ Megaphone_1736881895.jpg');
+    background-size: cover;
+    background-position: center;
+        }
+        .orange:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10;
+    width: 180%;
+    height: 100%;
+    opacity: 0.5; /* Adjust the transparency of the image */
+    z-index: 1; /* Ensure it's behind the text and overlay */
+    transform: skewX(0deg);
+    transform-origin: top left;
+    overflow: hidden;
+}
+
+        .red:before {
+            background-image: url('/StockCake-Flame\ Dancer\ Rising_1736881908.jpg');
+    background-size: cover;
+    background-position: center;            z-index: -2;
+        }
+        .red:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10;
+    width: 180%;
+    height: 100%;
+    
+    opacity: 0.5; /* Adjust the transparency of the image */
+    z-index: -1; /* Ensure it's behind the text and overlay */
+    transform: skewX(0deg);
+    transform-origin: top left;
+}
+
+        .blue:before {
+    width: 130%;
+    z-index: -4;
+}
+.blue:hover{
+
+    scale: 1.02;
+    transform: translateX(-100px)!important;
+}
+
+.blue:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1;
+    width: 180%;
+    height: 103%;
+    z-index: -4; /* Ensure it's behind the text and overlay */
+    transform: skewX(0deg);
+    background-image: url('/BANNERPRINCIPAL_1_mob.webp');
+    background-size: cover;
+    background-position: center;
+    transform-origin: top left;
+}
+
+        .content {
+            text-align: center;
+            color: white;
+        }
+
+        .content h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .content p {
+            margin: 0.5rem 0 0;
+        }
+        .video-grid-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Set a fixed height for the scrollable area */
+    overflow: hidden;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out; /* Smooth scrolling */
+}
+
+.scroll-down-arrow {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Hide by default */
+}
+
+.video-grid-container.show-arrow .scroll-down-arrow {
+    display: block; /* Show arrow if more than 4 videos */
+}
+
+.h2{
+position: absolute;
+top:20px;
+padding-left:40px ;}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Slanted Sections Layout</h1>
+    </header>
+    <main id="main-sections">
+        <div class="section yellow" data-active-section="music">
+            <div class="content">
+                <h2 class="h2">Explorar 
+                    <br>Música</h2>
+            </div>
+        </div>
+        <div class="section orange" data-active-section="culture">
+            <div class="content">
+                <h2 class="h2">Explorar
+                    <br> Cultura</h2>
+            </div>
+        </div>
+        <div class="section red" data-active-section="dance">
+            <div class="content">
+                <h2 class="h2">Explorar 
+                    <br>Danza</h2>
+            </div>
+        </div>
+        <div class="section blue" data-url="https://naginattaz.com">
+        </div>
+    </main>
+    
+    <div id="active-container" class="hidden">
+        <section id="active-section" class="active-content">
+            <button id="close-button">Close</button>
+            <div id="active-content"></div>
+        </section>
+        <div class="video-grid-container" id="video-grid-container">
+            <div class="video-grid" id="video-grid">
+                <!-- Embedded videos will be injected here -->
+            </div>
+            <div class="scroll-down-arrow" id="scroll-arrow">↓</div>
+        </div>
+        
+    </div>
+    
+    <script src="/sections.js"></script>
+
+    <footer>
+        <p>Footer Content</p>
+    </footer>
+</body>
+</html>
