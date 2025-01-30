@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function createFlipCard(item) {
         const addToCartButton = item.stock > 0
-            ? `<button class="add-to-cart" data-image="${item.image}" data-title="${item.title}" data-price="${item.price}" data-stock="${item.stock}">Add to Cart</button>`
+            ? `<button class="add-to-cart" data-image="${item.image}" data-instructor="${item.instructor}" data-title="${item.title}" data-price="${item.price}" data-stock="${item.stock}">Añadir al carrito!</button>`
             : '';
     
         return `
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <img src="${item.image}" alt="${item.title}" style="width:30vh">
                         <div style="color: black;">
                             <h3>${item.title}</h3>
+                            <h3>${item.instructor}</h3>
                             <p>${item.price}</p>
                         </div>
                     </div>

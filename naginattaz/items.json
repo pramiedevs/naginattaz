@@ -2,24 +2,30 @@
     "items": [
       {
         "image": "styles/afro.jpeg",
-        "title": "AFRO",
-        "price": "$ <br><br>",
+        "title": "<br>AFRO",
+        "instructor":"<br> Panchito",
+        "price": "<br>$ <br><br>",
         "description": " AFRO STYLE CLASS <br><br>",
-        "stock": "1"
+        "stock": "1",
+        "code":"0001"
       },
       {
         "image": "styles/dancehall.jpeg",
         "title": "DANCEHALL",
         "price": "$ <br><br>",
         "description": " DANCEHALL STYLE CLASS <br><br>",
-        "stock": "1"
+        "stock": "1",
+        "code":"0002"
+
       },
       {
         "image": "styles/heels.jpeg",
-        "title": "HEEL",
+        "title": "HEELS",
         "price": "$ <br><br>",
         "description": " HEELS STYLE CLASS <br><br>",
-        "stock": "1"
+        "stock": "1",
+        "code":"0003"
+
       }
     ]
   }

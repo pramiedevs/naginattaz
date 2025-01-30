@@ -53,6 +53,7 @@
 }
 
 .content1 {
+    margin-top:20px ;
     width: 100vw; /* Adjust width as needed */
     padding: 15px 5px;
     box-sizing: border-box;
@@ -108,8 +109,8 @@
 
 .flip-card {
     background-color: transparent;
-    width: 200px; /* Adjust size as needed */
-    height: 300px; /* Adjust size as needed */
+    width: 250px; /* Adjust size as needed */
+    height: 350px; /* Adjust size as needed */
     perspective: 1000px;
 }
 
@@ -133,7 +134,7 @@
 }
 
 .flip-card-front {
-    background-color: #fff;
+    background-color: #c070c5;
 }
 
 .flip-card-back {
@@ -146,7 +147,7 @@
     justify-content: center;
 }
 .flip-card img{
-    width: 20px;
+    width: inherit!important;
 }
 .add-to-cart {
     background-color: #ff5722;
