@@ -127,7 +127,7 @@
 
 .flip-card-front, .flip-card-back {
     position: absolute;
-    width: 100%;
+    width: auto;
     height: 100%;
     backface-visibility: hidden;
 }
