@@ -4,7 +4,8 @@
     --secondary-color: #fac8f8;
     --cta-color: #af14af;
     --hover-color: #804fe1;
-    --special-color:#424844;
+    --special-color:linear-gradient(0.25turn, #111111, #26152e, #524257, #382142, #0f0f0f);
+    ;
 }
 
 /* Dark Mode Variables (6pm - 6am) */
