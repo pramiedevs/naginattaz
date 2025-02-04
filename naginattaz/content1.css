@@ -138,7 +138,7 @@
 }
 
 .flip-card-back {
-    background-color: #3c104e;
+    background-color: #4b59ed;
     color: white;
     transform: rotateY(180deg);
     display: flex;
@@ -150,7 +150,7 @@
     width: inherit!important;
 }
 .add-to-cart {
-    background-color: #ff5722;
+    background-color: #af14af;
     color: white;
     border: none;
     padding: 10px;
