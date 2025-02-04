@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (linkId === 'inicio') {
                 // Redirect to index.html
-                window.location.href = '../index.html';
+                window.location.href = './store.html';
             } else {
                 // Hide the featured products section
                 featuredProducts.style.display = 'none';
