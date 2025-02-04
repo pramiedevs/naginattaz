@@ -157,7 +157,10 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.add-to-cart:hover{
+    background-color: #c070c5;
 
+}
 .load-more {
     width: 100%;
     padding: 10px;
